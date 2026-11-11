@@ -1,0 +1,100 @@
+{
+ "format": 2,
+ "id": "x00-exemple",
+ "name": "Exemple",
+ "size": [
+  10,
+  4
+ ],
+ "pieces": [
+  {
+   "type": "emitter",
+   "at": [
+    0,
+    0
+   ],
+   "dir": "E",
+   "mask": "RGB"
+  },
+  {
+   "type": "mirror",
+   "at": [
+    0,
+    3
+   ],
+   "o": "/"
+  },
+  {
+   "type": "target",
+   "at": [
+    1,
+    1
+   ],
+   "need": "R"
+  },
+  {
+   "type": "target",
+   "at": [
+    2,
+    1
+   ],
+   "need": "R"
+  },
+  {
+   "type": "target",
+   "at": [
+    3,
+    1
+   ],
+   "need": "R"
+  },
+  {
+   "type": "target",
+   "at": [
+    4,
+    1
+   ],
+   "need": "R"
+  },
+  {
+   "type": "target",
+   "at": [
+    5,
+    1
+   ],
+   "need": "R"
+  },
+  {
+   "type": "target",
+   "at": [
+    1,
+    2
+   ],
+   "need": "R"
+  },
+  {
+   "type": "target",
+   "at": [
+    2,
+    2
+   ],
+   "need": "R"
+  },
+  {
+   "type": "target",
+   "at": [
+    3,
+    2
+   ],
+   "need": "R"
+  },
+  {
+   "type": "target",
+   "at": [
+    4,
+    2
+   ],
+   "need": "R"
+  }
+ ]
+}

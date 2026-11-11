@@ -1,0 +1,29 @@
+{
+  "format": 2,
+  "id": "s10-tout-ensemble",
+  "name": "Tout ensemble",
+  "size": [10,8],
+  "pieces": [
+    {"type":"target","at":[2,0],"need":"G"},
+    {"type":"target","at":[4,0],"need":"G"},
+    {"type":"portal","at":[5,1],"pair":0},
+    {"type":"gate","at":[6,1],"link":[2,0]},
+    {"type":"emitter","at":[9,1],"dir":"W","mask":"RGB"},
+    {"type":"wall","at":[0,2]},
+    {"type":"target","at":[6,3],"need":"G"},
+    {"type":"prism","at":[1,4]},
+    {"type":"wall","at":[4,4]},
+    {"type":"splitter","at":[9,4],"o":"|"},
+    {"type":"wall","at":[2,5]},
+    {"type":"mirror","at":[4,5],"o":"\\"},
+    {"type":"wall","at":[7,5]},
+    {"type":"mirror","at":[0,6],"o":"|"},
+    {"type":"target","at":[3,7],"need":"R"},
+    {"type":"portal","at":[5,7],"pair":0},
+    {"type":"mirror","at":[9,7],"o":"/"}
+  ],
+  "par": 5,
+  "solutions": [
+    [{"type":"mirror","at":[8,1],"o":"\\"},{"type":"mirror","at":[8,0],"o":"\\"},{"type":"prism","at":[7,0]},{"type":"splitter","at":[6,0],"o":"/"},{"type":"mirror","at":[7,1],"o":"/"}]
+  ]
+}

@@ -1,0 +1,13 @@
+{
+"format":2,
+"levelId":"daily-3",
+"levelHash":"sha256:5e3561e06d24c6dcd3de6107e41ff464279980748d6c24cf484b353954567342",
+"rulesVersion":2,
+"solverVersion":2,
+"status":"proved-optimal",
+"minimum":4,
+"solutionsAtMin":1,
+"witness":[{"type":"mirror","at":[6,6],"o":"\\"},{"type":"filter","at":[6,5],"mask":"RG"},{"type":"mirror","at":[6,4],"o":"\\"},{"type":"prism","at":[1,4]}],
+"parking":[{"type":"mirror","at":[0,0],"o":"-"}],
+"metrics":{"movable":5,"kinds":["filter","mirror","prism"],"targets":3,"nodes":1218,"nodesTotal":4808,"leaves":2463,"solutionsRelaxed":1,"falseTrail":1,"pathLength":11,"crossings":0,"specialTypes":2,"D2":27.5}
+}

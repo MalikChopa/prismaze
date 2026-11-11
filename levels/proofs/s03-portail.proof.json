@@ -1,0 +1,13 @@
+{
+"format":2,
+"levelId":"s03-portail",
+"levelHash":"sha256:4f034073f4a46bd0f7c897287df0cc51007e114da8c503853c955becb0c9b26f",
+"rulesVersion":2,
+"solverVersion":2,
+"status":"proved-optimal",
+"minimum":3,
+"solutionsAtMin":2,
+"witness":[{"type":"mirror","at":[1,1],"o":"\\"},{"type":"mirror","at":[1,4],"o":"\\"},{"type":"mirror","at":[7,4],"o":"/"}],
+"parking":[],
+"metrics":{"movable":3,"kinds":["mirror"],"targets":1,"nodes":149,"nodesTotal":347,"leaves":120,"solutionsRelaxed":2,"falseTrail":0.983,"pathLength":10,"crossings":0,"specialTypes":0,"D2":17.5}
+}

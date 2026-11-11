@@ -1,0 +1,85 @@
+{
+  "format": 2,
+  "chapters": [
+    {
+      "id": "miroirs",
+      "name": "Miroirs",
+      "levels": [
+        "m01-tourner",
+        "m02-glisser",
+        "m03-traverser",
+        "m04-contourner",
+        "m05-fixe-et-leurre",
+        "m06-serpent",
+        "m07-crochet",
+        "m08-zigzag",
+        "m09-cinq-cibles",
+        "m10-grand-final"
+      ]
+    },
+    {
+      "id": "couleurs",
+      "name": "Couleurs",
+      "levels": [
+        "c01-rouge",
+        "c02-melange",
+        "c03-filtre",
+        "c04-deux-lumieres",
+        "c05-paralleles",
+        "c06-jaune",
+        "c07-bleu-barre",
+        "c08-cascade",
+        "c09-cyan",
+        "c10-trois-sources"
+      ]
+    },
+    {
+      "id": "prismes",
+      "name": "Prismes",
+      "levels": [
+        "p01-prisme",
+        "p02-violet",
+        "p03-trois-couleurs",
+        "p04-sous-l-emetteur",
+        "p05-le-filtre",
+        "p06-jaune",
+        "p07-cyan",
+        "p08-violet-en-colonne",
+        "p09-double-partage",
+        "p10-detour-jaune"
+      ]
+    },
+    {
+      "id": "speciales",
+      "name": "Pièces spéciales",
+      "levels": [
+        "s01-separateur",
+        "s02-deux-voies",
+        "s03-portail",
+        "s04-passage",
+        "s05-porte",
+        "s06-la-cible-cle",
+        "s07-retour",
+        "s08-porte-du-fond",
+        "s09-grand-ensemble",
+        "s10-tout-ensemble"
+      ]
+    },
+    {
+      "id": "maitrise",
+      "name": "Maîtrise",
+      "levels": [
+        "x01-cyan-et-bleu",
+        "x02-porte-et-prisme",
+        "x03-deux-sources",
+        "x04-rouge-et-vert",
+        "x05-cle",
+        "x06-trois-teintes",
+        "x07-verrou",
+        "x08-passage",
+        "x09-six-pieces",
+        "x10-examen"
+      ]
+    }
+  ]
+}

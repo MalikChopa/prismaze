@@ -1,0 +1,24 @@
+{
+  "format": 2,
+  "id": "s04-passage",
+  "name": "Passage",
+  "size": [9,7],
+  "pieces": [
+    {"type":"target","at":[0,0],"need":"RGB"},
+    {"type":"mirror","at":[4,0],"o":"|"},
+    {"type":"splitter","at":[8,0],"o":"-"},
+    {"type":"target","at":[0,1],"need":"RGB"},
+    {"type":"mirror","at":[3,1],"o":"\\"},
+    {"type":"portal","at":[0,2],"pair":0},
+    {"type":"mirror","at":[4,3],"o":"/"},
+    {"type":"portal","at":[4,5],"pair":0},
+    {"type":"wall","at":[5,5]},
+    {"type":"emitter","at":[8,5],"dir":"W","mask":"RGB"},
+    {"type":"target","at":[1,6],"need":"RGB"}
+  ],
+  "par": 3,
+  "solutions": [
+    [{"type":"mirror","at":[7,5],"o":"/"},{"type":"mirror","at":[7,6],"o":"/"},{"type":"splitter","at":[4,6],"o":"\\"}],
+    [{"type":"mirror","at":[6,5],"o":"/"},{"type":"mirror","at":[6,6],"o":"/"},{"type":"splitter","at":[4,6],"o":"\\"}]
+  ]
+}

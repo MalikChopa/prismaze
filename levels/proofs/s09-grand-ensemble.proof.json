@@ -1,0 +1,13 @@
+{
+"format":2,
+"levelId":"s09-grand-ensemble",
+"levelHash":"sha256:8c5eb513993b5a783c173af15cfc11abcc604e7912bc87e9ad7131eebe514c1e",
+"rulesVersion":2,
+"solverVersion":2,
+"status":"proved-optimal",
+"minimum":4,
+"solutionsAtMin":1,
+"witness":[{"type":"mirror","at":[9,0],"o":"\\"},{"type":"prism","at":[7,0]},{"type":"splitter","at":[4,0],"o":"/"},{"type":"mirror","at":[2,0],"o":"/"}],
+"parking":[{"type":"mirror","at":[0,0],"o":"-"}],
+"metrics":{"movable":5,"kinds":["mirror","prism","splitter"],"targets":4,"nodes":18047,"nodesTotal":89545,"leaves":59329,"solutionsRelaxed":1,"falseTrail":1,"pathLength":30,"crossings":0,"specialTypes":2,"D2":34.8}
+}

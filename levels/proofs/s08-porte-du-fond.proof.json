@@ -1,0 +1,13 @@
+{
+"format":2,
+"levelId":"s08-porte-du-fond",
+"levelHash":"sha256:49df900769a5f38683917edc2b06d6b69edeca106e9bb91558c9d0e0a2651c1b",
+"rulesVersion":2,
+"solverVersion":2,
+"status":"proved-optimal",
+"minimum":4,
+"solutionsAtMin":2,
+"witness":[{"type":"mirror","at":[7,3],"o":"\\"},{"type":"mirror","at":[7,2],"o":"\\"},{"type":"splitter","at":[6,2],"o":"\\"},{"type":"mirror","at":[1,2],"o":"\\"}],
+"parking":[],
+"metrics":{"movable":4,"kinds":["mirror","splitter"],"targets":4,"nodes":4446,"nodesTotal":8741,"leaves":4791,"solutionsRelaxed":2,"falseTrail":1,"pathLength":12,"crossings":0,"specialTypes":1,"D2":27.3}
+}

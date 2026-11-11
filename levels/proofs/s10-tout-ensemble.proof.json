@@ -1,0 +1,13 @@
+{
+"format":2,
+"levelId":"s10-tout-ensemble",
+"levelHash":"sha256:fbbba465785197354eb2b63eb8b59fffd4609b394af564c28d9941034a30def9",
+"rulesVersion":2,
+"solverVersion":2,
+"status":"proved-optimal",
+"minimum":5,
+"solutionsAtMin":1,
+"witness":[{"type":"mirror","at":[8,1],"o":"\\"},{"type":"mirror","at":[8,0],"o":"\\"},{"type":"prism","at":[7,0]},{"type":"splitter","at":[6,0],"o":"/"},{"type":"mirror","at":[7,1],"o":"/"}],
+"parking":[],
+"metrics":{"movable":5,"kinds":["mirror","prism","splitter"],"targets":4,"nodes":385982,"nodesTotal":1013904,"leaves":570632,"solutionsRelaxed":1,"falseTrail":1,"pathLength":25,"crossings":1,"specialTypes":2,"D2":42.8}
+}

@@ -1,0 +1,13 @@
+{
+"format":2,
+"levelId":"m10-grand-final",
+"levelHash":"sha256:d38c6d17b61a7c3db53a68cbab834bb04fa76aaf9a4401486348849fa53abe9c",
+"rulesVersion":2,
+"solverVersion":2,
+"status":"proved-optimal",
+"minimum":6,
+"solutionsAtMin":2,
+"witness":[{"type":"mirror","at":[1,2],"o":"/"},{"type":"mirror","at":[1,0],"o":"/"},{"type":"mirror","at":[5,0],"o":"\\"},{"type":"mirror","at":[5,2],"o":"/"},{"type":"mirror","at":[3,2],"o":"\\"},{"type":"mirror","at":[3,1],"o":"\\"}],
+"parking":[{"type":"mirror","at":[0,0],"o":"-"},{"type":"mirror","at":[3,0],"o":"-"}],
+"metrics":{"movable":8,"kinds":["mirror"],"targets":5,"nodes":84129,"nodesTotal":491157,"leaves":157800,"solutionsRelaxed":2,"falseTrail":1,"pathLength":15,"crossings":1,"specialTypes":0,"D2":37.8}
+}

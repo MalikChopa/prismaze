@@ -1,0 +1,13 @@
+{
+"format":2,
+"levelId":"c08-cascade",
+"levelHash":"sha256:3a81bbb8112101fb44b11175834402dd72e4f4703b974ee884b8085699329557",
+"rulesVersion":2,
+"solverVersion":2,
+"status":"proved-optimal",
+"minimum":3,
+"solutionsAtMin":1,
+"witness":[{"type":"mirror","at":[8,1],"o":"/"},{"type":"mirror","at":[6,1],"o":"/"},{"type":"mirror","at":[1,2],"o":"/"}],
+"parking":[{"type":"mirror","at":[0,0],"o":"-"}],
+"metrics":{"movable":4,"kinds":["mirror"],"targets":3,"nodes":18347,"nodesTotal":22566,"leaves":13359,"solutionsRelaxed":1,"falseTrail":1,"pathLength":19,"crossings":1,"specialTypes":0,"D2":27.6}
+}

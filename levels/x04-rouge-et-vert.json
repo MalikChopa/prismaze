@@ -1,0 +1,28 @@
+{
+  "format": 2,
+  "id": "x04-rouge-et-vert",
+  "name": "Rouge et vert",
+  "size": [10,8],
+  "pieces": [
+    {"type":"emitter","at":[0,0],"dir":"S","mask":"RGB"},
+    {"type":"mirror","at":[3,0],"o":"-"},
+    {"type":"wall","at":[0,1]},
+    {"type":"filter","at":[6,1],"mask":"RG"},
+    {"type":"prism","at":[1,2]},
+    {"type":"mirror","at":[4,4],"o":"/"},
+    {"type":"target","at":[5,5],"need":"R"},
+    {"type":"target","at":[0,6],"need":"R"},
+    {"type":"wall","at":[4,6]},
+    {"type":"target","at":[7,6],"need":"RG"},
+    {"type":"mirror","at":[8,6],"o":"|"},
+    {"type":"emitter","at":[9,6],"dir":"W","mask":"RGB"},
+    {"type":"target","at":[0,7],"need":"R"},
+    {"type":"splitter","at":[3,7],"o":"\\"}
+  ],
+  "par": 4,
+  "solutions": [
+    [{"type":"filter","at":[8,6],"mask":"RG"},{"type":"mirror","at":[6,6],"o":"\\"},{"type":"prism","at":[6,5]},{"type":"mirror","at":[0,5],"o":"/"}],
+    [{"type":"filter","at":[8,6],"mask":"RG"},{"type":"mirror","at":[6,6],"o":"\\"},{"type":"prism","at":[6,5]},{"type":"splitter","at":[0,5],"o":"/"}],
+    [{"type":"filter","at":[8,6],"mask":"RG"},{"type":"splitter","at":[6,6],"o":"\\"},{"type":"prism","at":[6,5]},{"type":"mirror","at":[0,5],"o":"/"}]
+  ]
+}

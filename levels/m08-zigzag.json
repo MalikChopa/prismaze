@@ -1,0 +1,28 @@
+{
+  "format": 2,
+  "id": "m08-zigzag",
+  "name": "Zigzag",
+  "size": [9,7],
+  "pieces": [
+    {"type":"emitter","at":[1,0],"dir":"S","mask":"RGB"},
+    {"type":"wall","at":[8,0]},
+    {"type":"wall","at":[4,1]},
+    {"type":"mirror","at":[7,1],"o":"-"},
+    {"type":"mirror","at":[2,2],"o":"\\"},
+    {"type":"target","at":[4,2],"need":"RGB"},
+    {"type":"mirror","at":[0,3],"o":"|"},
+    {"type":"target","at":[3,3],"need":"RGB"},
+    {"type":"target","at":[5,3],"need":"RGB"},
+    {"type":"mirror","at":[4,4],"o":"/"},
+    {"type":"wall","at":[8,4]},
+    {"type":"wall","at":[8,5]},
+    {"type":"target","at":[4,6],"need":"RGB"},
+    {"type":"mirror","at":[5,6],"o":"/"},
+    {"type":"mirror","at":[8,6],"o":"|"}
+  ],
+  "par": 4,
+  "solutions": [
+    [{"type":"mirror","at":[1,2],"o":"\\"},{"type":"mirror","at":[5,2],"o":"\\"},{"type":"mirror","at":[5,6],"o":"/"},{"type":"mirror","at":[3,6],"o":"\\"}],
+    [{"type":"mirror","at":[1,6],"o":"\\"},{"type":"mirror","at":[5,6],"o":"/"},{"type":"mirror","at":[5,2],"o":"\\"},{"type":"mirror","at":[3,2],"o":"/"}]
+  ]
+}

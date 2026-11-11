@@ -1,0 +1,13 @@
+{
+"format":2,
+"levelId":"s04-passage",
+"levelHash":"sha256:d09a1ae7168c62ebdc10ac3359f97c29bdf9e9a20462eeb8ddaf4094c5af62f9",
+"rulesVersion":2,
+"solverVersion":2,
+"status":"proved-optimal",
+"minimum":3,
+"solutionsAtMin":2,
+"witness":[{"type":"mirror","at":[7,5],"o":"/"},{"type":"mirror","at":[7,6],"o":"/"},{"type":"splitter","at":[4,6],"o":"\\"}],
+"parking":[{"type":"mirror","at":[1,0],"o":"-"}],
+"metrics":{"movable":4,"kinds":["mirror","splitter"],"targets":3,"nodes":201,"nodesTotal":2344,"leaves":1518,"solutionsRelaxed":2,"falseTrail":0.999,"pathLength":12,"crossings":0,"specialTypes":1,"D2":20.3}
+}

@@ -1,0 +1,13 @@
+{
+"format":2,
+"levelId":"p02-violet",
+"levelHash":"sha256:12e759e889ccb5fc37a68f1d01a153643ad6f6d490264509865dd71ddca08f7f",
+"rulesVersion":2,
+"solverVersion":2,
+"status":"proved-optimal",
+"minimum":2,
+"solutionsAtMin":2,
+"witness":[{"type":"mirror","at":[2,2],"o":"/"},{"type":"mirror","at":[4,2],"o":"\\"}],
+"parking":[],
+"metrics":{"movable":2,"kinds":["mirror"],"targets":1,"nodes":310,"nodesTotal":366,"leaves":216,"solutionsRelaxed":2,"falseTrail":0.991,"pathLength":15,"crossings":1,"specialTypes":0,"D2":18.5}
+}

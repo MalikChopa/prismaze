@@ -1,0 +1,15 @@
+{
+  "format": 2,
+  "id": "m02-glisser",
+  "name": "Glisser",
+  "size": [6,4],
+  "pieces": [
+    {"type":"emitter","at":[2,0],"dir":"S","mask":"RGB"},
+    {"type":"target","at":[5,2],"need":"RGB"},
+    {"type":"mirror","at":[4,3],"o":"\\"}
+  ],
+  "par": 1,
+  "solutions": [
+    [{"type":"mirror","at":[2,2],"o":"\\"}]
+  ]
+}

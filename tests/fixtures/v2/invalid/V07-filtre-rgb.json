@@ -1,0 +1,115 @@
+{
+ "format": 2,
+ "id": "x00-exemple",
+ "name": "Exemple",
+ "size": [
+  8,
+  6
+ ],
+ "pieces": [
+  {
+   "type": "emitter",
+   "at": [
+    0,
+    1
+   ],
+   "dir": "E",
+   "mask": "RGB"
+  },
+  {
+   "type": "prism",
+   "at": [
+    2,
+    1
+   ],
+   "fixed": true
+  },
+  {
+   "type": "target",
+   "at": [
+    6,
+    0
+   ],
+   "need": "R"
+  },
+  {
+   "type": "target",
+   "at": [
+    7,
+    1
+   ],
+   "need": "G"
+  },
+  {
+   "type": "gate",
+   "at": [
+    5,
+    1
+   ],
+   "link": [
+    6,
+    0
+   ]
+  },
+  {
+   "type": "wall",
+   "at": [
+    4,
+    3
+   ]
+  },
+  {
+   "type": "portal",
+   "at": [
+    0,
+    5
+   ],
+   "pair": 0
+  },
+  {
+   "type": "portal",
+   "at": [
+    7,
+    5
+   ],
+   "pair": 0
+  },
+  {
+   "type": "mirror",
+   "at": [
+    4,
+    4
+   ],
+   "o": "/"
+  },
+  {
+   "type": "mirror",
+   "at": [
+    1,
+    3
+   ],
+   "o": "\\"
+  },
+  {
+   "type": "filter",
+   "at": [
+    6,
+    4
+   ],
+   "mask": "RGB"
+  }
+ ],
+ "par": 1,
+ "solutions": [
+  [
+   {
+    "type": "mirror",
+    "at": [
+     2,
+     0
+    ],
+    "o": "/"
+   }
+  ]
+ ]
+}

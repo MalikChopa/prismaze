@@ -1,0 +1,13 @@
+{
+"format":2,
+"levelId":"m03-traverser",
+"levelHash":"sha256:6da6001367922a25614fc7452bcd96aee61d50f8eac259b4461b6fd5d8ac76c9",
+"rulesVersion":2,
+"solverVersion":2,
+"status":"proved-optimal",
+"minimum":1,
+"solutionsAtMin":1,
+"witness":[{"type":"mirror","at":[4,1],"o":"\\"}],
+"parking":[],
+"metrics":{"movable":1,"kinds":["mirror"],"targets":2,"nodes":13,"nodesTotal":18,"leaves":12,"solutionsRelaxed":1,"falseTrail":0.917,"pathLength":6,"crossings":0,"specialTypes":0,"D2":7.5}
+}

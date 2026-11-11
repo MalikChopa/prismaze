@@ -1,0 +1,13 @@
+{
+"format":2,
+"levelId":"m05-fixe-et-leurre",
+"levelHash":"sha256:d3b5a3505d393752f6ec4adfbe72976adabef5f7477d45dedbe17693e33a7985",
+"rulesVersion":2,
+"solverVersion":2,
+"status":"proved-optimal",
+"minimum":2,
+"solutionsAtMin":3,
+"witness":[{"type":"mirror","at":[3,3],"o":"/"},{"type":"mirror","at":[5,3],"o":"/"}],
+"parking":[{"type":"mirror","at":[0,0],"o":"-"}],
+"metrics":{"movable":3,"kinds":["mirror"],"targets":1,"nodes":77,"nodesTotal":182,"leaves":87,"solutionsRelaxed":3,"falseTrail":0.966,"pathLength":9,"crossings":0,"specialTypes":0,"D2":13.5}
+}

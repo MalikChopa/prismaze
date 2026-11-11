@@ -1,0 +1,21 @@
+{
+  "format": 2,
+  "id": "s05-porte",
+  "name": "Porte",
+  "size": [8,5],
+  "pieces": [
+    {"type":"emitter","at":[0,3],"dir":"E","mask":"RGB"},
+    {"type":"target","at":[2,1],"need":"RGB"},
+    {"type":"gate","at":[5,0],"link":[2,1]},
+    {"type":"target","at":[7,2],"need":"RGB"},
+    {"type":"mirror","at":[4,4],"o":"/"},
+    {"type":"mirror","at":[5,4],"o":"/"},
+    {"type":"mirror","at":[6,4],"o":"/"},
+    {"type":"wall","at":[3,3]},
+    {"type":"wall","at":[6,1]}
+  ],
+  "par": 3,
+  "solutions": [
+    [{"type":"mirror","at":[2,3],"o":"/"},{"type":"mirror","at":[2,0],"o":"/"},{"type":"mirror","at":[7,0],"o":"\\"}]
+  ]
+}

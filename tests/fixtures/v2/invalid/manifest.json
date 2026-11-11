@@ -1,0 +1,272 @@
+[
+ {
+  "file": "V01-format-1.json",
+  "mode": "shipped",
+  "code": "V1_FORMAT",
+  "note": "format 1 refusé, jamais converti"
+ },
+ {
+  "file": "V01-format-absent.json",
+  "mode": "shipped",
+  "code": "V1_FORMAT",
+  "note": ""
+ },
+ {
+  "file": "V02-id-majuscule.json",
+  "mode": "shipped",
+  "code": "V2_ID",
+  "note": ""
+ },
+ {
+  "file": "V02-id-court.json",
+  "mode": "shipped",
+  "code": "V2_ID",
+  "note": ""
+ },
+ {
+  "file": "V03-taille-large.json",
+  "mode": "shipped",
+  "code": "V3_SIZE",
+  "note": ""
+ },
+ {
+  "file": "V03-taille-petite.json",
+  "mode": "shipped",
+  "code": "V3_SIZE",
+  "note": ""
+ },
+ {
+  "file": "V04-cle-niveau.json",
+  "mode": "shipped",
+  "code": "V4_UNKNOWN_KEY",
+  "note": ""
+ },
+ {
+  "file": "V04-cle-piece.json",
+  "mode": "shipped",
+  "code": "V4_UNKNOWN_KEY",
+  "note": ""
+ },
+ {
+  "file": "V04-fixed-sur-mur.json",
+  "mode": "shipped",
+  "code": "V4_UNKNOWN_KEY",
+  "note": "fixed seulement sur miroir/séparateur/prisme/filtre"
+ },
+ {
+  "file": "V05-hors-plateau.json",
+  "mode": "shipped",
+  "code": "V5_OUT_OF_BOUNDS",
+  "note": ""
+ },
+ {
+  "file": "V05-case-double.json",
+  "mode": "shipped",
+  "code": "V5_OVERLAP",
+  "note": ""
+ },
+ {
+  "file": "V06-sans-emetteur.json",
+  "mode": "shipped",
+  "code": "V6_EMITTER_COUNT",
+  "note": ""
+ },
+ {
+  "file": "V06-4-emetteurs.json",
+  "mode": "shipped",
+  "code": "V6_EMITTER_COUNT",
+  "note": ""
+ },
+ {
+  "file": "V06-sans-cible.json",
+  "mode": "shipped",
+  "code": "V6_NO_TARGET",
+  "note": ""
+ },
+ {
+  "file": "V06-9-cibles.json",
+  "mode": "free",
+  "code": "V6_TARGET_COUNT",
+  "note": ""
+ },
+ {
+  "file": "V06-5-portes.json",
+  "mode": "free",
+  "code": "V6_GATE_COUNT",
+  "note": ""
+ },
+ {
+  "file": "V06-101-pieces.json",
+  "mode": "free",
+  "code": "V6_PIECE_COUNT",
+  "note": ""
+ },
+ {
+  "file": "V07-direction.json",
+  "mode": "shipped",
+  "code": "V7_DIRECTION",
+  "note": ""
+ },
+ {
+  "file": "V07-orientation.json",
+  "mode": "shipped",
+  "code": "V7_ORIENTATION",
+  "note": ""
+ },
+ {
+  "file": "V07-masque-ordre.json",
+  "mode": "shipped",
+  "code": "V7_MASK",
+  "note": "ordre RGB imposé"
+ },
+ {
+  "file": "V07-masque-vide.json",
+  "mode": "shipped",
+  "code": "V7_MASK",
+  "note": ""
+ },
+ {
+  "file": "V07-filtre-rgb.json",
+  "mode": "shipped",
+  "code": "V7_MASK",
+  "note": "un filtre accepte 1..6"
+ },
+ {
+  "file": "V07-pair.json",
+  "mode": "shipped",
+  "code": "V7_PAIR",
+  "note": ""
+ },
+ {
+  "file": "V07-fixed-non-booleen.json",
+  "mode": "shipped",
+  "code": "V7_FIXED",
+  "note": ""
+ },
+ {
+  "file": "V08-0-mobile.json",
+  "mode": "free",
+  "code": "V8_MOVABLE_COUNT",
+  "note": ""
+ },
+ {
+  "file": "V08-9-mobiles.json",
+  "mode": "free",
+  "code": "V8_MOVABLE_COUNT",
+  "note": ""
+ },
+ {
+  "file": "V09-sans-case-libre.json",
+  "mode": "free",
+  "code": "V9_NO_FREE_CELL",
+  "note": "8 pièces fixes sur 9 cases + 1 mobile : il faut 2 cases sans pièce fixe"
+ },
+ {
+  "file": "V10-deja-gagnant.json",
+  "mode": "shipped",
+  "code": "V10_ALREADY_WON",
+  "note": ""
+ },
+ {
+  "file": "V11-portail-seul.json",
+  "mode": "shipped",
+  "code": "V11_PORTAL_PAIR",
+  "note": ""
+ },
+ {
+  "file": "V11-portail-trois.json",
+  "mode": "shipped",
+  "code": "V11_PORTAL_PAIR",
+  "note": ""
+ },
+ {
+  "file": "V12-lien-sans-cible.json",
+  "mode": "shipped",
+  "code": "V12_LINK",
+  "note": ""
+ },
+ {
+  "file": "V12-lien-mal-forme.json",
+  "mode": "shipped",
+  "code": "V12_LINK",
+  "note": ""
+ },
+ {
+  "file": "V13-solution-perdante.json",
+  "mode": "shipped",
+  "code": "V13_SOLUTIONS",
+  "note": ""
+ },
+ {
+  "file": "V13-par-faux.json",
+  "mode": "shipped",
+  "code": "V13_SOLUTIONS",
+  "note": "le jeu gagne avec 1 pièce, par vaut 2"
+ },
+ {
+  "file": "V13-sans-solutions.json",
+  "mode": "shipped",
+  "code": "V13_SOLUTIONS",
+  "note": "niveau livré sans par ni solutions"
+ },
+ {
+  "file": "V13-inventaire.json",
+  "mode": "shipped",
+  "code": "V13_SOLUTIONS",
+  "note": "pas de prisme mobile dans l'inventaire"
+ },
+ {
+  "file": "V15-nom-vide.json",
+  "mode": "shipped",
+  "code": "V15_NAME",
+  "note": ""
+ },
+ {
+  "file": "V15-nom-41.json",
+  "mode": "shipped",
+  "code": "V15_NAME",
+  "note": ""
+ },
+ {
+  "file": "V15-partage-majuscule.json",
+  "mode": "shared",
+  "code": "V15_NAME",
+  "note": "É majuscule absent de T (la saisie met en minuscules avant)"
+ },
+ {
+  "file": "V15-partage-decompose.json",
+  "mode": "shared",
+  "code": "V15_NAME",
+  "note": "e + accent combinant : non normalisé NFC"
+ },
+ {
+  "file": "V15-partage-25.json",
+  "mode": "shared",
+  "code": "V15_NAME",
+  "note": ""
+ },
+ {
+  "file": "V15-partage-signe.json",
+  "mode": "shared",
+  "code": "V15_NAME",
+  "note": ""
+ },
+ {
+  "file": "V15-partage-emoji.json",
+  "mode": "shared",
+  "code": "V15_NAME",
+  "note": ""
+ },
+ {
+  "file": "V04-partage-par.json",
+  "mode": "shared",
+  "code": "V4_UNKNOWN_KEY",
+  "note": "par/solutions hors du lien"
+ },
+ {
+  "file": "V02-partage-id.json",
+  "mode": "shared",
+  "code": "V2_ID_NAME",
+  "note": "id synthétique « partage »"
+ }
+]

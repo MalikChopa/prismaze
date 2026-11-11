@@ -1,0 +1,13 @@
+{
+"format":2,
+"levelId":"x08-passage",
+"levelHash":"sha256:d94dba302d89941f5316833b596980cace64bebac1a19e5b0b9a82b611a88190",
+"rulesVersion":2,
+"solverVersion":2,
+"status":"proved-optimal",
+"minimum":5,
+"solutionsAtMin":8,
+"witness":[{"type":"mirror","at":[5,6],"o":"/"},{"type":"mirror","at":[6,6],"o":"/"},{"type":"prism","at":[6,4]},{"type":"mirror","at":[4,0],"o":"/"},{"type":"splitter","at":[5,4],"o":"|"}],
+"parking":[{"type":"mirror","at":[2,0],"o":"-"}],
+"metrics":{"movable":6,"kinds":["mirror","prism","splitter"],"targets":4,"nodes":206498,"nodesTotal":1076020,"leaves":577295,"solutionsRelaxed":8,"falseTrail":1,"pathLength":27,"crossings":2,"specialTypes":2,"D2":44.3}
+}

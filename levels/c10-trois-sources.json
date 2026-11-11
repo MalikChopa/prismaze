@@ -1,0 +1,31 @@
+{
+  "format": 2,
+  "id": "c10-trois-sources",
+  "name": "Trois sources",
+  "size": [10,8],
+  "pieces": [
+    {"type":"wall","at":[1,0]},
+    {"type":"emitter","at":[3,0],"dir":"S","mask":"R"},
+    {"type":"mirror","at":[8,0],"o":"\\"},
+    {"type":"wall","at":[2,1]},
+    {"type":"target","at":[3,1],"need":"R"},
+    {"type":"filter","at":[9,1],"mask":"RG"},
+    {"type":"mirror","at":[1,2],"o":"|"},
+    {"type":"mirror","at":[6,2],"o":"\\"},
+    {"type":"target","at":[2,4],"need":"RB"},
+    {"type":"wall","at":[5,4]},
+    {"type":"target","at":[2,5],"need":"RB"},
+    {"type":"wall","at":[4,5]},
+    {"type":"mirror","at":[5,5],"o":"\\"},
+    {"type":"wall","at":[6,5]},
+    {"type":"emitter","at":[0,6],"dir":"E","mask":"B"},
+    {"type":"target","at":[1,6],"need":"RB"},
+    {"type":"mirror","at":[0,7],"o":"-"},
+    {"type":"emitter","at":[2,7],"dir":"N","mask":"G"}
+  ],
+  "par": 4,
+  "solutions": [
+    [{"type":"mirror","at":[2,6],"o":"/"},{"type":"mirror","at":[2,3],"o":"/"},{"type":"mirror","at":[3,3],"o":"/"},{"type":"filter","at":[3,2],"mask":"RG"}],
+    [{"type":"mirror","at":[2,6],"o":"/"},{"type":"filter","at":[2,3],"mask":"RG"},{"type":"mirror","at":[3,2],"o":"/"},{"type":"mirror","at":[2,2],"o":"/"}]
+  ]
+}

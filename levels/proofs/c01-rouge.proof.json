@@ -1,0 +1,13 @@
+{
+"format":2,
+"levelId":"c01-rouge",
+"levelHash":"sha256:774cf4f12cce4f1fbe1b21e5d6a46591be80031bb120241b5d6a7b9b9715ff11",
+"rulesVersion":2,
+"solverVersion":2,
+"status":"proved-optimal",
+"minimum":1,
+"solutionsAtMin":1,
+"witness":[{"type":"mirror","at":[3,3],"o":"\\"}],
+"parking":[],
+"metrics":{"movable":1,"kinds":["mirror"],"targets":1,"nodes":13,"nodesTotal":18,"leaves":12,"solutionsRelaxed":1,"falseTrail":0.917,"pathLength":6,"crossings":0,"specialTypes":0,"D2":7.5}
+}

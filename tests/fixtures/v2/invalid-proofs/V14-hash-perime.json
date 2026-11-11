@@ -1,0 +1,33 @@
+{
+ "format": 2,
+ "levelId": "x00-exemple",
+ "levelHash": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+ "rulesVersion": 2,
+ "solverVersion": 2,
+ "status": "proved-optimal",
+ "minimum": 1,
+ "solutionsAtMin": 1,
+ "witness": [
+  {
+   "type": "mirror",
+   "at": [
+    2,
+    0
+   ],
+   "o": "/"
+  }
+ ],
+ "parking": [
+  {
+   "type": "mirror",
+   "at": [
+    7,
+    3
+   ],
+   "o": "-"
+  }
+ ],
+ "metrics": {
+  "note": "preuve de test écrite à la main pour le fixture, pas produite par le solveur"
+ }
+}

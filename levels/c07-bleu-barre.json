@@ -1,0 +1,27 @@
+{
+  "format": 2,
+  "id": "c07-bleu-barre",
+  "name": "Bleu barré",
+  "size": [9,7],
+  "pieces": [
+    {"type":"wall","at":[5,0]},
+    {"type":"wall","at":[7,0]},
+    {"type":"wall","at":[0,1]},
+    {"type":"wall","at":[3,1]},
+    {"type":"filter","at":[5,1],"mask":"RG"},
+    {"type":"target","at":[7,3],"need":"RB"},
+    {"type":"emitter","at":[8,3],"dir":"W","mask":"B"},
+    {"type":"wall","at":[0,4]},
+    {"type":"mirror","at":[2,4],"o":"|"},
+    {"type":"mirror","at":[3,4],"o":"-"},
+    {"type":"target","at":[5,4],"need":"RB"},
+    {"type":"mirror","at":[8,4],"o":"\\"},
+    {"type":"mirror","at":[5,5],"o":"\\"},
+    {"type":"target","at":[7,5],"need":"R"},
+    {"type":"emitter","at":[8,5],"dir":"W","mask":"R"}
+  ],
+  "par": 3,
+  "solutions": [
+    [{"type":"mirror","at":[5,5],"o":"\\"},{"type":"mirror","at":[5,3],"o":"/"},{"type":"filter","at":[6,5],"mask":"RG"}]
+  ]
+}

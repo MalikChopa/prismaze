@@ -1,0 +1,16 @@
+{
+  "name": "Prismaze",
+  "short_name": "Prismaze",
+  "description": "Jeu de réflexion : guide la lumière avec des miroirs, des prismes et des filtres.",
+  "lang": "fr",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#06061a",
+  "theme_color": "#06061a",
+  "icons": [
+    { "src": "icons/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "icons/icon-maskable.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "maskable" }
+  ]
+}

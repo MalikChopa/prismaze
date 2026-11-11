@@ -1,0 +1,13 @@
+{
+"format":2,
+"levelId":"s02-deux-voies",
+"levelHash":"sha256:2112ddbd68943d790e9c0ea40c9f45723150971f8debcef31a1b958ff8ed9c1f",
+"rulesVersion":2,
+"solverVersion":2,
+"status":"proved-optimal",
+"minimum":2,
+"solutionsAtMin":1,
+"witness":[{"type":"splitter","at":[4,3],"o":"/"},{"type":"mirror","at":[4,1],"o":"\\"}],
+"parking":[{"type":"mirror","at":[0,0],"o":"-"},{"type":"mirror","at":[1,0],"o":"-"}],
+"metrics":{"movable":4,"kinds":["mirror","splitter"],"targets":2,"nodes":246,"nodesTotal":576,"leaves":387,"solutionsRelaxed":1,"falseTrail":0.997,"pathLength":11,"crossings":0,"specialTypes":1,"D2":17.4}
+}

@@ -1,0 +1,15 @@
+{
+  "format": 2,
+  "id": "c01-rouge",
+  "name": "Rouge",
+  "size": [7,5],
+  "pieces": [
+    {"type":"emitter","at":[3,0],"dir":"S","mask":"R"},
+    {"type":"mirror","at":[3,3],"o":"|"},
+    {"type":"target","at":[6,3],"need":"R"}
+  ],
+  "par": 1,
+  "solutions": [
+    [{"type":"mirror","at":[3,3],"o":"\\"}]
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "format": 2,
+  "id": "x02-porte-et-prisme",
+  "name": "Porte et prisme",
+  "size": [10,8],
+  "pieces": [
+    {"type":"target","at":[0,0],"need":"B"},
+    {"type":"splitter","at":[1,0],"o":"/"},
+    {"type":"emitter","at":[5,0],"dir":"S","mask":"RGB"},
+    {"type":"gate","at":[1,1],"link":[2,3]},
+    {"type":"filter","at":[3,1],"mask":"GB"},
+    {"type":"mirror","at":[6,1],"o":"\\"},
+    {"type":"wall","at":[1,2]},
+    {"type":"target","at":[2,3],"need":"RGB"},
+    {"type":"wall","at":[5,3]},
+    {"type":"prism","at":[8,3]},
+    {"type":"mirror","at":[0,5],"o":"/"},
+    {"type":"target","at":[2,6],"need":"GB"},
+    {"type":"mirror","at":[4,6],"o":"|"},
+    {"type":"target","at":[2,7],"need":"GB"}
+  ],
+  "par": 4,
+  "solutions": [
+    [{"type":"mirror","at":[5,1],"o":"/"},{"type":"splitter","at":[2,1],"o":"/"},{"type":"prism","at":[0,1]},{"type":"filter","at":[2,4],"mask":"GB"}],
+    [{"type":"mirror","at":[5,1],"o":"/"},{"type":"splitter","at":[2,1],"o":"/"},{"type":"prism","at":[0,1]},{"type":"filter","at":[2,5],"mask":"GB"}]
+  ]
+}

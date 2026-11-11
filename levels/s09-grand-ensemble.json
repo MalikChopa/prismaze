@@ -1,0 +1,25 @@
+{
+  "format": 2,
+  "id": "s09-grand-ensemble",
+  "name": "Grand ensemble",
+  "size": [10,8],
+  "pieces": [
+    {"type":"portal","at":[9,1],"pair":0},
+    {"type":"target","at":[4,2],"need":"G"},
+    {"type":"mirror","at":[7,2],"o":"/"},
+    {"type":"target","at":[2,3],"need":"G"},
+    {"type":"target","at":[4,3],"need":"G"},
+    {"type":"mirror","at":[1,4],"o":"\\"},
+    {"type":"gate","at":[7,5],"link":[4,2]},
+    {"type":"mirror","at":[0,6],"o":"-"},
+    {"type":"prism","at":[2,6]},
+    {"type":"portal","at":[5,6],"pair":0},
+    {"type":"splitter","at":[2,7],"o":"-"},
+    {"type":"emitter","at":[5,7],"dir":"N","mask":"RGB"},
+    {"type":"target","at":[7,7],"need":"R"}
+  ],
+  "par": 4,
+  "solutions": [
+    [{"type":"mirror","at":[9,0],"o":"\\"},{"type":"prism","at":[7,0]},{"type":"splitter","at":[4,0],"o":"/"},{"type":"mirror","at":[2,0],"o":"/"}]
+  ]
+}

@@ -1,0 +1,13 @@
+{
+"format":2,
+"levelId":"x07-verrou",
+"levelHash":"sha256:7422aefa997ad75e1cafcdebeeed80f0aae7fbffcc463dca143973c2054b34f5",
+"rulesVersion":2,
+"solverVersion":2,
+"status":"proved-optimal",
+"minimum":5,
+"solutionsAtMin":6,
+"witness":[{"type":"mirror","at":[1,3],"o":"/"},{"type":"filter","at":[1,2],"mask":"GB"},{"type":"splitter","at":[1,1],"o":"\\"},{"type":"mirror","at":[5,2],"o":"/"},{"type":"prism","at":[2,2]}],
+"parking":[{"type":"mirror","at":[0,0],"o":"-"}],
+"metrics":{"movable":6,"kinds":["filter","mirror","prism","splitter"],"targets":3,"nodes":155505,"nodesTotal":735731,"leaves":468642,"solutionsRelaxed":6,"falseTrail":1,"pathLength":14,"crossings":1,"specialTypes":3,"D2":41.4}
+}

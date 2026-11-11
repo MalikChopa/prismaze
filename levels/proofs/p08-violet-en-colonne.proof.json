@@ -1,0 +1,13 @@
+{
+"format":2,
+"levelId":"p08-violet-en-colonne",
+"levelHash":"sha256:3e438e8d4b8d7caf277210d63e4d01b1963a39903cc9b3fc941c41d9dd13c551",
+"rulesVersion":2,
+"solverVersion":2,
+"status":"proved-optimal",
+"minimum":4,
+"solutionsAtMin":2,
+"witness":[{"type":"filter","at":[1,3],"mask":"RB"},{"type":"mirror","at":[2,3],"o":"/"},{"type":"mirror","at":[2,0],"o":"\\"},{"type":"prism","at":[1,0]}],
+"parking":[{"type":"mirror","at":[0,0],"o":"-"},{"type":"mirror","at":[3,0],"o":"-"}],
+"metrics":{"movable":6,"kinds":["filter","mirror","prism"],"targets":4,"nodes":28827,"nodesTotal":157682,"leaves":95490,"solutionsRelaxed":2,"falseTrail":1,"pathLength":12,"crossings":1,"specialTypes":2,"D2":33.8}
+}

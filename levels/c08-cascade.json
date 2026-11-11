@@ -1,0 +1,27 @@
+{
+  "format": 2,
+  "id": "c08-cascade",
+  "name": "Cascade",
+  "size": [9,7],
+  "pieces": [
+    {"type":"emitter","at":[1,0],"dir":"S","mask":"R"},
+    {"type":"wall","at":[2,0]},
+    {"type":"emitter","at":[8,0],"dir":"S","mask":"B"},
+    {"type":"wall","at":[0,1]},
+    {"type":"mirror","at":[6,1],"o":"/"},
+    {"type":"target","at":[0,2],"need":"R"},
+    {"type":"target","at":[6,2],"need":"B"},
+    {"type":"wall","at":[7,2]},
+    {"type":"mirror","at":[6,3],"o":"|"},
+    {"type":"mirror","at":[4,4],"o":"-"},
+    {"type":"wall","at":[5,4]},
+    {"type":"wall","at":[3,5]},
+    {"type":"mirror","at":[0,6],"o":"-"},
+    {"type":"target","at":[6,6],"need":"GB"},
+    {"type":"emitter","at":[8,6],"dir":"W","mask":"G"}
+  ],
+  "par": 3,
+  "solutions": [
+    [{"type":"mirror","at":[8,1],"o":"/"},{"type":"mirror","at":[6,1],"o":"/"},{"type":"mirror","at":[1,2],"o":"/"}]
+  ]
+}

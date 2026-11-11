@@ -1,0 +1,14 @@
+{ "format": 1, "id": "tight-audit-min", "name": "Garage serré : contre-exemple minimal de l'audit", "size": [4,3],
+  "pieces": [
+    {"type":"emitter","at":[3,0],"dir":"W"},
+    {"type":"wall","at":[3,2]},
+    {"type":"wall","at":[2,2]},
+    {"type":"wall","at":[3,1]},
+    {"type":"target","at":[2,0]},
+    {"type":"mirror","at":[0,0],"o":"/","fixed":true},
+    {"type":"mirror","at":[0,1],"o":"|","fixed":true},
+    {"type":"mirror","at":[1,2],"o":"/","fixed":true},
+    {"type":"mirror","at":[0,2],"o":"\\","fixed":true},
+    {"type":"mirror","at":[1,0],"o":"/"},
+    {"type":"mirror","at":[1,1],"o":"/"},
+    {"type":"mirror","at":[2,1],"o":"/"} ] }

@@ -1,0 +1,13 @@
+{
+"format":2,
+"levelId":"p03-trois-couleurs",
+"levelHash":"sha256:4cf3f409ba0892fd416dfc29f606c09d4528738df250f954eeae2298ca4273ee",
+"rulesVersion":2,
+"solverVersion":2,
+"status":"proved-optimal",
+"minimum":3,
+"solutionsAtMin":1,
+"witness":[{"type":"mirror","at":[1,5],"o":"/"},{"type":"prism","at":[1,4]},{"type":"mirror","at":[1,1],"o":"\\"}],
+"parking":[{"type":"mirror","at":[0,0],"o":"-"}],
+"metrics":{"movable":4,"kinds":["mirror","prism"],"targets":3,"nodes":546,"nodesTotal":6064,"leaves":3600,"solutionsRelaxed":1,"falseTrail":1,"pathLength":13,"crossings":0,"specialTypes":1,"D2":21.8}
+}

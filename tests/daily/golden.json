@@ -1,0 +1,247 @@
+{
+ "about": "Empreintes d'or du défi du jour (Q6) : sha256 du code F4 canonique du niveau accepté, tentative e acceptée, nœuds de la preuve. Produit par src/engine/daily.js.",
+ "start": "2026-11-08",
+ "count": 30,
+ "rows": [
+  {
+   "date": "2026-11-08",
+   "v": 1,
+   "e": 0,
+   "nodes": 117977,
+   "minimum": 4,
+   "sha256": "e9729c35440d6cbd1101178dda8a57106b249d8e11ce97ca72de25bd39f0382f"
+  },
+  {
+   "date": "2026-11-09",
+   "v": 1,
+   "e": 0,
+   "nodes": 27,
+   "minimum": 2,
+   "sha256": "137f9cefe6f3756b248f44353adcfaf4840f27ce2ee9a18fb562c1fdb8f63819"
+  },
+  {
+   "date": "2026-11-10",
+   "v": 1,
+   "e": 0,
+   "nodes": 43,
+   "minimum": 2,
+   "sha256": "0378e3dc9b838a52d8c58d022ecd6229af22ae261355a206eada4edfc026bf4d"
+  },
+  {
+   "date": "2026-11-11",
+   "v": 1,
+   "e": 7,
+   "nodes": 594,
+   "minimum": 3,
+   "sha256": "89fbb8f974386640bb2125e497aaa1011b5efc494bad54b65ee30178673c128b"
+  },
+  {
+   "date": "2026-11-12",
+   "v": 1,
+   "e": 0,
+   "nodes": 1290,
+   "minimum": 3,
+   "sha256": "bcb42cbcb9e649f01ed9eb59cdb769d93521922f27b4c651d3e790936b421e90"
+  },
+  {
+   "date": "2026-11-13",
+   "v": 1,
+   "e": 2,
+   "nodes": 43134,
+   "minimum": 4,
+   "sha256": "288e307744763e9719558ff23a9ac07fed3ae7d1a86948c1ff8263c3fbd2596f"
+  },
+  {
+   "date": "2026-11-14",
+   "v": 1,
+   "e": 2,
+   "nodes": 97283,
+   "minimum": 4,
+   "sha256": "fb20e58a61346b1bfd8edcf234eab98abd2a1987cc8f0a96af164c26ed27b0d2"
+  },
+  {
+   "date": "2026-11-15",
+   "v": 1,
+   "e": 15,
+   "nodes": 63773,
+   "minimum": 4,
+   "sha256": "f8f2ba06d7237d93e053ae136364c8b1b8fa79e31ba2feca036be3bb47f07e08"
+  },
+  {
+   "date": "2026-11-16",
+   "v": 1,
+   "e": 4,
+   "nodes": 12,
+   "minimum": 2,
+   "sha256": "d521bfc11ecdcec5765e5d010afa3f99b8274c013c66fb34946e97d84d2d9977"
+  },
+  {
+   "date": "2026-11-17",
+   "v": 1,
+   "e": 1,
+   "nodes": 296,
+   "minimum": 3,
+   "sha256": "2d1711c9b85d098a26e624e12daa11c203a89ea123bbab48afc83610d8e9cb37"
+  },
+  {
+   "date": "2026-11-18",
+   "v": 1,
+   "e": 0,
+   "nodes": 1143,
+   "minimum": 3,
+   "sha256": "332b82e2f5aa8c32743f5b8c361945f044f112b3d211f9d6bc89039d317c171b"
+  },
+  {
+   "date": "2026-11-19",
+   "v": 1,
+   "e": 5,
+   "nodes": 3187,
+   "minimum": 3,
+   "sha256": "f588f6e48f71c14d1249792cef6aa5449a6700c842a04dddd250c2985e21f612"
+  },
+  {
+   "date": "2026-11-20",
+   "v": 1,
+   "e": 1,
+   "nodes": 41323,
+   "minimum": 4,
+   "sha256": "cca1e366e4a6396730bd2e93367bf0e391e53e843fce502f6fab35b295841c70"
+  },
+  {
+   "date": "2026-11-21",
+   "v": 1,
+   "e": 0,
+   "nodes": 382903,
+   "minimum": 5,
+   "sha256": "a07e61cb9fc2cbe4b5531b2abd9325a6f40e27b6bdccf86b784bfa68fd512e47"
+  },
+  {
+   "date": "2026-11-22",
+   "v": 1,
+   "e": 2,
+   "nodes": 381533,
+   "minimum": 5,
+   "sha256": "29214f0f5f8c069118142f9ff50666ae7cb1f124d1761b866c951c5cb50795cc"
+  },
+  {
+   "date": "2026-11-23",
+   "v": 1,
+   "e": 0,
+   "nodes": 32,
+   "minimum": 2,
+   "sha256": "1e99c132b8da91d931ab43e154a620871948d9dde2fecab791f40af5cbe13c72"
+  },
+  {
+   "date": "2026-11-24",
+   "v": 1,
+   "e": 0,
+   "nodes": 81,
+   "minimum": 2,
+   "sha256": "8132f29444c4fc62611f7a7d270d90ed4aa803a18c7d282522eff7832dd8bbcc"
+  },
+  {
+   "date": "2026-11-25",
+   "v": 1,
+   "e": 0,
+   "nodes": 941,
+   "minimum": 3,
+   "sha256": "8bf5973ed555b3ed18cddfbfa6b6c01aab49fcd96801cf52792b46268dc49f5c"
+  },
+  {
+   "date": "2026-11-26",
+   "v": 1,
+   "e": 0,
+   "nodes": 7919,
+   "minimum": 3,
+   "sha256": "52ff5973e03b81d36964a89ff11682e8ecc73e91a8a9cc681a380f02c4c20931"
+  },
+  {
+   "date": "2026-11-27",
+   "v": 1,
+   "e": 3,
+   "nodes": 95648,
+   "minimum": 4,
+   "sha256": "2733d7560219a3246e1a37fc1e2025e89026137ada35b3a5cc46967f3dd0b665"
+  },
+  {
+   "date": "2026-11-28",
+   "v": 1,
+   "e": 2,
+   "nodes": 72399,
+   "minimum": 4,
+   "sha256": "8cd40cbad326e4140d2f7a68556a71a027ba2e9110100a0422f0a1582e782106"
+  },
+  {
+   "date": "2026-11-29",
+   "v": 1,
+   "e": 2,
+   "nodes": 98249,
+   "minimum": 4,
+   "sha256": "254a63eed912a3c35fcd021da7c415f24df6c7bdd9ec3c7ef53615d36cf145d3"
+  },
+  {
+   "date": "2026-11-30",
+   "v": 1,
+   "e": 0,
+   "nodes": 16,
+   "minimum": 2,
+   "sha256": "6e85aec9895a83ff08af5215e4516fdfa6ed1ee791ca95d44dad8083807b86e5"
+  },
+  {
+   "date": "2026-12-01",
+   "v": 1,
+   "e": 0,
+   "nodes": 526,
+   "minimum": 3,
+   "sha256": "6bbfba618d1bb89548020139af6bbaa933f2b36157c2067e5ae9596eff35ab4d"
+  },
+  {
+   "date": "2026-12-02",
+   "v": 1,
+   "e": 1,
+   "nodes": 1297,
+   "minimum": 3,
+   "sha256": "9599a41d173cb0b7d338e694168c887867f3274c27b7c28fc332a264ff9d3404"
+  },
+  {
+   "date": "2026-12-03",
+   "v": 1,
+   "e": 1,
+   "nodes": 23286,
+   "minimum": 4,
+   "sha256": "941beb861e1411764a1b952a46c58f3c497f5222d38bed7f3115f6a098d1335c"
+  },
+  {
+   "date": "2026-12-04",
+   "v": 1,
+   "e": 7,
+   "nodes": 15577,
+   "minimum": 4,
+   "sha256": "176bcaf8fb9fa072d59ca5960cc9543d4a90b023745f44602c32eaf7a129cbe2"
+  },
+  {
+   "date": "2026-12-05",
+   "v": 1,
+   "e": 0,
+   "nodes": 176634,
+   "minimum": 4,
+   "sha256": "838429120154847faa55ca446c8ad5afdd2a42fad2a0b1c46d268222395a2233"
+  },
+  {
+   "date": "2026-12-06",
+   "v": 1,
+   "e": 3,
+   "nodes": 43281,
+   "minimum": 4,
+   "sha256": "d6b8b76be5f96e8bb5d61ea73209b364318e2aa941e4365972330f6ff56af497"
+  },
+  {
+   "date": "2026-12-07",
+   "v": 1,
+   "e": 0,
+   "nodes": 31,
+   "minimum": 2,
+   "sha256": "9321ae52914143c2a4b03620e4a9d707c5b031c777da5aa105c5b68f06c76fca"
+  }
+ ]
+}

@@ -1,0 +1,13 @@
+{
+"format":2,
+"levelId":"s05-porte",
+"levelHash":"sha256:2e23bc2b04f80215929b51cf548da281a3592c5cfbefcd9ef83ff62383e6049e",
+"rulesVersion":2,
+"solverVersion":2,
+"status":"proved-optimal",
+"minimum":3,
+"solutionsAtMin":1,
+"witness":[{"type":"mirror","at":[2,3],"o":"/"},{"type":"mirror","at":[2,0],"o":"/"},{"type":"mirror","at":[7,0],"o":"\\"}],
+"parking":[],
+"metrics":{"movable":3,"kinds":["mirror"],"targets":2,"nodes":205,"nodesTotal":253,"leaves":120,"solutionsRelaxed":1,"falseTrail":0.992,"pathLength":14,"crossings":0,"specialTypes":0,"D2":18.7}
+}

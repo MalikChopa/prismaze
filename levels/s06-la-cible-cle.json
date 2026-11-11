@@ -1,0 +1,22 @@
+{
+  "format": 2,
+  "id": "s06-la-cible-cle",
+  "name": "La cible clé",
+  "size": [8,6],
+  "pieces": [
+    {"type":"mirror","at":[0,1],"o":"\\"},
+    {"type":"target","at":[0,2],"need":"RGB"},
+    {"type":"gate","at":[1,2],"link":[2,2]},
+    {"type":"target","at":[2,2],"need":"RGB"},
+    {"type":"splitter","at":[3,2],"o":"-"},
+    {"type":"wall","at":[4,2]},
+    {"type":"emitter","at":[0,4],"dir":"E","mask":"RGB"},
+    {"type":"mirror","at":[1,5],"o":"\\"},
+    {"type":"target","at":[2,5],"need":"RGB"},
+    {"type":"mirror","at":[7,5],"o":"/"}
+  ],
+  "par": 3,
+  "solutions": [
+    [{"type":"splitter","at":[2,4],"o":"\\"},{"type":"mirror","at":[3,4],"o":"/"},{"type":"mirror","at":[3,2],"o":"\\"}]
+  ]
+}

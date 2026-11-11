@@ -1,0 +1,20 @@
+{
+  "format": 2,
+  "id": "p03-trois-couleurs",
+  "name": "Trois couleurs",
+  "size": [8,6],
+  "pieces": [
+    {"type":"target","at":[0,1],"need":"G"},
+    {"type":"prism","at":[0,2]},
+    {"type":"mirror","at":[3,2],"o":"\\"},
+    {"type":"target","at":[0,4],"need":"R"},
+    {"type":"target","at":[2,4],"need":"B"},
+    {"type":"emitter","at":[0,5],"dir":"E","mask":"RGB"},
+    {"type":"mirror","at":[3,5],"o":"|"},
+    {"type":"mirror","at":[5,5],"o":"|"}
+  ],
+  "par": 3,
+  "solutions": [
+    [{"type":"mirror","at":[1,5],"o":"/"},{"type":"prism","at":[1,4]},{"type":"mirror","at":[1,1],"o":"\\"}]
+  ]
+}

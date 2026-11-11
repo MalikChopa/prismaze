@@ -1,0 +1,13 @@
+{
+"format":2,
+"levelId":"m07-crochet",
+"levelHash":"sha256:e8f38d00d7991ac132fb61374a3e657794d6643036c3382746b48305b5e8c081",
+"rulesVersion":2,
+"solverVersion":2,
+"status":"proved-optimal",
+"minimum":3,
+"solutionsAtMin":1,
+"witness":[{"type":"mirror","at":[2,3],"o":"\\"},{"type":"mirror","at":[4,3],"o":"/"},{"type":"mirror","at":[4,1],"o":"\\"}],
+"parking":[{"type":"mirror","at":[0,0],"o":"-"},{"type":"mirror","at":[1,0],"o":"-"}],
+"metrics":{"movable":5,"kinds":["mirror"],"targets":4,"nodes":444,"nodesTotal":766,"leaves":297,"solutionsRelaxed":1,"falseTrail":0.997,"pathLength":11,"crossings":1,"specialTypes":0,"D2":21.1}
+}

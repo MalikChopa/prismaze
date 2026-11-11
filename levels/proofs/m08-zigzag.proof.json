@@ -1,0 +1,13 @@
+{
+"format":2,
+"levelId":"m08-zigzag",
+"levelHash":"sha256:f9806b0890e6e8dfd415a4079d886bf084196f6d47fc393081fd4bca0403c0a1",
+"rulesVersion":2,
+"solverVersion":2,
+"status":"proved-optimal",
+"minimum":4,
+"solutionsAtMin":2,
+"witness":[{"type":"mirror","at":[1,2],"o":"\\"},{"type":"mirror","at":[5,2],"o":"\\"},{"type":"mirror","at":[5,6],"o":"/"},{"type":"mirror","at":[3,6],"o":"\\"}],
+"parking":[{"type":"mirror","at":[0,0],"o":"-"},{"type":"mirror","at":[2,0],"o":"-"}],
+"metrics":{"movable":6,"kinds":["mirror"],"targets":4,"nodes":2497,"nodesTotal":7694,"leaves":3088,"solutionsRelaxed":2,"falseTrail":0.999,"pathLength":18,"crossings":1,"specialTypes":0,"D2":27.8}
+}

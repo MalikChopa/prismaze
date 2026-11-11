@@ -1,0 +1,13 @@
+{
+"format":2,
+"levelId":"x03-deux-sources",
+"levelHash":"sha256:fa88f482a2d0d2ac862a0261aa7ab81e29145c3d8901c79888e0e8e4d3f9aeeb",
+"rulesVersion":2,
+"solverVersion":2,
+"status":"proved-optimal",
+"minimum":4,
+"solutionsAtMin":2,
+"witness":[{"type":"filter","at":[1,6],"mask":"GB"},{"type":"mirror","at":[2,6],"o":"/"},{"type":"mirror","at":[2,3],"o":"/"},{"type":"splitter","at":[4,3],"o":"/"}],
+"parking":[{"type":"filter","at":[0,0],"mask":"RB"},{"type":"mirror","at":[1,0],"o":"-"}],
+"metrics":{"movable":6,"kinds":["filter","mirror","splitter"],"targets":4,"nodes":85504,"nodesTotal":479622,"leaves":318696,"solutionsRelaxed":2,"falseTrail":1,"pathLength":15,"crossings":0,"specialTypes":2,"D2":33.8}
+}

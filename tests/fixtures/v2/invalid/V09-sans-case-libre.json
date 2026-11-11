@@ -1,0 +1,78 @@
+{
+ "format": 2,
+ "id": "x00-exemple",
+ "name": "Exemple",
+ "size": [
+  3,
+  3
+ ],
+ "pieces": [
+  {
+   "type": "emitter",
+   "at": [
+    0,
+    0
+   ],
+   "dir": "E",
+   "mask": "RGB"
+  },
+  {
+   "type": "target",
+   "at": [
+    2,
+    0
+   ],
+   "need": "R"
+  },
+  {
+   "type": "wall",
+   "at": [
+    1,
+    0
+   ]
+  },
+  {
+   "type": "wall",
+   "at": [
+    0,
+    1
+   ]
+  },
+  {
+   "type": "wall",
+   "at": [
+    1,
+    1
+   ]
+  },
+  {
+   "type": "wall",
+   "at": [
+    2,
+    1
+   ]
+  },
+  {
+   "type": "wall",
+   "at": [
+    0,
+    2
+   ]
+  },
+  {
+   "type": "wall",
+   "at": [
+    1,
+    2
+   ]
+  },
+  {
+   "type": "mirror",
+   "at": [
+    2,
+    2
+   ],
+   "o": "/"
+  }
+ ]
+}

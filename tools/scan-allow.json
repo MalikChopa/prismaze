@@ -1,0 +1,8 @@
+[
+  {
+    "file": "docs/media/",
+    "rule": "image-metadata",
+    "match": "ICC_PROFILE",
+    "reason": "Profil de couleur sRGB standard ecrit par Chrome dans ses captures JPEG : aucune donnee personnelle."
+  }
+]

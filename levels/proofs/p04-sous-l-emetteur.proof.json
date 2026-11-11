@@ -1,0 +1,13 @@
+{
+"format":2,
+"levelId":"p04-sous-l-emetteur",
+"levelHash":"sha256:b7178f8980f19581854f30c48b2e4b0d1e98649600e38360be8ceeb310cef542",
+"rulesVersion":2,
+"solverVersion":2,
+"status":"proved-optimal",
+"minimum":3,
+"solutionsAtMin":1,
+"witness":[{"type":"prism","at":[5,1]},{"type":"mirror","at":[5,2],"o":"/"},{"type":"mirror","at":[2,2],"o":"/"}],
+"parking":[{"type":"mirror","at":[0,0],"o":"-"},{"type":"mirror","at":[1,0],"o":"-"}],
+"metrics":{"movable":5,"kinds":["mirror","prism"],"targets":4,"nodes":998,"nodesTotal":4378,"leaves":2628,"solutionsRelaxed":1,"falseTrail":1,"pathLength":15,"crossings":0,"specialTypes":1,"D2":23}
+}

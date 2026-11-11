@@ -1,0 +1,27 @@
+{
+  "format": 2,
+  "id": "daily-2",
+  "name": "défi de secours · mardi",
+  "size": [8,6],
+  "pieces": [
+    {"type":"mirror","at":[6,0],"o":"/"},
+    {"type":"wall","at":[7,0]},
+    {"type":"emitter","at":[7,1],"dir":"W","mask":"RGB"},
+    {"type":"target","at":[5,2],"need":"RGB"},
+    {"type":"target","at":[7,2],"need":"R"},
+    {"type":"wall","at":[1,3]},
+    {"type":"mirror","at":[2,4],"o":"/"},
+    {"type":"wall","at":[4,4]},
+    {"type":"wall","at":[1,5]},
+    {"type":"mirror","at":[2,5],"o":"|"},
+    {"type":"prism","at":[4,5]},
+    {"type":"wall","at":[5,5]}
+  ],
+  "par": 3,
+  "solutions": [
+    [{"type":"mirror","at":[5,1],"o":"/"},{"type":"mirror","at":[5,3],"o":"\\"},{"type":"prism","at":[7,3]}],
+    [{"type":"mirror","at":[5,1],"o":"/"},{"type":"prism","at":[5,3]},{"type":"mirror","at":[7,3],"o":"/"}],
+    [{"type":"mirror","at":[5,1],"o":"/"},{"type":"mirror","at":[5,4],"o":"\\"},{"type":"prism","at":[7,4]}],
+    [{"type":"mirror","at":[5,1],"o":"/"},{"type":"prism","at":[5,4]},{"type":"mirror","at":[7,4],"o":"/"}]
+  ]
+}

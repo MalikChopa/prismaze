@@ -1,0 +1,13 @@
+{
+"format":2,
+"levelId":"s06-la-cible-cle",
+"levelHash":"sha256:e6e5535ea689be45c3a041ac97352ebb75b7fe1a78af7a823ba9db821de8b39c",
+"rulesVersion":2,
+"solverVersion":2,
+"status":"proved-optimal",
+"minimum":3,
+"solutionsAtMin":1,
+"witness":[{"type":"splitter","at":[2,4],"o":"\\"},{"type":"mirror","at":[3,4],"o":"/"},{"type":"mirror","at":[3,2],"o":"\\"}],
+"parking":[{"type":"mirror","at":[0,0],"o":"-"}],
+"metrics":{"movable":4,"kinds":["mirror","splitter"],"targets":3,"nodes":2381,"nodesTotal":6978,"leaves":3951,"solutionsRelaxed":1,"falseTrail":1,"pathLength":9,"crossings":0,"specialTypes":1,"D2":22.9}
+}

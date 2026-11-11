@@ -1,0 +1,13 @@
+{
+"format":2,
+"levelId":"p10-detour-jaune",
+"levelHash":"sha256:1f8090365a29456750a8ed3151173cb4d0756fbea56f4054e9b1b9d70544c57a",
+"rulesVersion":2,
+"solverVersion":2,
+"status":"proved-optimal",
+"minimum":5,
+"solutionsAtMin":1,
+"witness":[{"type":"mirror","at":[8,1],"o":"\\"},{"type":"mirror","at":[8,0],"o":"\\"},{"type":"filter","at":[7,0],"mask":"RG"},{"type":"prism","at":[5,0]},{"type":"mirror","at":[4,0],"o":"/"}],
+"parking":[{"type":"prism","at":[0,0]}],
+"metrics":{"movable":6,"kinds":["filter","mirror","prism"],"targets":4,"nodes":175466,"nodesTotal":236805,"leaves":119312,"solutionsRelaxed":1,"falseTrail":1,"pathLength":20,"crossings":0,"specialTypes":2,"D2":38.7}
+}

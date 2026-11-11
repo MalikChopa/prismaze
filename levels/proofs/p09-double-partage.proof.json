@@ -1,0 +1,13 @@
+{
+"format":2,
+"levelId":"p09-double-partage",
+"levelHash":"sha256:f862c0237df1a809f1f7b9b26fdccafeece0c3f8388277fc3e2b918cda566ef4",
+"rulesVersion":2,
+"solverVersion":2,
+"status":"proved-optimal",
+"minimum":4,
+"solutionsAtMin":1,
+"witness":[{"type":"prism","at":[8,6]},{"type":"mirror","at":[8,5],"o":"\\"},{"type":"mirror","at":[8,7],"o":"/"},{"type":"mirror","at":[7,7],"o":"\\"}],
+"parking":[{"type":"filter","at":[0,0],"mask":"RB"},{"type":"prism","at":[1,0]}],
+"metrics":{"movable":6,"kinds":["filter","mirror","prism"],"targets":3,"nodes":41991,"nodesTotal":404332,"leaves":266747,"solutionsRelaxed":1,"falseTrail":1,"pathLength":27,"crossings":2,"specialTypes":1,"D2":37.3}
+}

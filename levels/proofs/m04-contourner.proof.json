@@ -1,0 +1,13 @@
+{
+"format":2,
+"levelId":"m04-contourner",
+"levelHash":"sha256:37000ed283fc7bb187fe3592d2a4184044c63400cb2d19e955eb3fe95e281390",
+"rulesVersion":2,
+"solverVersion":2,
+"status":"proved-optimal",
+"minimum":2,
+"solutionsAtMin":2,
+"witness":[{"type":"mirror","at":[1,3],"o":"/"},{"type":"mirror","at":[1,1],"o":"/"}],
+"parking":[],
+"metrics":{"movable":2,"kinds":["mirror"],"targets":1,"nodes":18,"nodesTotal":52,"leaves":24,"solutionsRelaxed":2,"falseTrail":0.917,"pathLength":7,"crossings":0,"specialTypes":0,"D2":11.2}
+}

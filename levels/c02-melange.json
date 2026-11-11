@@ -1,0 +1,16 @@
+{
+  "format": 2,
+  "id": "c02-melange",
+  "name": "Mélange",
+  "size": [7,5],
+  "pieces": [
+    {"type":"emitter","at":[0,2],"dir":"E","mask":"R"},
+    {"type":"target","at":[3,2],"need":"RB"},
+    {"type":"mirror","at":[2,4],"o":"\\"},
+    {"type":"emitter","at":[6,4],"dir":"N","mask":"B"}
+  ],
+  "par": 1,
+  "solutions": [
+    [{"type":"mirror","at":[6,2],"o":"\\"}]
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "format": 2,
+  "id": "daily-5",
+  "name": "défi de secours · vendredi",
+  "size": [10,8],
+  "pieces": [
+    {"type":"splitter","at":[1,0],"o":"/"},
+    {"type":"filter","at":[4,0],"mask":"RB"},
+    {"type":"wall","at":[8,0]},
+    {"type":"wall","at":[0,1]},
+    {"type":"target","at":[8,3],"need":"B"},
+    {"type":"wall","at":[9,3]},
+    {"type":"mirror","at":[1,4],"o":"\\"},
+    {"type":"prism","at":[2,4]},
+    {"type":"wall","at":[3,4]},
+    {"type":"target","at":[8,4],"need":"B"},
+    {"type":"wall","at":[9,4]},
+    {"type":"target","at":[2,5],"need":"RB"},
+    {"type":"wall","at":[7,5]},
+    {"type":"mirror","at":[0,6],"o":"-"},
+    {"type":"wall","at":[1,6]},
+    {"type":"mirror","at":[5,6],"o":"|"},
+    {"type":"wall","at":[7,6]},
+    {"type":"emitter","at":[0,7],"dir":"N","mask":"RGB"}
+  ],
+  "par": 4,
+  "solutions": [
+    [{"type":"filter","at":[0,6],"mask":"RB"},{"type":"splitter","at":[0,5],"o":"/"},{"type":"mirror","at":[0,2],"o":"/"},{"type":"prism","at":[8,2]}],
+    [{"type":"filter","at":[0,6],"mask":"RB"},{"type":"splitter","at":[0,5],"o":"/"},{"type":"prism","at":[0,2]},{"type":"mirror","at":[8,2],"o":"\\"}],
+    [{"type":"filter","at":[0,6],"mask":"RB"},{"type":"mirror","at":[0,2],"o":"/"},{"type":"splitter","at":[2,2],"o":"\\"},{"type":"prism","at":[8,2]}],
+    [{"type":"splitter","at":[0,5],"o":"/"},{"type":"filter","at":[1,5],"mask":"RB"},{"type":"mirror","at":[0,2],"o":"/"},{"type":"prism","at":[8,2]}]
+  ]
+}

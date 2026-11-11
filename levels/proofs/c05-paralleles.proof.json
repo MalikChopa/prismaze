@@ -1,0 +1,13 @@
+{
+"format":2,
+"levelId":"c05-paralleles",
+"levelHash":"sha256:c83d130065e1e43ecc38b2dcbee22e1ca82a02b8ab89e864fe419132218b5ad8",
+"rulesVersion":2,
+"solverVersion":2,
+"status":"proved-optimal",
+"minimum":3,
+"solutionsAtMin":1,
+"witness":[{"type":"mirror","at":[1,1],"o":"\\"},{"type":"mirror","at":[3,0],"o":"\\"},{"type":"mirror","at":[3,4],"o":"/"}],
+"parking":[{"type":"mirror","at":[1,0],"o":"-"}],
+"metrics":{"movable":4,"kinds":["mirror"],"targets":3,"nodes":559,"nodesTotal":1726,"leaves":867,"solutionsRelaxed":1,"falseTrail":0.999,"pathLength":15,"crossings":1,"specialTypes":0,"D2":22.2}
+}

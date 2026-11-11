@@ -1,0 +1,13 @@
+{
+"format":2,
+"levelId":"x10-examen",
+"levelHash":"sha256:5e5c4154b564a871d6a4b005ebb3ec6c16d51e1c7b9de1f186bc165bdcb06291",
+"rulesVersion":2,
+"solverVersion":2,
+"status":"proved-optimal",
+"minimum":6,
+"solutionsAtMin":12,
+"witness":[{"type":"filter","at":[9,1],"mask":"GB"},{"type":"mirror","at":[9,3],"o":"/"},{"type":"mirror","at":[7,3],"o":"/"},{"type":"prism","at":[7,6]},{"type":"filter","at":[4,2],"mask":"RG"},{"type":"mirror","at":[4,7],"o":"\\"}],
+"parking":[],
+"metrics":{"movable":6,"kinds":["filter","mirror","prism"],"targets":4,"nodes":132021,"nodesTotal":412968,"leaves":73394,"solutionsRelaxed":12,"falseTrail":1,"pathLength":28,"crossings":2,"specialTypes":2,"D2":47}
+}

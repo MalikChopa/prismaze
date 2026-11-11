@@ -1,0 +1,13 @@
+{
+"format":2,
+"levelId":"x02-porte-et-prisme",
+"levelHash":"sha256:42bdeecdc36d7333ec33e1b4bc0f235c43bd344ffd7c7778f654c78121af3af0",
+"rulesVersion":2,
+"solverVersion":2,
+"status":"proved-optimal",
+"minimum":4,
+"solutionsAtMin":2,
+"witness":[{"type":"mirror","at":[5,1],"o":"/"},{"type":"splitter","at":[2,1],"o":"/"},{"type":"prism","at":[0,1]},{"type":"filter","at":[2,4],"mask":"GB"}],
+"parking":[{"type":"mirror","at":[1,0],"o":"-"},{"type":"mirror","at":[2,0],"o":"-"}],
+"metrics":{"movable":6,"kinds":["filter","mirror","prism","splitter"],"targets":4,"nodes":18652,"nodesTotal":154046,"leaves":109748,"solutionsRelaxed":2,"falseTrail":1,"pathLength":19,"crossings":0,"specialTypes":3,"D2":34.6}
+}

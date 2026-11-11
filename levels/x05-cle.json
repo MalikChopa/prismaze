@@ -1,0 +1,29 @@
+{
+  "format": 2,
+  "id": "x05-cle",
+  "name": "La clé",
+  "size": [10,8],
+  "pieces": [
+    {"type":"emitter","at":[0,0],"dir":"S","mask":"RGB"},
+    {"type":"target","at":[5,0],"need":"GB"},
+    {"type":"target","at":[8,0],"need":"B"},
+    {"type":"target","at":[9,0],"need":"B"},
+    {"type":"emitter","at":[0,1],"dir":"E","mask":"RGB"},
+    {"type":"wall","at":[3,1]},
+    {"type":"mirror","at":[2,3],"o":"-"},
+    {"type":"filter","at":[9,3],"mask":"GB"},
+    {"type":"gate","at":[2,4],"link":[5,0]},
+    {"type":"mirror","at":[0,5],"o":"|"},
+    {"type":"mirror","at":[6,5],"o":"\\"},
+    {"type":"target","at":[2,6],"need":"RGB"},
+    {"type":"filter","at":[3,6],"mask":"RB"},
+    {"type":"splitter","at":[5,6],"o":"/"}
+  ],
+  "par": 5,
+  "solutions": [
+    [{"type":"mirror","at":[1,1],"o":"/"},{"type":"mirror","at":[1,0],"o":"/"},{"type":"splitter","at":[2,0],"o":"\\"},{"type":"filter","at":[3,0],"mask":"GB"},{"type":"filter","at":[6,0],"mask":"RB"}],
+    [{"type":"mirror","at":[1,1],"o":"/"},{"type":"mirror","at":[1,0],"o":"/"},{"type":"splitter","at":[2,0],"o":"\\"},{"type":"filter","at":[3,0],"mask":"GB"},{"type":"filter","at":[7,0],"mask":"RB"}],
+    [{"type":"mirror","at":[1,1],"o":"/"},{"type":"mirror","at":[1,0],"o":"/"},{"type":"splitter","at":[2,0],"o":"\\"},{"type":"filter","at":[4,0],"mask":"GB"},{"type":"filter","at":[6,0],"mask":"RB"}],
+    [{"type":"mirror","at":[1,1],"o":"/"},{"type":"mirror","at":[1,0],"o":"/"},{"type":"splitter","at":[2,0],"o":"\\"},{"type":"filter","at":[4,0],"mask":"GB"},{"type":"filter","at":[7,0],"mask":"RB"}]
+  ]
+}

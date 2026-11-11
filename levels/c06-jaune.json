@@ -1,0 +1,24 @@
+{
+  "format": 2,
+  "id": "c06-jaune",
+  "name": "Jaune",
+  "size": [8,6],
+  "pieces": [
+    {"type":"mirror","at":[1,0],"o":"-"},
+    {"type":"wall","at":[7,0]},
+    {"type":"emitter","at":[0,1],"dir":"E","mask":"RGB"},
+    {"type":"mirror","at":[1,1],"o":"/"},
+    {"type":"wall","at":[0,2]},
+    {"type":"target","at":[2,2],"need":"RG"},
+    {"type":"wall","at":[4,2]},
+    {"type":"filter","at":[6,2],"mask":"RG"},
+    {"type":"target","at":[2,3],"need":"RG"},
+    {"type":"mirror","at":[2,4],"o":"|"},
+    {"type":"wall","at":[1,5]},
+    {"type":"target","at":[6,5],"need":"RG"}
+  ],
+  "par": 3,
+  "solutions": [
+    [{"type":"filter","at":[1,1],"mask":"RG"},{"type":"mirror","at":[2,1],"o":"\\"},{"type":"mirror","at":[2,5],"o":"\\"}]
+  ]
+}

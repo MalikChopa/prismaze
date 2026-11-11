@@ -1,0 +1,13 @@
+{
+"format":2,
+"levelId":"c02-melange",
+"levelHash":"sha256:3ba4e61df928e26f7f9e97bdd5a1884f396b6fae7ab47943dc058b5dda1ff201",
+"rulesVersion":2,
+"solverVersion":2,
+"status":"proved-optimal",
+"minimum":1,
+"solutionsAtMin":1,
+"witness":[{"type":"mirror","at":[6,2],"o":"\\"}],
+"parking":[],
+"metrics":{"movable":1,"kinds":["mirror"],"targets":1,"nodes":10,"nodesTotal":35,"leaves":25,"solutionsRelaxed":1,"falseTrail":0.96,"pathLength":14,"crossings":1,"specialTypes":0,"D2":10.8}
+}

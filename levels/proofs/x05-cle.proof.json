@@ -1,0 +1,13 @@
+{
+"format":2,
+"levelId":"x05-cle",
+"levelHash":"sha256:824c342f66d4e6b500c7970d46cba1b8e0d875f1457bab520931496a72880c58",
+"rulesVersion":2,
+"solverVersion":2,
+"status":"proved-optimal",
+"minimum":5,
+"solutionsAtMin":10,
+"witness":[{"type":"mirror","at":[1,1],"o":"/"},{"type":"mirror","at":[1,0],"o":"/"},{"type":"splitter","at":[2,0],"o":"\\"},{"type":"filter","at":[3,0],"mask":"GB"},{"type":"filter","at":[6,0],"mask":"RB"}],
+"parking":[{"type":"mirror","at":[4,0],"o":"-"}],
+"metrics":{"movable":6,"kinds":["filter","mirror","splitter"],"targets":4,"nodes":49290,"nodesTotal":550498,"leaves":321162,"solutionsRelaxed":10,"falseTrail":1,"pathLength":17,"crossings":0,"specialTypes":2,"D2":36.5}
+}

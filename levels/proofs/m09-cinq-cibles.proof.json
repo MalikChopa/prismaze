@@ -1,0 +1,13 @@
+{
+"format":2,
+"levelId":"m09-cinq-cibles",
+"levelHash":"sha256:33b070220bd2eb7aaef0bbf1cc11e7fc7b75d2d09b6a6893d89dcb37d5fb8d14",
+"rulesVersion":2,
+"solverVersion":2,
+"status":"proved-optimal",
+"minimum":5,
+"solutionsAtMin":2,
+"witness":[{"type":"mirror","at":[1,6],"o":"/"},{"type":"mirror","at":[4,6],"o":"/"},{"type":"mirror","at":[4,2],"o":"/"},{"type":"mirror","at":[8,2],"o":"\\"},{"type":"mirror","at":[8,4],"o":"/"}],
+"parking":[{"type":"mirror","at":[0,0],"o":"-"},{"type":"mirror","at":[1,0],"o":"-"}],
+"metrics":{"movable":7,"kinds":["mirror"],"targets":5,"nodes":11234,"nodesTotal":58367,"leaves":20634,"solutionsRelaxed":2,"falseTrail":1,"pathLength":22,"crossings":1,"specialTypes":0,"D2":33.6}
+}

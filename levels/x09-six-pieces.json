@@ -1,0 +1,42 @@
+{
+  "format": 2,
+  "id": "x09-six-pieces",
+  "name": "Six pièces",
+  "size": [10,8],
+  "pieces": [
+    {"type":"target","at":[2,0],"need":"G"},
+    {"type":"mirror","at":[5,0],"o":"/"},
+    {"type":"filter","at":[6,0],"mask":"GB"},
+    {"type":"target","at":[4,1],"need":"GB"},
+    {"type":"prism","at":[5,1]},
+    {"type":"wall","at":[6,1]},
+    {"type":"wall","at":[8,1]},
+    {"type":"wall","at":[1,2]},
+    {"type":"wall","at":[3,2]},
+    {"type":"mirror","at":[7,2],"o":"/"},
+    {"type":"wall","at":[9,2]},
+    {"type":"wall","at":[2,3]},
+    {"type":"wall","at":[5,3]},
+    {"type":"target","at":[3,4],"need":"RG"},
+    {"type":"target","at":[4,4],"need":"RGB"},
+    {"type":"mirror","at":[6,4],"o":"\\"},
+    {"type":"emitter","at":[0,5],"dir":"E","mask":"RGB"},
+    {"type":"gate","at":[1,5],"link":[3,4]},
+    {"type":"filter","at":[6,5],"mask":"RG"},
+    {"type":"wall","at":[7,5]},
+    {"type":"wall","at":[9,5]},
+    {"type":"wall","at":[0,6]},
+    {"type":"wall","at":[1,6]},
+    {"type":"wall","at":[3,6]},
+    {"type":"wall","at":[9,6]},
+    {"type":"wall","at":[3,7]},
+    {"type":"emitter","at":[5,7],"dir":"N","mask":"RGB"}
+  ],
+  "par": 6,
+  "solutions": [
+    [{"type":"filter","at":[5,6],"mask":"RG"},{"type":"mirror","at":[5,4],"o":"\\"},{"type":"filter","at":[2,5],"mask":"GB"},{"type":"mirror","at":[4,5],"o":"/"},{"type":"mirror","at":[4,0],"o":"\\"},{"type":"prism","at":[3,0]}],
+    [{"type":"filter","at":[5,6],"mask":"RG"},{"type":"mirror","at":[5,4],"o":"\\"},{"type":"filter","at":[3,5],"mask":"GB"},{"type":"mirror","at":[4,5],"o":"/"},{"type":"mirror","at":[4,0],"o":"\\"},{"type":"prism","at":[3,0]}],
+    [{"type":"filter","at":[5,6],"mask":"RG"},{"type":"mirror","at":[5,4],"o":"\\"},{"type":"mirror","at":[4,5],"o":"/"},{"type":"filter","at":[4,3],"mask":"GB"},{"type":"mirror","at":[4,0],"o":"\\"},{"type":"prism","at":[3,0]}],
+    [{"type":"filter","at":[5,6],"mask":"RG"},{"type":"mirror","at":[5,4],"o":"\\"},{"type":"mirror","at":[4,5],"o":"/"},{"type":"filter","at":[4,2],"mask":"GB"},{"type":"mirror","at":[4,0],"o":"\\"},{"type":"prism","at":[3,0]}]
+  ]
+}

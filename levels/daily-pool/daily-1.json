@@ -1,0 +1,21 @@
+{
+  "format": 2,
+  "id": "daily-1",
+  "name": "défi de secours · lundi",
+  "size": [7,6],
+  "pieces": [
+    {"type":"wall","at":[3,0]},
+    {"type":"emitter","at":[6,0],"dir":"S","mask":"RGB"},
+    {"type":"wall","at":[4,1]},
+    {"type":"target","at":[1,2],"need":"RGB"},
+    {"type":"wall","at":[3,2]},
+    {"type":"mirror","at":[4,3],"o":"/"},
+    {"type":"wall","at":[6,4]},
+    {"type":"mirror","at":[2,5],"o":"|"},
+    {"type":"mirror","at":[3,5],"o":"\\"}
+  ],
+  "par": 2,
+  "solutions": [
+    [{"type":"mirror","at":[6,3],"o":"/"},{"type":"mirror","at":[1,3],"o":"\\"}]
+  ]
+}

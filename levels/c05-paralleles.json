@@ -1,0 +1,25 @@
+{
+  "format": 2,
+  "id": "c05-paralleles",
+  "name": "Parallèles",
+  "size": [8,6],
+  "pieces": [
+    {"type":"emitter","at":[0,0],"dir":"E","mask":"R"},
+    {"type":"mirror","at":[1,0],"o":"|"},
+    {"type":"wall","at":[4,0]},
+    {"type":"emitter","at":[0,1],"dir":"E","mask":"G"},
+    {"type":"target","at":[3,1],"need":"R"},
+    {"type":"wall","at":[5,1]},
+    {"type":"mirror","at":[3,2],"o":"/"},
+    {"type":"wall","at":[5,2]},
+    {"type":"mirror","at":[4,3],"o":"-"},
+    {"type":"mirror","at":[6,3],"o":"|"},
+    {"type":"target","at":[1,4],"need":"RG"},
+    {"type":"wall","at":[5,4]},
+    {"type":"target","at":[1,5],"need":"G"}
+  ],
+  "par": 3,
+  "solutions": [
+    [{"type":"mirror","at":[1,1],"o":"\\"},{"type":"mirror","at":[3,0],"o":"\\"},{"type":"mirror","at":[3,4],"o":"/"}]
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "format": 2,
+  "id": "c04-deux-lumieres",
+  "name": "Deux lumières",
+  "size": [7,5],
+  "pieces": [
+    {"type":"target","at":[0,0],"need":"R"},
+    {"type":"target","at":[1,1],"need":"RB"},
+    {"type":"emitter","at":[6,1],"dir":"W","mask":"R"},
+    {"type":"emitter","at":[0,2],"dir":"E","mask":"B"},
+    {"type":"wall","at":[0,3]},
+    {"type":"mirror","at":[4,3],"o":"\\"},
+    {"type":"wall","at":[0,4]},
+    {"type":"wall","at":[2,4]},
+    {"type":"mirror","at":[4,4],"o":"/"},
+    {"type":"mirror","at":[6,4],"o":"/"}
+  ],
+  "par": 2,
+  "solutions": [
+    [{"type":"mirror","at":[1,2],"o":"/"},{"type":"mirror","at":[0,1],"o":"\\"}]
+  ]
+}

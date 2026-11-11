@@ -1,0 +1,19 @@
+{
+  "format": 2,
+  "id": "p05-le-filtre",
+  "name": "Le filtre",
+  "size": [8,6],
+  "pieces": [
+    {"type":"filter","at":[1,1],"mask":"RB"},
+    {"type":"mirror","at":[3,1],"o":"/"},
+    {"type":"target","at":[7,1],"need":"B"},
+    {"type":"target","at":[1,3],"need":"RB"},
+    {"type":"mirror","at":[3,3],"o":"\\"},
+    {"type":"prism","at":[6,4]},
+    {"type":"emitter","at":[0,5],"dir":"E","mask":"RGB"}
+  ],
+  "par": 3,
+  "solutions": [
+    [{"type":"mirror","at":[1,5],"o":"/"},{"type":"filter","at":[1,4],"mask":"RB"},{"type":"prism","at":[1,1]}]
+  ]
+}

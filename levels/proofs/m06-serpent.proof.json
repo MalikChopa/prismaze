@@ -1,0 +1,13 @@
+{
+"format":2,
+"levelId":"m06-serpent",
+"levelHash":"sha256:ca8e91e727e74529e08b041f11415106dae6c7021c9e89253a4b2f5a0d34ba9e",
+"rulesVersion":2,
+"solverVersion":2,
+"status":"proved-optimal",
+"minimum":3,
+"solutionsAtMin":1,
+"witness":[{"type":"mirror","at":[1,2],"o":"\\"},{"type":"mirror","at":[1,3],"o":"\\"},{"type":"mirror","at":[6,3],"o":"/"}],
+"parking":[{"type":"mirror","at":[0,0],"o":"-"}],
+"metrics":{"movable":4,"kinds":["mirror"],"targets":3,"nodes":182,"nodesTotal":509,"leaves":201,"solutionsRelaxed":1,"falseTrail":0.995,"pathLength":10,"crossings":0,"specialTypes":0,"D2":17.8}
+}

@@ -1,0 +1,18 @@
+{
+  "format": 2,
+  "id": "p01-prisme",
+  "name": "Prisme",
+  "size": [10,8],
+  "pieces": [
+    {"type":"emitter","at":[0,2],"dir":"E","mask":"RGB"},
+    {"type":"prism","at":[5,4],"fixed":true},
+    {"type":"target","at":[9,4],"need":"R"},
+    {"type":"target","at":[1,4],"need":"B"},
+    {"type":"target","at":[5,7],"need":"G"},
+    {"type":"mirror","at":[2,6],"o":"\\"}
+  ],
+  "par": 1,
+  "solutions": [
+    [{"type":"mirror","at":[5,2],"o":"\\"}]
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "format": 2,
+  "id": "x01-cyan-et-bleu",
+  "name": "Cyan et bleu",
+  "size": [10,8],
+  "pieces": [
+    {"type":"emitter","at":[2,0],"dir":"S","mask":"RGB"},
+    {"type":"mirror","at":[3,1],"o":"/"},
+    {"type":"target","at":[4,1],"need":"GB"},
+    {"type":"splitter","at":[7,1],"o":"|"},
+    {"type":"target","at":[5,2],"need":"GB"},
+    {"type":"target","at":[5,3],"need":"GB"},
+    {"type":"mirror","at":[6,3],"o":"\\"},
+    {"type":"wall","at":[1,4]},
+    {"type":"target","at":[2,4],"need":"B"},
+    {"type":"filter","at":[0,5],"mask":"GB"},
+    {"type":"wall","at":[2,5]},
+    {"type":"prism","at":[5,5]},
+    {"type":"mirror","at":[2,6],"o":"-"}
+  ],
+  "par": 4,
+  "solutions": [
+    [{"type":"mirror","at":[2,1],"o":"\\"},{"type":"filter","at":[3,1],"mask":"GB"},{"type":"mirror","at":[5,1],"o":"\\"},{"type":"prism","at":[5,4]}],
+    [{"type":"mirror","at":[2,1],"o":"\\"},{"type":"filter","at":[3,1],"mask":"GB"},{"type":"splitter","at":[5,1],"o":"\\"},{"type":"prism","at":[5,4]}]
+  ]
+}

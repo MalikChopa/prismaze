@@ -1,0 +1,48 @@
+{
+  "comment": "Tracés de référence de ARCHITECTURE.md §10 (J1), valeurs de l'audit. Unités de case. Les pièces sont désignées par leur indice dans levels/maquette-07.json : 9 = miroir (3,3), 10 = miroir (3,1), 11 = miroir (7,1), 12 = miroir fixe (7,4). Cibles : indice 0 = (5,1), indice 1 = (4,4). Les champs lit, deflectors, usedMovable, allLit, end.c/r/d et le détail de steps du tracé 3 ont été déduits à la main (pas dans §10).",
+  "traces": [
+    {
+      "name": "départ",
+      "actions": [],
+      "points": [0.5, 3.5, 3.5, 3.5, 3.5, 1.5, 7.5, 1.5, 7.5, 0],
+      "litCount": 1,
+      "lit": [true, false],
+      "allLit": false,
+      "steps": 10,
+      "end": { "reason": "edge", "c": 7, "r": 0, "d": 1 },
+      "deflectors": [9, 10, 11],
+      "usedMovable": 3,
+      "length": 10.5
+    },
+    {
+      "name": "(7,1) tourné en \\",
+      "actions": [{ "op": "rotate", "id": 11, "steps": 2 }],
+      "points": [0.5, 3.5, 3.5, 3.5, 3.5, 1.5, 7.5, 1.5, 7.5, 4.5, 3, 4.5],
+      "litCount": 2,
+      "lit": [true, true],
+      "allLit": true,
+      "steps": 16,
+      "end": { "reason": "wall", "c": 3, "r": 4, "d": 2 },
+      "deflectors": [9, 10, 11, 12],
+      "usedMovable": 3,
+      "length": 16.5
+    },
+    {
+      "name": "solution alternative",
+      "actions": [
+        { "op": "move", "id": 9, "c": 4, "r": 3 },
+        { "op": "move", "id": 10, "c": 4, "r": 1 },
+        { "op": "rotate", "id": 11, "steps": 2 }
+      ],
+      "points": [0.5, 3.5, 4.5, 3.5, 4.5, 1.5, 7.5, 1.5, 7.5, 4.5, 3, 4.5],
+      "litCount": 2,
+      "lit": [true, true],
+      "allLit": true,
+      "steps": 16,
+      "end": { "reason": "wall", "c": 3, "r": 4, "d": 2 },
+      "deflectors": [9, 10, 11, 12],
+      "usedMovable": 3,
+      "length": 16.5
+    }
+  ]
+}

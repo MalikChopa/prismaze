@@ -1,0 +1,13 @@
+{
+"format":2,
+"levelId":"c03-filtre",
+"levelHash":"sha256:212556226083ac6068a1a9853dae669ac8256c2bee56cb535d49ab726e7d4ac3",
+"rulesVersion":2,
+"solverVersion":2,
+"status":"proved-optimal",
+"minimum":1,
+"solutionsAtMin":2,
+"witness":[{"type":"filter","at":[1,2],"mask":"G"}],
+"parking":[{"type":"mirror","at":[0,0],"o":"-"}],
+"metrics":{"movable":2,"kinds":["filter","mirror"],"targets":1,"nodes":6,"nodesTotal":37,"leaves":28,"solutionsRelaxed":2,"falseTrail":0.929,"pathLength":8,"crossings":0,"specialTypes":1,"D2":8.9}
+}

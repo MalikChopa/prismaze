@@ -1,0 +1,13 @@
+{
+"format":2,
+"levelId":"m01-tourner",
+"levelHash":"sha256:a7f959b1090a1fa64783435b184be56f5eccdb1befc965da66dbd7e17dc487bf",
+"rulesVersion":2,
+"solverVersion":2,
+"status":"proved-optimal",
+"minimum":1,
+"solutionsAtMin":1,
+"witness":[{"type":"mirror","at":[3,2],"o":"/"}],
+"parking":[],
+"metrics":{"movable":1,"kinds":["mirror"],"targets":1,"nodes":11,"nodesTotal":22,"leaves":15,"solutionsRelaxed":1,"falseTrail":0.933,"pathLength":5,"crossings":0,"specialTypes":0,"D2":7.1}
+}

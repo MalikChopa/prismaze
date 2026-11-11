@@ -1,0 +1,13 @@
+{
+"format":2,
+"levelId":"m02-glisser",
+"levelHash":"sha256:fd9dd742e159c89cbeb0ce5c458a5db3b4374ad840a14cbb61244a032ed05a3a",
+"rulesVersion":2,
+"solverVersion":2,
+"status":"proved-optimal",
+"minimum":1,
+"solutionsAtMin":1,
+"witness":[{"type":"mirror","at":[2,2],"o":"\\"}],
+"parking":[],
+"metrics":{"movable":1,"kinds":["mirror"],"targets":1,"nodes":9,"nodesTotal":14,"leaves":9,"solutionsRelaxed":1,"falseTrail":0.889,"pathLength":5,"crossings":0,"specialTypes":0,"D2":6.9}
+}

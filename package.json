@@ -1,0 +1,14 @@
+{
+  "name": "prismaze",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Prismaze : jeu de réflexion en labyrinthe de lasers, dans le navigateur.",
+  "type": "module",
+  "scripts": {
+    "test": "node --test \"tests/**/*.test.mjs\"",
+    "serve": "node tools/serve.mjs",
+    "scan:public": "node tools/scan-public.mjs",
+    "export:public": "node tools/export-public.mjs",
+    "check:readme": "node tools/check-readme.mjs"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "format": 2,
+  "id": "p09-double-partage",
+  "name": "Double partage",
+  "size": [10,8],
+  "pieces": [
+    {"type":"filter","at":[6,0],"mask":"RB"},
+    {"type":"prism","at":[9,3]},
+    {"type":"target","at":[0,5],"need":"B"},
+    {"type":"target","at":[5,5],"need":"B"},
+    {"type":"prism","at":[6,5]},
+    {"type":"target","at":[7,5],"need":"RB"},
+    {"type":"mirror","at":[9,5],"o":"\\"},
+    {"type":"mirror","at":[3,6],"o":"\\"},
+    {"type":"mirror","at":[8,6],"o":"|"},
+    {"type":"emitter","at":[9,6],"dir":"W","mask":"RGB"}
+  ],
+  "par": 4,
+  "solutions": [
+    [{"type":"prism","at":[8,6]},{"type":"mirror","at":[8,5],"o":"\\"},{"type":"mirror","at":[8,7],"o":"/"},{"type":"mirror","at":[7,7],"o":"\\"}]
+  ]
+}

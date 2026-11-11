@@ -1,0 +1,856 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#06061a">
+<title>Prismaze</title>
+<link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+<link rel="manifest" href="manifest.webmanifest">
+<style>
+  /* Coque de J5 : menu, jeu, victoire, réglages (style B, maquette docs/maquette-b/index.html).
+     Texte et icônes secondaires : 62 % de #dee2ff sur #06061a (6,25:1). À 50 % on tombe à 4,38:1 : interdit (D10).
+     Bordures de boutons : au moins 55 % d'opacité (3,30:1, P9 : écart assumé à la maquette, qui était à 22 %). */
+  :root { --bg: #06061a; --fg: #eef0ff; --dim: rgba(222, 226, 255, .74); --line: rgba(170, 180, 255, .58); --acc: #8f7bff; --accl: #c9bdff; --glass: rgba(8, 9, 24, .72); --tile: rgba(10, 11, 32, .74); --bevel: inset 0 1px 0 rgba(255, 255, 255, .07), inset 0 -1px 0 rgba(0, 0, 0, .35);
+    --beam: #ffffff; --gold: #ffd23f; --hair: rgba(170, 180, 255, .14); --big: 1.75rem; --ease: cubic-bezier(.2, .7, .2, 1);
+    --pt: max(14px, env(safe-area-inset-top)); --pr: max(16px, env(safe-area-inset-right)); --pb: max(14px, env(safe-area-inset-bottom)); --pl: max(16px, env(safe-area-inset-left)); --cx: max(var(--pl), 6.5vw); }
+  html, body { margin: 0; height: 100%; background: var(--bg); color: var(--fg); overflow: hidden;
+    font-family: ui-sans-serif, system-ui, "Segoe UI", sans-serif; }
+  body { background:
+    radial-gradient(ellipse at 50% 40%, rgba(80, 70, 190, .22), transparent 62%),
+    radial-gradient(ellipse at 85% 90%, rgba(255, 77, 160, .10), transparent 50%),
+    radial-gradient(ellipse at 10% 95%, rgba(61, 224, 255, .09), transparent 45%), #06061a; }
+  [hidden] { display: none !important; }
+  #grain { position: fixed; inset: 0; pointer-events: none; opacity: .06; z-index: 50; }
+  button { font: inherit; color: inherit; }
+  :focus-visible { outline: 2px solid var(--accl); outline-offset: 2px; }
+  .sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+  /* ---- jeu ---- */
+  #game { position: fixed; inset: 0; width: 100%; height: 100%; display: block;
+    touch-action: none; -webkit-tap-highlight-color: transparent; -webkit-user-select: none; user-select: none; outline: none; }
+  #msg { position: fixed; left: 0; right: 0; top: 40%; text-align: center; font-size: 15px; color: var(--dim); margin: 0; padding: 0 16px; }
+  #hud-label { position: fixed; top: 16px; left: 16px; font-size: 15px; letter-spacing: .18em; color: var(--fg); font-variant-numeric: tabular-nums; margin: 0; }
+  /* Zone de toucher d'au moins 44 x 44 px (J8b) ; le dessin reste de 22 px. */
+  .ui-btn { background: none; border: 0; margin: 0; padding: 0; width: 44px; height: 44px; display: inline-flex;
+    align-items: center; justify-content: center; color: rgba(222, 226, 255, .8); cursor: pointer;
+    border-radius: 6px; touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+  .ui-btn:hover { color: #ffffff; }
+  .ui-btn:disabled, .ui-btn[aria-disabled="true"] { opacity: .55; cursor: default; }
+  .ui-btn svg { width: 22px; height: 22px; stroke: currentColor; fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+  #btn-back { position: fixed; top: 12px; left: 12px; }
+  #btn-reset { position: fixed; top: 12px; right: 12px; }
+  #tools { position: fixed; left: 0; right: 0; top: 80%; display: flex; justify-content: center; gap: 10px; }
+  #btn-sound .slash, #btn-sound.muted .waves { display: none; }
+  #btn-sound.muted .slash { display: inline; }
+  #caption { position: fixed; left: 0; right: 0; top: 90%; text-align: center; font-size: 13px; letter-spacing: .08em; color: var(--dim); margin: 0; padding: 0 12px; }
+  /* Texte de victoire : SOUS le plateau (la maquette le posait dessus), le plateau reste visible au-dessus. */
+  #win { position: fixed; left: 0; right: 0; top: 88%; text-align: center; }
+  .win-head { display: flex; align-items: center; justify-content: center; gap: 14px; }
+  #win-title { margin: 0; font-size: 13px; letter-spacing: .55em; color: #ffffff; font-weight: 400; }
+  #win-stars { font-size: 22px; letter-spacing: .2em; line-height: 1; white-space: nowrap; }
+  #win-stars .st { display: inline-block; color: rgba(222, 226, 255, .62); }
+  #win-stars .st.on { color: #ffd23f; text-shadow: 0 0 12px rgba(255, 210, 63, .55); }
+  #win-stars.shown .st.on { animation: starIn .45s cubic-bezier(.2, 1.4, .4, 1) both; }
+  #win-stars.shown .st:nth-child(2) { animation-delay: .25s; }
+  #win-stars.shown .st:nth-child(3) { animation-delay: .5s; }
+  @keyframes starIn { from { opacity: 0; transform: scale(.2) rotate(-40deg); } to { opacity: 1; transform: none; } }
+  #win-sub { margin: 2px 0 6px; font-size: 12px; color: var(--dim); }
+  /* V13 : succès obtenus en gagnant (et Architecte dans la fenêtre Partager) : une ligne calme dans le panneau, jamais sur le plateau */
+  .ach-line { margin: 0 0 6px; font-size: 12px; color: var(--fg); }
+  .ach-line::before { content: ""; display: inline-block; width: 7px; height: 7px; margin-right: 7px; transform: rotate(45deg) translateY(-1px); background: #ffd23f; box-shadow: 0 0 6px rgba(255, 210, 63, .55); }
+  .ach-line:empty { display: none; }
+  .win-actions { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+  /* Boutons en verre sombre (maquette C, .gb) : bordure >= 3:1 (P9), biseau discret. */
+  .btn { display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box; min-height: 44px; font-size: 12px; letter-spacing: .24em; color: #ffffff; cursor: pointer;
+    background: var(--glass); border: 1px solid var(--line); padding: 0 18px; border-radius: 22px; box-shadow: var(--bevel); touch-action: manipulation; transition: background .2s, border-color .2s; }
+  .btn:hover { background: rgba(40, 40, 90, .72); border-color: #c9c3ff; }
+  .btn.main { background: rgba(90, 70, 200, .5); border-color: #c9c3ff; }
+  .btn.main:hover { background: rgba(110, 90, 225, .6); }
+  .btn.quiet { background: none; color: rgba(222, 226, 255, .85); box-shadow: none; }
+  .btn[aria-disabled="true"], .btn:disabled { opacity: .62; cursor: default; }
+  @media (max-width: 480px) { .btn { padding: 0 12px; letter-spacing: .2em; } .win-actions { gap: 6px; } }
+  @media (max-height: 600px) {
+    #win { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 4px 16px; }
+    #win-sub { margin: 0; }
+    #win .ach-line { margin: 0; }
+    html:not([data-ui="immersive"]) #win .ach-line { display: none; } /* ancienne disposition (`?debug`, essais) en fenêtre basse : le panneau reste sur une ligne */
+  }
+
+  /* ---- accueil et ses écrans (V11, maquette D2 variante 2 : docs/maquette-d/index.html) ----
+     Scène vivante en Canvas 2D derrière (src/ui/home-scene.js), texte posé sur le noir (la scène est effacée sous le texte), filets fins, aucune carte.
+     Police : Bahnschrift (Windows), sinon DIN Alternate / Avenir Next, sinon la police système ; aucune police téléchargée. */
+  html { font-size: clamp(14px, calc(.45vmin + 10px), 18px); }
+  /* V12 (G4) : très grands écrans (2560×1440, 3440×1440) : le bloc de l'accueil grandit avec l'écran (texte ≈ 21 px à 1440 px de haut) ; 1920×1080 et moins : inchangé. */
+  @media (min-width: 1900px) and (min-height: 1200px) { html { font-size: clamp(18px, 1.45vmin, 26px); } #home .wm svg { width: clamp(230px, min(40vw, 78vh), 1100px); } }
+  #screen-menu { position: fixed; inset: 0; z-index: 2; overflow: hidden; background: #06061a; color: var(--fg); font-weight: 350; line-height: 1.35; -webkit-text-size-adjust: 100%;
+    font-family: Bahnschrift, "DIN Alternate", "Avenir Next", ui-sans-serif, system-ui, "Segoe UI", Roboto, sans-serif; }
+  #home-scene { position: absolute; inset: 0; width: 100%; height: 100%; display: block; z-index: 0; pointer-events: none; }
+  #screen-menu .hs { position: absolute; inset: 0; z-index: 2; overflow-x: hidden; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; }
+  #screen-menu button { background: none; border: 0; padding: 0; margin: 0; text-align: left; cursor: pointer; font: inherit; color: inherit; touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+  #screen-menu :focus-visible { outline: 2px solid #ffffff; outline-offset: 3px; border-radius: 2px; }
+  #screen-menu h1:focus, #screen-menu h2:focus { outline: none; }
+  #screen-menu .num { font-variant-numeric: tabular-nums; }
+  #screen-menu .st { color: var(--gold); }
+  #screen-menu .ok { color: #3dffb0; }
+  /* transition d'écran : un trait de lumière balaie et révèle (0,46 s ; aucune en mouvement réduit) */
+  #screen-menu .hs.wipe-f { animation: wipeF .46s var(--ease) both; }
+  #screen-menu .hs.wipe-b { animation: wipeB .46s var(--ease) both; }
+  @keyframes wipeF { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+  @keyframes wipeB { from { clip-path: inset(0 0 0 100%); } to { clip-path: inset(0 0 0 0); } }
+  #wipe { position: absolute; top: 0; bottom: 0; left: 0; width: 2px; margin-left: -1px; z-index: 40; pointer-events: none; opacity: 0; background: #ffffff; box-shadow: 0 0 10px 2px var(--beam), 0 0 34px 6px rgba(150, 160, 255, .18); }
+  #wipe.run-f { animation: lineF .46s var(--ease) both; }
+  #wipe.run-b { animation: lineB .46s var(--ease) both; }
+  @keyframes lineF { 0% { transform: translateX(0); opacity: .85; } 80% { opacity: .85; } 100% { transform: translateX(100vw); opacity: 0; } }
+  @keyframes lineB { 0% { transform: translateX(100vw); opacity: .85; } 80% { opacity: .85; } 100% { transform: translateX(0); opacity: 0; } }
+  /* musique d'ambiance (en haut à droite) : onde lumineuse si elle joue, trait plat sinon */
+  #btn-ambient { position: absolute; top: var(--pt); right: var(--pr); z-index: 30; min-height: 44px; min-width: 44px; display: flex; align-items: center; gap: .6rem; padding: 0 .25rem; color: var(--dim); }
+  #btn-ambient:hover, #btn-ambient[aria-pressed="true"] { color: var(--fg); }
+  #btn-ambient[aria-pressed="false"] .flat { opacity: .55; }
+  #btn-ambient svg { width: 26px; height: 12px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; overflow: visible; }
+  #btn-ambient .wv { stroke: var(--beam); filter: drop-shadow(0 0 3px var(--beam)); }
+  #btn-ambient[aria-pressed="false"] .wv, #btn-ambient[aria-pressed="true"] .flat { display: none; }
+  /* accueil : scène plein écran, carte de titre en bas à gauche */
+  #home .hb { min-height: 100%; display: flex; flex-direction: column; justify-content: flex-end; box-sizing: border-box; padding: calc(var(--pt) + 8px) var(--pr) max(var(--pb), 7vh) var(--cx); }
+  #home .banner { margin: 50px 0 auto; max-width: min(40rem, 100%); }
+  #home .blk { width: fit-content; max-width: 100%; }
+  #screen-menu .wm { margin: 0; line-height: 0; font-size: 0; }
+  #screen-menu .wm svg { display: block; height: auto; overflow: visible; }
+  #home .wm svg { width: clamp(230px, min(40vw, 78vh), 860px); }
+  /* V13 : une ligne discrète pour jouer au clavier (touches lues dans src/ui/input.js) ; masquée sur les écrans tactiles sans souris */
+  #home-howto .kbd { margin: .4rem 0 .9rem; font-size: 14px; line-height: 1.45; color: var(--dim); max-width: 46rem; }
+  @media (hover: none) and (pointer: coarse) { #home-howto .kbd { display: none; } }
+  #screen-menu .play { position: relative; display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 1rem; row-gap: .1rem; min-height: 44px; margin-top: clamp(14px, 3.5vh, 40px); padding: .3rem 0 .85rem; }
+  #screen-menu .play .pa { font-size: var(--big); font-weight: 300; letter-spacing: .01em; line-height: 1.1; }
+  #screen-menu .play .pb { color: var(--dim); }
+  #screen-menu .play::after { content: ""; position: absolute; left: 0; bottom: .3rem; width: min(100%, 15rem); height: 2px; background: linear-gradient(90deg, var(--beam) 0%, var(--beam) 30%, transparent 100%); opacity: .85; filter: drop-shadow(0 0 4px var(--beam)); transition: opacity .3s, width .4s var(--ease); }
+  #screen-menu .play:hover::after, #screen-menu .play:focus-visible::after { opacity: 1; width: min(100%, 19rem); }
+  #screen-menu .play .spk { position: absolute; left: 0; bottom: calc(.3rem - 3px); width: 8px; height: 8px; margin-left: -4px; border-radius: 50%; background: #ffffff; box-shadow: 0 0 8px 3px var(--beam); opacity: 0; pointer-events: none; }
+  #screen-menu .play .spk.go { animation: spk .9s var(--ease) both; }
+  @keyframes spk { 0% { transform: translateX(0); opacity: 0; } 15% { opacity: 1; } 100% { transform: translateX(min(19rem, 60vw)); opacity: 0; } }
+  #home .offer { display: flex; flex-wrap: wrap; align-items: center; column-gap: .5rem; margin: .3rem 0 0; color: var(--dim); }
+  #home .offer button { min-height: 44px; color: var(--fg); text-decoration: underline; text-decoration-color: rgba(222, 226, 255, .4); text-underline-offset: 4px; }
+  #home .hmenu { list-style: none; display: flex; flex-wrap: wrap; column-gap: 2rem; margin: clamp(4px, 1.5vh, 18px) 0 0; padding: 0; }
+  #home .hmenu button { position: relative; display: flex; align-items: baseline; min-height: 44px; padding: .6rem 0; }
+  #home .hmenu button::before { content: ""; position: absolute; left: -1.4rem; top: calc(.6rem + .7em); width: .9rem; height: 2px; margin-top: -1px; background: linear-gradient(90deg, transparent, var(--beam)); filter: drop-shadow(0 0 3px var(--beam)); transform: scaleX(0); transform-origin: right; transition: transform .3s var(--ease); }
+  #home .hmenu button:hover::before, #home .hmenu button:focus-visible::before { transform: scaleX(1); }
+  #home .meta { margin: 0; color: var(--dim); }
+  #home .hmenu + .meta { margin-top: .5rem; }
+  #home .meta + .meta { margin-top: .15rem; }
+  #home .foot { display: flex; flex-wrap: wrap; width: fit-content; max-width: 100%; column-gap: 1.7rem; margin-top: .5rem; }
+  #home .foot button { min-height: 44px; color: var(--dim); }
+  #home .foot button:hover { color: var(--fg); }
+  /* téléphone portrait : la scène en haut, le texte en bas */
+  @media (max-aspect-ratio: 4/5), (max-width: 600px) {
+    #home .wm svg { width: clamp(200px, 74vw, 520px); }
+    #home .hmenu { column-gap: 1.6rem; }
+    #home .hmenu button::before { left: -.9rem; width: .55rem; }
+  }
+  @media (max-aspect-ratio: 4/5) and (max-height: 700px) { #screen-menu .play { margin-top: 10px; padding: .1rem 0 .6rem; } #home .hmenu { margin-top: 2px; } }
+  /* paysage bas (téléphone couché, zoom 200 %) */
+  @media (orientation: landscape) and (max-height: 540px) {
+    #home .hb { padding-top: var(--pt); padding-bottom: var(--pb); }
+    #home .wm svg { width: min(36vw, 330px); }
+    #screen-menu .play { margin-top: 6px; padding: .15rem 0 .6rem; }
+    #home .hmenu { margin-top: 2px; }
+    #home .hmenu button { padding: .25rem 0; }
+    #home .banner { margin-top: 0; max-width: calc(100% - 7.5rem); } /* à côté du bouton de la musique : l'accueil ne défile (presque) plus avec un message */
+  }
+  /* écrans secondaires : colonne de gauche, filets fins */
+  #screen-menu .sub { min-height: 100%; box-sizing: border-box; padding: calc(var(--pt) + 2px) var(--pr) calc(var(--pb) + 28px) var(--cx); max-width: calc(var(--cx) + 66rem); }
+  #screen-menu .back { display: inline-flex; align-items: center; gap: .55rem; min-height: 44px; min-width: 44px; color: var(--dim); margin-left: -.1rem; }
+  #screen-menu .back:hover { color: var(--fg); }
+  #screen-menu .back svg { width: 18px; height: 12px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+  #screen-menu h2 { font-size: var(--big); font-weight: 300; letter-spacing: .01em; margin: clamp(14px, 6vh, 72px) 0 .35rem; line-height: 1.15; width: fit-content; max-width: 100%; }
+  #screen-menu .lead { color: var(--dim); margin: 0 0 clamp(16px, 4.5vh, 48px); max-width: 38rem; }
+  #screen-menu .rows { list-style: none; margin: 0; padding: 0; }
+  #screen-menu .rows > li { border-top: 1px solid var(--hair); }
+  #screen-menu .rows > li:last-child { border-bottom: 1px solid var(--hair); }
+  /* chapitres */
+  #screen-menu .chl { max-width: 54rem; }
+  #screen-menu .chl button { display: grid; grid-template-columns: clamp(88px, 11vw, 150px) minmax(0, 1fr) auto; align-items: center; column-gap: clamp(14px, 2.6vw, 40px); width: 100%; min-height: 64px; padding: .75rem 0; }
+  #screen-menu .art svg { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; transition: filter .3s; }
+  #screen-menu .chl button:hover .art svg { filter: brightness(1.35); }
+  #screen-menu .chl .nm { font-size: var(--big); font-weight: 300; line-height: 1.1; }
+  #screen-menu .chl .nm i { font-style: normal; font-size: 1rem; color: var(--dim); display: inline-block; min-width: 2.2em; }
+  #screen-menu .chl .mt { color: var(--dim); text-align: right; }
+  #screen-menu .chl .lk .art { opacity: .28; filter: grayscale(1); }
+  #screen-menu .chl .lk .nm { color: var(--dim); }
+  #screen-menu .chl .lk { cursor: default; }
+  /* niveaux d'un chapitre : 10 lignes en 2 colonnes (1 sur téléphone) */
+  #screen-menu .lvh { display: flex; align-items: flex-end; gap: clamp(14px, 2.6vw, 40px); }
+  #screen-menu .lvh .art { width: clamp(96px, 12vw, 170px); flex: none; margin-bottom: .3rem; }
+  #screen-menu .lvl { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: repeat(5, auto); grid-auto-flow: column; column-gap: clamp(24px, 5vw, 80px); max-width: 56rem; }
+  #screen-menu .lvl > li:nth-child(5) { border-bottom: 1px solid var(--hair); }
+  #screen-menu .lvl button { display: flex; align-items: baseline; gap: 1rem; width: 100%; min-height: 48px; padding: .7rem 0; }
+  #screen-menu .lvl .n { color: var(--dim); min-width: 1.6em; }
+  #screen-menu .lvl .nm { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+  #screen-menu .lvl .s { letter-spacing: .1em; color: var(--gold); white-space: nowrap; }
+  #screen-menu .lvl .s .o { color: rgba(222, 226, 255, .62); }
+  #screen-menu .lvl .current .s { color: var(--fg); letter-spacing: 0; }
+  #screen-menu .lvl .current .nm { text-decoration: underline; text-decoration-color: var(--beam); text-underline-offset: 5px; }
+  #screen-menu .lvl .locked { cursor: default; color: var(--dim); }
+  #screen-menu .lvl .locked .s { color: var(--dim); }
+  #screen-menu .lvl .locked .s svg { width: 12px; height: 13px; fill: none; stroke: currentColor; stroke-width: 1.4; vertical-align: -1px; }
+  #screen-menu .lvl button:not(.locked):hover .nm { color: #ffffff; }
+  /* comment jouer */
+  #screen-menu .steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(16px, 3vw, 56px); max-width: 70rem; }
+  #screen-menu .step svg.demo { display: block; width: 100%; height: auto; max-height: 42vh; }
+  #screen-menu .step h3 { font-size: 1rem; font-weight: 400; margin: .7rem 0 .1rem; }
+  #screen-menu .step h3 i { font-style: normal; color: var(--dim); margin-right: .7rem; }
+  #screen-menu .step p { margin: 0; color: var(--dim); }
+  #screen-menu .acts { display: flex; flex-wrap: wrap; align-items: center; column-gap: 2.2rem; margin-top: clamp(16px, 5vh, 56px); }
+  #screen-menu .acts .play { margin-top: 0; }
+  #screen-menu .acts .plain { min-height: 44px; min-width: 44px; color: var(--dim); }
+  #screen-menu .acts .plain:hover { color: var(--fg); }
+  /* succès : la cible hexagonale du jeu, allumée à sa couleur si obtenu */
+  #screen-menu .acl { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: repeat(6, auto); grid-auto-flow: column; column-gap: clamp(24px, 5vw, 80px); max-width: 68rem; }
+  #screen-menu .acl > li { display: grid; grid-template-columns: 28px minmax(0, 1fr) auto; column-gap: 1rem; align-items: start; padding: .8rem 0; }
+  #screen-menu .acl > li:nth-child(6) { border-bottom: 1px solid var(--hair); }
+  #screen-menu .acl svg { width: 28px; height: 28px; display: block; overflow: visible; }
+  #screen-menu .acl b { font-weight: 400; display: block; }
+  #screen-menu .acl .d { color: var(--dim); }
+  #screen-menu .acl .r { color: var(--dim); text-align: right; white-space: nowrap; }
+  #screen-menu .acl .got .r { color: var(--fg); }
+  /* à propos */
+  #screen-menu .ab { max-width: 38rem; margin-top: clamp(18px, 4vh, 40px); }
+  #screen-menu .ab .wm svg { width: min(260px, 60vw); margin: 0 0 1.6rem; }
+  #screen-menu .ab p { margin: 0 0 .8rem; color: var(--dim); }
+  #screen-menu .ab p.f { color: var(--fg); }
+  #screen-menu .ab .addr { display: inline-flex; align-items: center; min-height: 44px; vertical-align: middle; color: var(--fg); overflow-wrap: anywhere; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(255,255,255,.35); }
+  @media (max-aspect-ratio: 4/5), (max-width: 600px) {
+    #screen-menu .steps { grid-template-columns: 1fr; gap: .4rem; max-width: 32rem; }
+    #screen-menu .step { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); column-gap: 1rem; align-items: center; }
+    #screen-menu .step svg.demo { grid-row: 1 / 3; max-height: none; }
+    #screen-menu .step h3 { margin-top: 0; align-self: end; }
+    #screen-menu .step p { align-self: start; }
+    #screen-menu .chl button { grid-template-columns: clamp(72px, 22vw, 110px) minmax(0, 1fr); }
+    #screen-menu .chl .mt { grid-column: 2; text-align: left; }
+    #screen-menu .lvl, #screen-menu .acl { grid-template-columns: minmax(0, 1fr); grid-template-rows: none; grid-auto-flow: row; }
+    #screen-menu .lvl > li:nth-child(5), #screen-menu .acl > li:nth-child(6) { border-bottom: 0; }
+    #screen-menu .lvl > li:last-child, #screen-menu .acl > li:last-child { border-bottom: 1px solid var(--hair); }
+  }
+  @media (orientation: landscape) and (max-height: 540px) {
+    #screen-menu h2 { margin-top: .5rem; }
+    #screen-menu .lead { margin-bottom: .8rem; }
+    #screen-menu .step svg.demo { max-height: 48vh; }
+    #screen-menu .step p { display: none; }
+    #screen-menu .acts { margin-top: .6rem; }
+  }
+  /* démonstrations « comment jouer » (maquette D) : figées en mouvement réduit (règle générale plus bas) */
+  .demo .cell { fill: none; stroke: rgba(170, 180, 255, .09); stroke-width: 1; }
+  .demo .bm { fill: none; stroke-linecap: round; }
+  .demo .bw { stroke: #ffffff; } .demo .bR { stroke: #ff4d6d; } .demo .bG { stroke: #3dffb0; } .demo .bB { stroke: #4d8dff; }
+  .demo .halo { stroke-width: 9; opacity: .2; } .demo .core { stroke-width: 2.2; }
+  .demo .mir { stroke: #e8ecff; stroke-width: 4; stroke-linecap: round; }
+  .demo .em { fill: #0b0d24; stroke: #c9d0ff; stroke-width: 1.5; }
+  .demo .tg { fill: #0b0d24; stroke-width: 1.6; }
+  .demo .fing { fill: rgba(255, 255, 255, .18); stroke: #ffffff; stroke-width: 1.5; }
+  .demo .rip { fill: none; stroke: #ffffff; stroke-width: 1.5; opacity: 0; }
+  .demo .pz { fill: rgba(160, 170, 255, .16); stroke: #e8ecff; stroke-width: 1.5; stroke-linejoin: round; }
+  .demo .str { fill: #ffd23f; }
+  .d1 .mrot { transform-box: fill-box; transform-origin: center; transform: rotate(-45deg); animation: d1rot 5s infinite; }
+  .d1 .down { opacity: 0; animation: d1down 5s infinite; }
+  .d1 .up, .d1 .tgl { animation: d1up 5s infinite; }
+  .d1 .fing { animation: d1fing 5s infinite; }
+  .d1 .rip1 { animation: d1rip1 5s infinite; } .d1 .rip2 { animation: d1rip2 5s infinite; }
+  @keyframes d1rot { 0%, 30% { transform: rotate(45deg); } 36%, 44% { transform: rotate(0deg); } 50%, 92% { transform: rotate(-45deg); } 100% { transform: rotate(45deg); } }
+  @keyframes d1down { 0%, 30% { opacity: 1; } 32%, 94% { opacity: 0; } 100% { opacity: 1; } }
+  @keyframes d1up { 0%, 49% { opacity: 0; } 53%, 90% { opacity: 1; } 96%, 100% { opacity: 0; } }
+  @keyframes d1fing { 0%, 18% { opacity: 0; } 24%, 56% { opacity: 1; } 62%, 100% { opacity: 0; } }
+  @keyframes d1rip1 { 0%, 29% { opacity: 0; r: 6px; } 30% { opacity: .9; r: 6px; } 38% { opacity: 0; r: 22px; } 100% { opacity: 0; } }
+  @keyframes d1rip2 { 0%, 43% { opacity: 0; r: 6px; } 44% { opacity: .9; r: 6px; } 52% { opacity: 0; r: 22px; } 100% { opacity: 0; } }
+  .d2 .mv { animation: d2mv 5s var(--ease) infinite; }
+  .d2 .pass { opacity: 0; animation: d2pass 5s infinite; }
+  .d2 .up, .d2 .tgl { animation: d2up 5s infinite; }
+  @keyframes d2mv { 0%, 20% { transform: translate(-60px, 60px); } 52%, 90% { transform: translate(0, 0); } 96%, 100% { transform: translate(-60px, 60px); } }
+  @keyframes d2pass { 0%, 50% { opacity: 1; } 52%, 95% { opacity: 0; } 100% { opacity: 1; } }
+  @keyframes d2up { 0%, 52% { opacity: 0; } 56%, 90% { opacity: 1; } 95%, 100% { opacity: 0; } }
+  .d3 .w { animation: d3w 5.4s infinite; } .d3 .r { animation: d3r 5.4s infinite; }
+  .d3 .t1 { animation: d3t1 5.4s infinite; } .d3 .t2 { animation: d3t2 5.4s infinite; } .d3 .t3 { animation: d3t3 5.4s infinite; }
+  .d3 .stars { transform-box: fill-box; transform-origin: center; animation: d3s 5.4s var(--ease) infinite; }
+  @keyframes d3w { 0% { stroke-dashoffset: 120; } 14%, 92% { stroke-dashoffset: 0; } 97%, 100% { stroke-dashoffset: 120; } }
+  @keyframes d3r { 0%, 14% { stroke-dashoffset: 110; } 32%, 92% { stroke-dashoffset: 0; } 97%, 100% { stroke-dashoffset: 110; } }
+  @keyframes d3t1 { 0%, 24% { opacity: 0; } 27%, 92% { opacity: 1; } 97%, 100% { opacity: 0; } }
+  @keyframes d3t2 { 0%, 29% { opacity: 0; } 32%, 92% { opacity: 1; } 97%, 100% { opacity: 0; } }
+  @keyframes d3t3 { 0%, 33% { opacity: 0; } 36%, 92% { opacity: 1; } 97%, 100% { opacity: 0; } }
+  @keyframes d3s { 0%, 40% { opacity: 0; transform: scale(.6); } 48% { opacity: 1; transform: scale(1.08); } 52%, 90% { opacity: 1; transform: scale(1); } 96%, 100% { opacity: 0; transform: scale(1); } }
+  html[data-motion="reduce"] #screen-menu .play .spk, html[data-motion="reduce"] #wipe { display: none; }
+  /* message discret (succès obtenu, niveau verrouillé) : fondu, jamais de flash (V3-20), lu par aria-live poli */
+  #toast { position: fixed; left: 0; right: 0; top: calc(var(--pt) + 58px); margin: 0 auto; width: max-content; max-width: min(30rem, calc(100vw - 32px)); box-sizing: border-box; z-index: 45; padding: .55rem .9rem; font-size: 14px; line-height: 1.35;
+    background: rgba(6, 6, 26, .94); border-left: 2px solid var(--beam); color: var(--fg); opacity: 0; transform: translateY(-4px); transition: opacity .25s, transform .25s; pointer-events: none; }
+  #toast.on { opacity: 1; transform: none; }
+  /* intro : la lumière trace le logo, puis le logo rejoint l'accueil */
+  #intro { position: fixed; inset: 0; z-index: 60; background: #06061a; transition: background-color .55s ease; }
+  #intro.out { background-color: rgba(6, 6, 26, 0); }
+  #intro-wm { position: absolute; left: 0; top: 0; overflow: visible; transform-origin: 0 0; }
+  #intro.out #intro-wm { transition: transform .55s var(--ease); }
+  html.intro-on #home .wm svg, html.intro-on #home .rv, html.intro-on #btn-ambient, html.intro-fly #home .wm svg { opacity: 0; }
+  html.intro-done #home .rv, html.intro-done #btn-ambient { animation: rise .6s var(--ease) both; }
+  html.intro-done #home .hmenu { animation-delay: .06s; } html.intro-done #home .meta { animation-delay: .12s; } html.intro-done #home .foot { animation-delay: .18s; }
+  @keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  #storage-note { position: fixed; left: 12px; bottom: 8px; margin: 0; font-size: 11px; letter-spacing: .06em; color: var(--dim); z-index: 3; pointer-events: none; }
+  /* Message du menu (lien invalide, niveau verrouillé...) : bandeau VISIBLE en haut, avec texte et bouton de fermeture (J8b). */
+  .banner { display: flex; align-items: center; gap: 10px; box-sizing: border-box; margin: 0 0 12px; padding: 4px 4px 4px 14px; border: 1px solid #ff8aa0; border-radius: 12px; background: rgba(46, 10, 24, .86); }
+  .banner .mark { flex: none; width: 22px; height: 22px; border-radius: 50%; border: 1.5px solid #ffc2cf; color: #ffc2cf; font-size: 14px; font-weight: 700; line-height: 19px; text-align: center; }
+  #menu-note { flex: 1; margin: 0; padding: 8px 0; font-size: 14px; line-height: 1.35; color: #ffe3e9; overflow-wrap: anywhere; }
+  .banner .ui-btn { flex: none; color: #ffe3e9; }
+  .banner .ui-btn svg { width: 18px; height: 18px; }
+
+  /* ---- réglages (fenêtre modale, V3-30, maquette C : .pn, .rw, .seg, .sw) ----
+     Les commandes restent de vraies cases et de vrais boutons radio (clavier, lecteur d'écran) : invisibles, posés sur leur dessin. */
+  dialog#dlg-settings, dialog.dlg { border: 1px solid var(--line); border-radius: 18px; background: rgba(8, 9, 26, .94); color: var(--fg); padding: 0; max-height: calc(100dvh - 24px); overflow-y: auto; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .08), 0 20px 80px rgba(0, 0, 0, .7); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); }
+  dialog#dlg-settings { width: min(500px, calc(100vw - 24px)); top: env(safe-area-inset-top); bottom: env(safe-area-inset-bottom); } /* V12 (G7) : centrée dans la zone sûre (encoche) */
+  /* V13b (revue n° 12) : la hauteur maximale retire aussi les marges de sécurité (iPhone en portrait : 47 px en haut, 34 en bas), partout et pas seulement en
+     paysage bas : la fenêtre tient entre les deux zones protégées (« Fermer » ne passe plus sur l'indicateur d'accueil). Mêmes règles pour les fenêtres de l'éditeur. */
+  dialog#dlg-settings, dialog.dlg { max-height: calc(100dvh - 24px - env(safe-area-inset-top) - env(safe-area-inset-bottom)); }
+  dialog.dlg { top: env(safe-area-inset-top); bottom: env(safe-area-inset-bottom); }
+  dialog.dlg { width: min(460px, calc(100vw - 32px)); }
+  dialog#dlg-settings::backdrop, dialog.dlg::backdrop { background: rgba(2, 3, 10, .62); }
+  .dlg-body { padding: 20px 24px 20px; }
+  .dlg-body h2 { margin: 0 0 12px; font-size: 13px; letter-spacing: .4em; font-weight: 500; }
+  .dlg-body fieldset { border: 0; border-top: 1px solid rgba(170, 180, 255, .2); margin: 0; padding: 8px 0; min-width: 0; }
+  .dlg-body legend { padding: 0 8px 0 0; font-size: 12px; letter-spacing: .12em; color: var(--accl); }
+  .dlg-body label { display: flex; align-items: center; gap: 10px; min-height: 44px; box-sizing: border-box; padding: 4px 0; font-size: 14px; cursor: pointer; }
+  .dlg-body input { width: 18px; height: 18px; margin: 0; accent-color: #8f7bff; }
+  .dlg-body .hint { margin: 0 0 4px 28px; font-size: 12px; color: var(--dim); }
+  .dlg-actions { display: flex; justify-content: flex-end; gap: 10px; flex-wrap: wrap; margin-top: 8px; }
+  #settings-form .rw { display: flex; justify-content: space-between; align-items: center; gap: 14px; min-height: 54px; padding: 5px 0; box-sizing: border-box; border-top: 1px solid rgba(170, 180, 255, .2); font-size: 14px; }
+  .rw-t { min-width: 0; flex: 1; }
+  .rw-t small { display: block; color: var(--dim); font-size: 12px; margin-top: 2px; line-height: 1.3; }
+  .sw { position: relative; flex: none; width: 48px; height: 28px; }
+  #settings-form .sw input, #settings-form .seg input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
+  .sw i { position: absolute; inset: 0; border-radius: 14px; border: 1px solid var(--line); background: rgba(20, 22, 60, .8); pointer-events: none; transition: background .2s, border-color .2s; }
+  .sw i::after { content: ""; position: absolute; left: 3px; top: 3px; width: 20px; height: 20px; border-radius: 50%; background: #b8bce8; transition: transform .2s, background .2s; }
+  .sw input:checked + i { background: rgba(120, 100, 240, .6); border-color: #c9c3ff; }
+  .sw input:checked + i::after { transform: translateX(20px); background: #ffffff; }
+  .sw input:focus-visible + i { outline: 2px solid #ffffff; outline-offset: 2px; }
+  .seg { display: flex; flex: none; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+  #settings-form .seg label { position: relative; display: block; min-width: 44px; min-height: 44px; padding: 0; }
+  .seg span { display: flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 12px; box-sizing: border-box; font-size: 12px; letter-spacing: .06em; color: var(--dim); background: rgba(20, 22, 60, .7); white-space: nowrap; }
+  .seg label + label span { border-left: 1px solid rgba(170, 180, 255, .35); }
+  .seg input:checked + span { background: rgba(130, 110, 255, .55); color: #ffffff; }
+  .seg input:focus-visible + span { outline: 2px solid #ffffff; outline-offset: -3px; }
+  #settings-form p#render-line { margin: 10px 0 4px; min-height: 16px; font-size: 12px; letter-spacing: .04em; color: var(--accl); }
+  #render-pending { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; margin: 0 0 8px; }
+  #settings-form #render-pending p { margin: 0; flex: 1 1 180px; font-size: 12px; color: var(--dim); }
+  @media (max-width: 500px) {
+    .dlg-body { padding: 16px 16px 16px; }
+    #settings-form .rw.seg-row { flex-direction: column; align-items: stretch; gap: 6px; padding: 8px 0; }
+    .seg-row .seg label { flex: 1; }
+  }
+  /* V12 (audit G5) : « Fermer » toujours visible (barre collée au bas de la fenêtre) ; quand la fenêtre défile, une flèche et un fondu le disent (src/ui/scroll-cue.js : data-more). */
+  #settings-form > .dlg-actions:last-child { position: sticky; bottom: 0; z-index: 2; margin: 8px -24px -20px; padding: 0 24px 20px; } /* même place qu'avant tant que rien ne défile (bureau inchangé) */
+  dialog#dlg-settings[data-more="1"] #settings-form > .dlg-actions:last-child { padding-top: 10px; background: rgb(8, 9, 26); box-shadow: 0 -1px 0 rgba(170, 180, 255, .2); }
+  #settings-form > .dlg-actions:last-child::before { content: "▾"; position: absolute; left: 0; right: 0; bottom: 100%; height: 30px; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 2px; box-sizing: border-box; font-size: 14px; color: var(--accl); background: linear-gradient(rgba(8, 9, 26, 0), rgb(8, 9, 26)); pointer-events: none; opacity: 0; transition: opacity .2s; }
+  dialog#dlg-settings[data-more="1"] #settings-form > .dlg-actions:last-child::before { opacity: 1; }
+  @media (max-width: 500px) { #settings-form > .dlg-actions:last-child { margin: 8px -16px -16px; padding: 0 16px 16px; } dialog#dlg-settings[data-more="1"] #settings-form > .dlg-actions:last-child { padding-top: 10px; } }
+  @media (orientation: landscape) and (max-height: 500px) {
+    dialog#dlg-settings { width: min(780px, calc(100vw - 24px - env(safe-area-inset-left) - env(safe-area-inset-right))); max-height: calc(100dvh - 16px - env(safe-area-inset-top) - env(safe-area-inset-bottom)); }
+    #settings-form { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: 22px; }
+    #settings-form > * { grid-column: 1 / -1; }
+    #settings-form > label.rw { grid-column: auto; min-height: 48px; }
+    .dlg-body h2 { margin-bottom: 6px; }
+  }
+  @media (orientation: landscape) and (max-height: 420px) { #settings-form .rw-t small { display: none; } }
+  #reset-confirm { margin: 6px 0 0; font-size: 13px; }
+  #reset-confirm p { margin: 0 0 8px; color: #ffd0d8; }
+  .btn.danger { border-color: #ff8aa0; }
+  /* P9 : mention discrète, sans interaction, quand le gouverneur baisse la qualité. */
+  #quality-note { position: fixed; top: calc(max(12px, env(safe-area-inset-top)) + 54px); left: 0; right: 0; margin: 0 auto; width: max-content; max-width: min(92vw, 460px); box-sizing: border-box; z-index: 6; padding: 6px 14px; border-radius: 14px; border: 1px solid rgba(170, 180, 255, .28); background: rgba(6, 7, 20, .86); color: var(--fg); font-size: 12px; letter-spacing: .04em; text-align: center; pointer-events: none; }
+
+  /* ---- éditeur, partage, défi du jour (J6) : mêmes variables que la coque de J5 ---- */
+  .dlg-body p { margin: 0 0 10px; font-size: 13px; color: var(--dim); }
+  .dlg-body p.msg { color: var(--accl); min-height: 18px; }
+  .dlg-body input[type="text"], .dlg-body textarea { min-height: 44px; width: 100%; box-sizing: border-box; font: inherit; font-size: 13px; color: var(--fg); background: rgba(10, 11, 32, .8); border: 1px solid var(--line); border-radius: 10px; padding: 8px 10px; }
+  .dlg-body textarea { height: 76px; resize: vertical; }
+  .dlg-body ul { list-style: none; margin: 0 0 12px; padding: 0; max-height: 34vh; overflow-y: auto; }
+  .dlg-body li { display: flex; align-items: center; gap: 8px; padding: 6px 0; border-top: 1px solid rgba(154, 166, 255, .2); font-size: 14px; }
+  .dlg-body li span { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .dlg-body li.empty { color: var(--dim); }
+  .dlg-body .btn { padding: 0 12px; letter-spacing: .2em; }
+  #drafts-confirm { margin: 0 0 10px; padding: 10px 12px; border: 1px solid #ff8aa0; border-radius: 10px; background: rgba(255, 138, 160, .1); }
+  #drafts-confirm p { margin: 0 0 8px; color: #ffe3e9; }
+  /* ---- éditeur (J8b) : trois dispositions, une grille. A : bureau et tablette (palette verticale d'icônes à gauche, plateau, panneau dessous) ;
+     B : téléphone en paysage (palette, plateau, panneau à droite) ; C : téléphone en portrait (plateau, palette sur deux rangées, panneau). ---- */
+  #screen-edit { position: fixed; inset: 0; z-index: 2; display: grid; box-sizing: border-box; padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left); overflow: hidden; background: radial-gradient(ellipse at 50% 38%, #0a0c20, #02030a 72%);
+    grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr) auto auto; grid-template-areas: "top" "board" "side" "panel"; }
+  #edit-top { grid-area: top; display: flex; align-items: center; gap: 4px; padding: 4px 6px; box-sizing: border-box; min-height: 52px; border-bottom: 1px solid rgba(170, 180, 255, .16); background: rgba(8, 9, 24, .55); }
+  #edit-title { margin: 0 8px 0 0; font-size: 12px; letter-spacing: .3em; font-weight: 400; color: var(--accl); }
+  #edit-name { flex: 1 1 90px; min-width: 70px; max-width: 280px; margin-right: auto; height: 44px; box-sizing: border-box; font: inherit; font-size: 14px; color: var(--fg); background: rgba(10, 11, 32, .8); border: 1px solid var(--line); border-radius: 10px; padding: 0 12px; box-shadow: var(--bevel); }
+  #edit-board { grid-area: board; position: relative; min-width: 0; min-height: 120px; }
+  #edit-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; touch-action: manipulation; -webkit-tap-highlight-color: transparent; -webkit-user-select: none; user-select: none; outline: none; }
+  #edit-side { grid-area: side; min-width: 0; padding: 4px 8px 0; box-sizing: border-box; }
+  #edit-tools { display: flex; flex-wrap: wrap; justify-content: center; gap: 5px; }
+  .etool { display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 44px; padding: 0; color: var(--fg); background: var(--tile); border: 1px solid rgba(170, 180, 255, .32); border-radius: 10px; box-shadow: var(--bevel); cursor: pointer; touch-action: manipulation; }
+  .etool svg { width: 28px; height: 28px; overflow: visible; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+  .etool:hover { background: rgba(40, 40, 100, .78); border-color: #ffffff; }
+  .etool[aria-pressed="true"] { border-color: #c9c3ff; background: rgba(90, 70, 200, .5); box-shadow: 0 0 14px rgba(143, 123, 255, .45); }
+  #edit-tool-name { display: none; margin: 8px 0 0; text-align: center; font-size: 12px; letter-spacing: .12em; color: var(--dim); }
+  /* V12 (audit C3, B1) : le panneau garde ses actions (TESTER, PROUVER, PARTAGER, BROUILLONS) toujours visibles en bas ; seul le haut (taille, réglage, informations)
+     défile, avec un indice (flèche et fondu, src/ui/scroll-cue.js). Disposition A (bureau) : inchangée (#edit-scroll sans boîte). */
+  #edit-panel { grid-area: panel; max-height: 46dvh; display: flex; flex-direction: column; overflow: hidden; box-sizing: border-box; padding: 6px 8px 8px; min-width: 0; border-top: 1px solid rgba(170, 180, 255, .16); background: rgba(8, 9, 24, .55); }
+  #edit-scroll { flex: 1 1 auto; min-height: 0; overflow-y: auto; overscroll-behavior: contain; }
+  #edit-scroll::after { content: "▾"; position: sticky; bottom: 0; display: block; height: 18px; margin-top: -18px; text-align: center; font-size: 13px; line-height: 18px; color: var(--accl); background: linear-gradient(rgba(8, 9, 24, 0), rgb(8, 9, 24)); pointer-events: none; opacity: 0; }
+  #edit-scroll[data-more="1"]::after { opacity: 1; }
+  /* V13b (revue n° 10) : même indice (flèche et fondu) quand c'est le panneau lui-même (disposition A) ou la palette (dispositions A, B, D) qui défile */
+  #edit-panel::after, #edit-side::after { content: "▾"; position: sticky; bottom: 0; display: block; height: 18px; margin-top: -18px; text-align: center; font-size: 13px; line-height: 18px; color: var(--accl); background: linear-gradient(rgba(8, 9, 24, 0), rgb(8, 9, 24)); pointer-events: none; opacity: 0; }
+  #edit-panel[data-more="1"]::after, #edit-side[data-more="1"]::after { opacity: 1; }
+  #edit-actions { flex: none; }
+  @media (max-width: 380px) { .etool { width: 44px; } #edit-tools { gap: 4px; } #screen-edit #edit-info { height: 56px; } #screen-edit #edit-panel { padding-top: 3px; padding-bottom: 5px; } #screen-edit .edit-row { margin-bottom: 1px; } } /* V13 : à 320 px la zone d information (76 px) poussait l état sous le fondu du panneau : 56 px (3 lignes), toujours FIXE (le plateau ne bouge pas quand un message apparaît : elle défile) */ /* V12 (C3, C4) : 6 outils par rangée à 320-360 px : 2 rangées au lieu de 3, le plateau gagne 50 px */
+  .edit-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 4px 14px; margin-bottom: 4px; }
+  #edit-sizebar { display: flex; align-items: center; gap: 3px; }
+  #edit-size { font-size: 13px; letter-spacing: .08em; color: var(--fg); min-width: 44px; text-align: center; font-variant-numeric: tabular-nums; }
+  .mini { width: 44px; height: 44px; padding: 0; font-size: 15px; line-height: 1; color: var(--fg); background: var(--tile); border: 1px solid var(--line); border-radius: 10px; box-shadow: var(--bevel); cursor: pointer; touch-action: manipulation; }
+  .mini:disabled { opacity: .4; cursor: default; }
+  #edit-options { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 4px; min-height: 44px; }
+  .eopt { min-width: 44px; height: 44px; font-size: 15px; border: 2px solid transparent; border-radius: 10px; cursor: pointer; background: var(--tile); color: var(--fg); touch-action: manipulation; }
+  .eopt[aria-pressed="true"] { border-color: #fff; box-shadow: 0 0 8px rgba(255, 255, 255, .6); }
+  .ehint { font-size: 12px; color: var(--dim); padding: 6px 4px; text-align: center; }
+  /* Zone d'information de HAUTEUR FIXE : un message qui apparaît ne redimensionne jamais le plateau sous le doigt (elle défile si le texte déborde). */
+  #edit-info { display: flex; flex-direction: column; height: 76px; overflow-y: auto; margin-bottom: 4px; }
+  #edit-status { display: contents; text-align: center; font-size: 12px; letter-spacing: .03em; color: var(--dim); }
+  #edit-status > span { display: block; text-align: center; order: 3; margin-bottom: 2px; }
+  #edit-status > .ok, #edit-status > .bad { order: 0; display: flex; justify-content: center; align-items: center; gap: 6px; font-size: 12px; }
+  #edit-msg { order: 1; } #edit-prove-out { order: 2; } #edit-witness { order: 4; }
+  #edit-status .ok { color: #7dffc8; } #edit-status .bad { color: #ffb3c0; }
+  #edit-status .ok::before, #edit-status .bad::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: currentColor; flex: none; }
+  #edit-msg, #edit-prove-out, #edit-witness { margin: 0 0 2px; text-align: center; font-size: 12px; color: var(--accl); min-height: 15px; }
+  #edit-prove-out:empty, #edit-msg:empty { min-height: 0; margin: 0; }
+  #edit-msg, #edit-prove-out, #edit-witness { flex: none; }
+  #edit-witness { color: var(--dim); min-height: 0; }
+  #edit-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; margin-top: 4px; }
+  #edit-actions .btn { flex: 1 1 auto; }
+  @media (max-width: 480px) { #edit-title { display: none; } #edit-name { flex: 1 1 60px; } }
+  @media (max-width: 759px), (max-height: 559px) { #edit-witness { display: none; } }
+  @media (min-width: 760px) and (min-height: 560px) { /* A */
+    #screen-edit { grid-template-columns: 156px minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr) auto; grid-template-areas: "top top" "side board" "side panel"; }
+    #edit-side { padding: 8px 8px 8px 12px; overflow-y: auto; }
+    #edit-tools { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; padding: 8px; border: 1px solid rgba(170, 180, 255, .22); border-radius: 14px; background: rgba(8, 9, 24, .6); box-shadow: var(--bevel); }
+    .etool { width: auto; height: 48px; }
+    #edit-tool-name { display: block; }
+    #edit-panel { max-height: 40dvh; display: block; overflow-y: auto; }
+    #edit-scroll { display: contents; }
+    #edit-scroll::after { display: none; }
+    #edit-info { height: 96px; } /* V9b (test final) : 5 lignes possibles ici (état, message, preuve, compteurs, témoin) : la dernière n'est plus coupée sous TESTER/PROUVER */
+  }
+  @media (min-width: 1600px) and (min-height: 900px) { /* V13 (test joueur n° 10) : grand écran : palette agrandie avec mesure (elle restait de 136 px de large à 1920×1080) */
+    #screen-edit { grid-template-columns: 196px minmax(0, 1fr); }
+    #edit-tools { gap: 8px; padding: 10px; }
+    .etool { height: 60px; border-radius: 12px; }
+    .etool svg { width: 34px; height: 34px; }
+    #edit-tool-name { font-size: 14px; }
+    #edit-panel, .ehint, #edit-status, #edit-status > .ok, #edit-status > .bad, #edit-msg, #edit-prove-out, #edit-witness { font-size: 13px; }
+  }
+  @media (min-width: 600px) and (max-height: 559px) { /* B */
+    #screen-edit { grid-template-columns: 148px minmax(0, 1fr) 244px; grid-template-rows: auto minmax(0, 1fr); grid-template-areas: "top top top" "side board panel"; }
+    #edit-side { padding: 2px 6px 4px 8px; overflow-y: auto; }
+    #edit-tools { display: grid; grid-template-columns: repeat(2, 1fr); gap: 5px; }
+    .etool { width: auto; }
+    #edit-panel { max-height: none; padding-top: 2px; }
+    .edit-row { flex-direction: column; gap: 2px; }
+    #edit-info { height: auto; overflow: visible; }
+    #edit-actions { display: grid; grid-template-columns: 1fr 1fr; }
+    #edit-actions #edit-drafts, #edit-actions #edit-prove-cancel { grid-column: 1 / -1; }
+    #edit-actions .btn { padding: 0 6px; letter-spacing: .12em; }
+  }
+  /* D (V12, audit B1, C3) : téléphone couché (moins de 600 px de large, ou moins de 400 px de haut) : palette à gauche sur 2 colonnes, plateau, colonne de droite
+     (barre du haut, réglages défilants avec indice, actions toujours visibles). Rien ne passe plus sous le plateau. */
+  @media (orientation: landscape) and (max-height: 559px) and (max-width: 599px), (orientation: landscape) and (max-height: 399px) {
+    #screen-edit { grid-template-columns: auto minmax(0, 1fr) clamp(220px, 32vw, 280px); grid-template-rows: auto minmax(0, 1fr); grid-template-areas: "side board top" "side board panel"; }
+    #edit-top { min-height: 48px; padding: 2px 4px; border-left: 1px solid rgba(170, 180, 255, .16); }
+    #edit-title { display: none; }
+    #edit-name { flex: 1 1 50px; min-width: 50px; padding: 0 8px; }
+    #edit-side { padding: 4px 6px; overflow-y: auto; border-right: 1px solid rgba(170, 180, 255, .16); }
+    #edit-tools { display: grid; grid-template-columns: repeat(2, 44px); gap: 3px; }
+    .etool { width: 44px; }
+    #edit-tool-name { display: none; }
+    #edit-panel { max-height: none; padding: 2px 6px 6px; border-top: 0; border-left: 1px solid rgba(170, 180, 255, .16); }
+    .edit-row { flex-direction: column; gap: 2px; }
+    #edit-sizebar { flex-wrap: wrap; justify-content: center; }
+    #edit-size { flex-basis: 100%; order: -1; }
+    #edit-info { height: auto; overflow: visible; }
+    #edit-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+    #edit-actions #edit-test, #edit-actions #edit-drafts, #edit-actions #edit-prove-cancel { grid-column: 1 / -1; }
+    #edit-actions .btn { padding: 0 6px; letter-spacing: .1em; }
+  }
+  #daily-wait { position: fixed; inset: 0; z-index: 4; display: flex; align-items: center; justify-content: center; background: rgba(2, 3, 10, .72); }
+  #daily-wait .box { width: min(380px, calc(100vw - 40px)); box-sizing: border-box; text-align: center; background: rgba(8, 9, 26, .94); border: 1px solid var(--line); border-radius: 18px; padding: 22px; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .08), 0 20px 80px rgba(0, 0, 0, .7); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); }
+  #daily-wait h2 { margin: 0 0 10px; font-size: 14px; letter-spacing: .35em; font-weight: 400; }
+  #daily-wait p { margin: 0 0 14px; font-size: 13px; color: var(--dim); min-height: 18px; }
+  #daily-wait .bar { height: 4px; border-radius: 2px; background: rgba(154, 166, 255, .25); margin: 0 0 14px; overflow: hidden; }
+  #daily-wait .bar i { display: block; height: 100%; width: 0; background: var(--accl); transition: width .15s; }
+  /* ---- interface flottante, disposition immersive (V5 ; ARCHITECTURE_V3_RENDU V3-17, V3-21, V3-22, V3-23, V3-24, V3-38) ----
+     Masquée : opacité 0 et pointer-events:none, JAMAIS visibility:hidden ni display:none (le clavier doit atteindre les boutons). Apparition 80 ms, disparition 700 ms.
+     Plaques : --plate = 0,30 au repos, 0,70 quand un faisceau s'approche (scrim.js). En `?debug` (disposition classique), #hud-tl et #hud-tr s'effacent de la mise en boîte. */
+  #safe-probe { position: fixed; visibility: hidden; pointer-events: none; left: 0; top: 0; width: 0; height: 0; padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left); }
+  #hud-count { display: none; }
+  html[data-ui="classic"] #hud-tl, html[data-ui="classic"] #hud-tr { display: contents; }
+  html[data-ui="immersive"] .fl { transition: opacity 80ms linear, background-color 200ms linear; }
+  html[data-ui="immersive"] #screen-game[data-hud="idle"] .fl { opacity: 0; pointer-events: none; transition: opacity 700ms linear, background-color 200ms linear; }
+  html[data-ui="immersive"] .plate { background: rgba(6, 7, 20, var(--plate, .3)); border: 1px solid rgba(170, 180, 255, .28); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+  html[data-fx="low"] .plate, html[data-fx="low"] dialog, html[data-fx="low"] #win, html[data-fx="low"] #daily-wait .box { -webkit-backdrop-filter: none !important; backdrop-filter: none !important; }
+  html[data-ui="immersive"] #hud-tl, html[data-ui="immersive"] #hud-tr { position: fixed; top: max(12px, env(safe-area-inset-top)); display: flex; align-items: center; height: 46px; box-sizing: border-box; border-radius: 23px; }
+  html[data-ui="immersive"] #hud-tl { left: max(12px, env(safe-area-inset-left)); padding: 0 14px 0 0; cursor: pointer; } /* V9b : toute la pastille ramène au menu (clic relayé au bouton) */
+  html[data-ui="immersive"] #hud-tl:hover #btn-back { color: #ffffff; }
+  html[data-ui="immersive"] #hud-tl:hover { border-color: rgba(200, 208, 255, .5); }
+  html[data-ui="immersive"] #hud-tr { right: max(12px, env(safe-area-inset-right)); padding: 0 0 0 14px; gap: 2px; }
+  html[data-ui="immersive"] #hud-label { position: static; font-size: 13px; letter-spacing: .16em; max-width: 34vw; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  html[data-ui="immersive"] #hud-count { display: inline-block; min-width: 2.6em; text-align: right; font-size: 13px; letter-spacing: .08em; font-variant-numeric: tabular-nums; }
+  html[data-ui="immersive"] #btn-back, html[data-ui="immersive"] #btn-reset { position: static; }
+  html[data-ui="immersive"] #tools { top: auto; left: 0; right: 0; bottom: max(14px, env(safe-area-inset-bottom)); margin-inline: auto; width: max-content; box-sizing: border-box; gap: 4px; padding: 4px; border-radius: 27px; }
+  html[data-ui="immersive"] #caption { top: auto; left: 0; right: 0; bottom: calc(max(14px, env(safe-area-inset-bottom)) + 62px); margin-inline: auto; width: max-content; max-width: min(92vw, 720px); box-sizing: border-box; min-height: 2.05em; padding: 4px 14px; border-radius: 14px; pointer-events: none; color: var(--fg); }
+  html[data-ui="immersive"] #win { top: auto; left: 0; right: 0; bottom: calc(max(14px, env(safe-area-inset-bottom)) + 62px); margin-inline: auto; width: min(560px, calc(100vw - 24px)); box-sizing: border-box; padding: 12px 18px; border-radius: 18px; border: 1px solid var(--line); background: rgba(8, 9, 26, .92); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); }
+  @media (max-width: 640px) { html[data-ui="immersive"] #caption { height: 3.5em; display: flex; align-items: center; justify-content: center; font-size: 12px; letter-spacing: .02em; line-height: 1.35; } } /* V8 : un indice long tient en 2 lignes à 412 px (il débordait de la plaque sur 3 lignes) */
+  @media (max-width: 640px) { html[data-ui="immersive"] #hud-label { font-size: 12px; letter-spacing: .1em; max-width: calc(100vw - 200px); white-space: normal; overflow-wrap: anywhere; line-height: 1.2; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; text-overflow: clip; } } /* V8 : « PIÈCES SPÉCIALES · 09 » entier à 412 px ; V12 (audit C2) : à 320 px, deux lignes plutôt qu'une ellipse (« DÉFI · 2026-11-10 · v1 ») */
+  /* Téléphone en paysage, fenêtre basse (hauteur < 500 px ; V3-38, refait en V12 : audit G1, G2, G3) : DEUX RAILS. À gauche, la pastille du titre (verticale)
+     et la légende ; à droite, les réglages, les outils dessous et, à la victoire, le panneau à côté d'eux. Le plateau occupe toute la hauteur entre les rails
+     (src/render/scene/layout.js, `rails`, `COMPACT`) : il ne recule plus sous les pastilles du haut. Marges de sécurité (encoche) comprises. */
+  @media (max-height: 499px) and (orientation: landscape) {
+    html[data-ui="immersive"] #screen-game { --rail: min(140px, 19vw); --trh: 66px; --tt: max(12px, env(safe-area-inset-top)); --rt: max(8px, env(safe-area-inset-right)); --bb: max(8px, env(safe-area-inset-bottom)); }
+    html[data-ui="immersive"] #hud-tl { top: var(--tt); flex-direction: column; align-items: flex-start; height: auto; width: max-content; max-width: var(--rail); padding: 0 12px 8px 0; border-radius: 20px; }
+    html[data-ui="immersive"] #hud-label { padding-left: 12px; font-size: 12px; letter-spacing: .08em; line-height: 1.3; white-space: normal; overflow-wrap: anywhere; max-width: none; overflow: visible; display: block; }
+    html[data-ui="immersive"] #hud-tr { top: var(--tt); right: var(--rt); width: 54px; height: var(--trh); flex-direction: column-reverse; justify-content: flex-end; align-items: center; padding: 0 0 4px; gap: 0; border-radius: 27px; }
+    html[data-ui="immersive"] #hud-count { min-width: 0; text-align: center; font-size: 12px; line-height: 16px; letter-spacing: .04em; }
+    html[data-ui="immersive"] #hud-tr .ui-btn { flex: none; }
+    html[data-ui="immersive"] #tools { left: auto; right: var(--rt); top: calc(var(--tt) + var(--trh) + 8px); bottom: var(--bb); margin-block: auto; margin-inline: 0; flex-direction: column; width: 54px; height: max-content; }
+    html[data-ui="immersive"] #caption { left: max(12px, env(safe-area-inset-left)); right: auto; bottom: var(--bb); margin: 0; width: var(--rail); height: auto; display: block; text-align: left; font-size: 12px; }
+    /* victoire : le panneau prend la place du rail des outils (sous la pastille des réglages) : le plateau ne perd que ~110 px de large (568×320 : case × 0,63),
+       son glissement reste lent et doux (stage.js, V3-20) ; Annuler reste au clavier (Ctrl+Z), REJOUER et MENU sont dans le panneau. */
+    html[data-ui="immersive"] #tools.won { display: none; }
+    html[data-ui="immersive"] #win { left: auto; right: var(--rt); top: calc(var(--tt) + var(--trh) + 8px); bottom: var(--bb); margin-block: auto; margin-inline: 0; width: min(220px, 31vw); height: max-content; max-height: calc(100% - var(--tt) - var(--trh) - 8px - var(--bb)); overflow-y: auto; padding: 8px 10px; display: block; }
+    html[data-ui="immersive"] #win .win-head { gap: 4px 10px; flex-wrap: wrap; }
+    html[data-ui="immersive"] #win-title { font-size: 12px; letter-spacing: .3em; }
+    html[data-ui="immersive"] #win .win-actions { flex-direction: column; gap: 6px; }
+    html[data-ui="immersive"] #win .btn { padding: 0 8px; letter-spacing: .1em; }
+    html[data-ui="immersive"] #win #win-sub { margin: 2px 0 8px; }
+    /* V13 : la ligne des succès prend une ou deux lignes : REJOUER et MENU côte à côte (le bouton suivant garde toute la largeur) pour que tout tienne sans défiler */
+    html[data-ui="immersive"] #win .win-actions { display: grid; grid-template-columns: 1fr 1fr; }
+    html[data-ui="immersive"] #win .win-actions #btn-next, html[data-ui="immersive"] #win .win-actions #btn-edit-copy { grid-column: 1 / -1; }
+    html[data-ui="immersive"] #win .win-actions #btn-again, html[data-ui="immersive"] #win .win-actions #btn-menu { padding: 0 4px; letter-spacing: .04em; min-width: 0; }
+    html[data-ui="immersive"] #win .ach-line { line-height: 1.3; margin: 0 0 8px; }
+    /* V13b : sous ~300 px de haut (640×280), le panneau borné défile : flèche et fondu au bas de la partie visible (src/ui/scroll-cue.js : data-more) */
+    html[data-ui="immersive"] #win::after { content: "▾"; position: sticky; bottom: -8px; display: block; height: 18px; margin-top: -18px; text-align: center; font-size: 13px; line-height: 18px; color: var(--accl); background: linear-gradient(rgba(8, 9, 26, 0), rgb(8, 9, 26)); pointer-events: none; opacity: 0; }
+    html[data-ui="immersive"] #win[data-more="1"]::after { opacity: 1; }
+  }
+  /* message discret (succès) pendant une partie en paysage bas : en bas à gauche, sur le rail de la légende (cachée à la victoire), jamais sur le panneau ni ses étoiles */
+  @media (max-height: 499px) and (orientation: landscape) {
+    #app:has(> #screen-game:not([hidden])) ~ #toast { top: auto; bottom: max(8px, env(safe-area-inset-bottom)); left: max(12px, env(safe-area-inset-left)); right: auto; margin: 0; max-width: min(260px, 40vw); font-size: 13px; }
+  }
+  /* Hauteur <= 360 px (568×320, 640×360) : pastille des réglages seule (le compte des cibles reste écrit dans la légende), outils resserrés. */
+  @media (max-height: 360px) and (orientation: landscape) {
+    html[data-ui="immersive"] #screen-game { --trh: 46px; }
+    html[data-ui="immersive"] #hud-count { display: none; }
+    html[data-ui="immersive"] #hud-tr { justify-content: center; padding: 0; }
+    html[data-ui="immersive"] #tools { gap: 2px; padding: 3px; }
+  }
+  /* V13b (revue n° 9) : hauteur < 310 px (640×280 : Android couché avec barres) : la colonne de 5 outils (236 px) ne tenait plus sous la pastille des réglages
+     (elle débordait de l'écran) : outils sur 2 colonnes (3 rangées, 144 px) ; garde-fou sous ~220 px : la colonne défile au lieu de sortir de l'écran. */
+  @media (max-height: 309px) and (orientation: landscape) {
+    html[data-ui="immersive"] #tools { display: grid; grid-template-columns: repeat(2, 44px); width: max-content; max-height: calc(100% - var(--tt) - var(--trh) - 8px - var(--bb)); overflow-y: auto; overscroll-behavior: contain; }
+  }
+  html[data-motion="reduce"] *, html[data-motion="reduce"] *::before, html[data-motion="reduce"] *::after { animation: none !important; transition: none !important; }
+</style>
+</head>
+<body>
+<div id="grain" aria-hidden="true"></div>
+
+<div id="app">
+  <main id="screen-menu" hidden aria-labelledby="menu-title">
+    <canvas id="home-scene" aria-hidden="true"></canvas>
+    <div id="wipe" aria-hidden="true"></div>
+
+    <!-- ============ accueil ============ -->
+    <section id="home" class="hs" aria-labelledby="menu-title">
+      <div class="hb">
+        <div id="menu-banner" class="banner" data-avoid hidden>
+          <span class="mark" aria-hidden="true">!</span>
+          <p id="menu-note"></p>
+          <button id="menu-note-close" class="ui-btn" type="button" title="Fermer ce message" aria-label="Fermer ce message"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+        </div>
+        <div class="blk" data-avoid>
+          <h1 id="menu-title" class="wm" tabindex="-1"><svg id="home-wm" role="img" aria-label="Prismaze"></svg></h1>
+          <button type="button" class="play rv" id="menu-continue" data-beam><span class="pa" id="play-a">Jouer</span><span class="pb" id="play-b"></span><i class="spk" aria-hidden="true"></i></button>
+          <p class="offer rv" id="home-offer" hidden>Première fois ?<button type="button" id="home-offer-yes">Voir comment jouer</button></p>
+          <ul class="hmenu rv">
+            <li><button type="button" id="menu-levels" data-beam>Niveaux</button></li>
+            <li><button type="button" id="menu-daily" data-beam>Défi du jour</button></li>
+            <li><button type="button" id="menu-editor" data-beam>Éditeur</button></li>
+            <li><button type="button" id="menu-settings" data-beam aria-haspopup="dialog">Réglages</button></li>
+          </ul>
+          <p class="meta rv num" id="home-daily" aria-hidden="true"></p>
+          <p class="meta rv num" id="home-progress" aria-hidden="true"></p>
+        </div>
+        <div class="foot rv" data-avoid>
+          <button type="button" id="menu-howto">Comment jouer</button><button type="button" id="menu-ach">Succès <span class="num" id="menu-ach-n">0/12</span></button><button type="button" id="menu-about">À propos</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ chapitres ============ -->
+    <section id="home-chapters" class="hs" hidden aria-labelledby="chapters-title">
+      <div class="sub">
+        <button type="button" class="back" data-back><svg viewBox="0 0 18 12" aria-hidden="true"><path d="M17 6H1M6 1L1 6l5 5"/></svg>Accueil</button>
+        <h2 id="chapters-title" tabindex="-1">Niveaux</h2>
+        <p class="lead num" id="chapters-meta"></p>
+        <ul class="rows chl" id="chapters-list"></ul>
+      </div>
+    </section>
+
+    <!-- ============ niveaux d'un chapitre ============ -->
+    <section id="home-levels" class="hs" hidden aria-labelledby="levels-title">
+      <div class="sub">
+        <button type="button" class="back" data-back><svg viewBox="0 0 18 12" aria-hidden="true"><path d="M17 6H1M6 1L1 6l5 5"/></svg>Chapitres</button>
+        <div class="lvh"><div class="art" id="levels-art"></div><div><h2 id="levels-title" tabindex="-1"></h2><p class="lead" id="levels-lead"></p></div></div>
+        <ol class="rows lvl" id="levels-list"></ol>
+      </div>
+    </section>
+
+    <!-- ============ comment jouer ============ -->
+    <section id="home-howto" class="hs" hidden aria-labelledby="howto-title">
+      <div class="sub">
+        <button type="button" class="back" data-back><svg viewBox="0 0 18 12" aria-hidden="true"><path d="M17 6H1M6 1L1 6l5 5"/></svg>Accueil</button>
+        <h2 id="howto-title" tabindex="-1">Comment jouer</h2>
+        <p class="lead">Guide le faisceau jusqu'aux cibles.</p>
+        <ol class="steps">
+          <li class="step">
+            <svg class="demo d1" viewBox="0 0 260 200" role="img" aria-label="Un toucher sur un miroir le fait tourner ; le faisceau change de direction et allume la cible.">
+              <g class="grid"></g>
+              <rect class="em" x="28" y="88" width="24" height="24" rx="5"/><circle cx="40" cy="100" r="4" fill="#fff"/>
+              <g class="bm bw"><path class="halo" d="M52 100H160"/><path class="core" d="M52 100H160"/></g>
+              <g class="bm bw down"><path class="halo" d="M160 100V196"/><path class="core" d="M160 100V196"/></g>
+              <g class="bm bw up"><path class="halo" d="M160 100V52"/><path class="core" d="M160 100V52"/></g>
+              <g transform="translate(160 40)"><polygon class="tg" points="0,-14 12,-7 12,7 0,14 -12,7 -12,-7" stroke="#c9d0ff"/><polygon class="tgl" points="0,-14 12,-7 12,7 0,14 -12,7 -12,-7" fill="rgba(201,208,255,.85)" style="filter:drop-shadow(0 0 8px #c9d0ff)"/><circle r="4" fill="#0b0d24"/></g>
+              <g transform="translate(160 100)"><line class="mir mrot" x1="-17" y1="0" x2="17" y2="0"/></g>
+              <circle class="rip rip1" cx="160" cy="100" r="6"/><circle class="rip rip2" cx="160" cy="100" r="6"/>
+              <circle class="fing" cx="172" cy="114" r="9"/>
+            </svg>
+            <h3><i>1</i>Toucher : tourner</h3><p>Clic droit ou appui long : l'autre sens</p>
+          </li>
+          <li class="step">
+            <svg class="demo d2" viewBox="0 0 260 200" role="img" aria-label="Glisser un miroir sur une autre case le déplace ; le faisceau s'y reflète vers la cible.">
+              <g class="grid"></g>
+              <rect class="em" x="28" y="88" width="24" height="24" rx="5"/><circle cx="40" cy="100" r="4" fill="#fff"/>
+              <g class="bm bw"><path class="halo" d="M52 100H160"/><path class="core" d="M52 100H160"/></g>
+              <g class="bm bw pass"><path class="halo" d="M160 100H252"/><path class="core" d="M160 100H252"/></g>
+              <g class="bm bw up"><path class="halo" d="M160 100V52"/><path class="core" d="M160 100V52"/></g>
+              <g transform="translate(160 40)"><polygon class="tg" points="0,-14 12,-7 12,7 0,14 -12,7 -12,-7" stroke="#c9d0ff"/><polygon class="tgl" points="0,-14 12,-7 12,7 0,14 -12,7 -12,-7" fill="rgba(201,208,255,.85)" style="filter:drop-shadow(0 0 8px #c9d0ff)"/><circle r="4" fill="#0b0d24"/></g>
+              <g class="mv"><g transform="translate(160 100)"><line class="mir" x1="-12" y1="12" x2="12" y2="-12"/></g><circle class="fing" cx="172" cy="114" r="9"/></g>
+            </svg>
+            <h3><i>2</i>Glisser : déplacer</h3><p>Sur une case libre</p>
+          </li>
+          <li class="step">
+            <svg class="demo d3" viewBox="0 0 260 200" role="img" aria-label="Un prisme sépare la lumière blanche en rouge, vert et bleu ; quand toutes les cibles sont allumées, le niveau est résolu, avec jusqu'à trois étoiles.">
+              <g class="grid"></g>
+              <rect class="em" x="28" y="88" width="24" height="24" rx="5"/><circle cx="40" cy="100" r="4" fill="#fff"/>
+              <g class="bm bw"><path class="halo w" d="M52 100H100" stroke-dasharray="120" style="stroke-dashoffset:0"/><path class="core w" d="M52 100H100" stroke-dasharray="120" style="stroke-dashoffset:0"/></g>
+              <g class="bm bR"><path class="halo r" d="M100 100V52" stroke-dasharray="110"/><path class="core r" d="M100 100V52" stroke-dasharray="110"/></g>
+              <g class="bm bG"><path class="halo r" d="M100 100H208" stroke-dasharray="110"/><path class="core r" d="M100 100H208" stroke-dasharray="110"/></g>
+              <g class="bm bB"><path class="halo r" d="M100 100V148" stroke-dasharray="110"/><path class="core r" d="M100 100V148" stroke-dasharray="110"/></g>
+              <polygon class="pz" points="88,88 114,100 88,112"/>
+              <g transform="translate(100 40)"><polygon class="tg" points="0,-14 12,-7 12,7 0,14 -12,7 -12,-7" stroke="#ff4d6d"/><polygon class="tgl t1" points="0,-14 12,-7 12,7 0,14 -12,7 -12,-7" fill="#ff4d6d" style="filter:drop-shadow(0 0 8px #ff4d6d)"/><polygon points="0,-5 4.5,3 -4.5,3" fill="#0b0d24"/></g>
+              <g transform="translate(220 100)"><polygon class="tg" points="0,-14 12,-7 12,7 0,14 -12,7 -12,-7" stroke="#3dffb0"/><polygon class="tgl t2" points="0,-14 12,-7 12,7 0,14 -12,7 -12,-7" fill="#3dffb0" style="filter:drop-shadow(0 0 8px #3dffb0)"/><circle r="4" fill="#0b0d24"/></g>
+              <g transform="translate(100 160)"><polygon class="tg" points="0,-14 12,-7 12,7 0,14 -12,7 -12,-7" stroke="#4d8dff"/><polygon class="tgl t3" points="0,-14 12,-7 12,7 0,14 -12,7 -12,-7" fill="#4d8dff" style="filter:drop-shadow(0 0 8px #4d8dff)"/><rect x="-3.6" y="-3.6" width="7.2" height="7.2" fill="#0b0d24"/></g>
+              <g class="stars"><path class="str" d="M0 -9l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z" transform="translate(178 34) scale(.8)"/><path class="str" d="M0 -9l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z" transform="translate(202 28)"/><path class="str" d="M0 -9l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z" transform="translate(226 34) scale(.8)"/></g>
+            </svg>
+            <h3><i>3</i>Allumer toutes les cibles</h3><p>Moins de pièces, plus d'étoiles</p>
+          </li>
+        </ol>
+        <p class="kbd" id="howto-kbd">Au clavier : flèches pour choisir une case, Entrée pour prendre puis poser une pièce, R pour la tourner, Échap pour revenir.</p>
+        <div class="acts"><button type="button" class="play" id="howto-go" data-beam><span class="pa">C'est parti</span><i class="spk" aria-hidden="true"></i></button><button type="button" class="plain" data-back>Retour</button></div>
+      </div>
+    </section>
+
+    <!-- ============ succès ============ -->
+    <section id="home-ach" class="hs" hidden aria-labelledby="ach-title">
+      <div class="sub">
+        <button type="button" class="back" data-back><svg viewBox="0 0 18 12" aria-hidden="true"><path d="M17 6H1M6 1L1 6l5 5"/></svg>Accueil</button>
+        <h2 id="ach-title" tabindex="-1">Succès</h2>
+        <p class="lead num" id="ach-meta"></p>
+        <ul class="rows acl" id="ach-list"></ul>
+      </div>
+    </section>
+
+    <!-- ============ à propos ============ -->
+    <section id="home-about" class="hs" hidden aria-labelledby="about-title">
+      <div class="sub">
+        <button type="button" class="back" data-back><svg viewBox="0 0 18 12" aria-hidden="true"><path d="M17 6H1M6 1L1 6l5 5"/></svg>Accueil</button>
+        <h2 id="about-title" tabindex="-1">À propos</h2>
+        <div class="ab">
+          <div class="wm" aria-hidden="true"><svg id="about-wm"></svg></div>
+          <p class="f">Un jeu de réflexion : plie la lumière avec des miroirs, des filtres et des prismes. 50 niveaux, un défi par jour, un éditeur.</p>
+          <p>Version <span class="num" id="about-version"></span></p>
+          <p>Logiciel libre, licence GPL-3.0. Code source : <a class="addr" id="about-source" href="https://github.com/MalikChopa/prismaze" target="_blank" rel="noopener noreferrer">github.com/MalikChopa/prismaze</a></p>
+          <p>Rien n'est envoyé : ta progression reste dans ton navigateur.</p>
+          <p>Fabriqué en JavaScript, Canvas, WebGL et Web Audio, sans bibliothèque, sans police ni image téléchargée.</p>
+        </div>
+      </div>
+    </section>
+
+    <button type="button" id="btn-ambient" aria-pressed="false"><svg viewBox="0 0 26 12" aria-hidden="true"><path class="flat" d="M1 6H25"/><path class="wv" d="M1 6C4 6 4 1.5 7 1.5S10 10.5 13 10.5 16 1.5 19 1.5 22 6 25 6"/></svg><span id="btn-ambient-t">Ambiance</span></button>
+  </main>
+
+  <div id="screen-game" hidden>
+    <canvas id="game" tabindex="0" role="application" aria-roledescription="plateau de lasers" aria-label="Plateau Prismaze"></canvas>
+    <div id="hud-tl" class="fl plate">
+      <button id="btn-back" class="ui-btn" type="button" title="Retour au menu" aria-label="Retour au menu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 5-7 7 7 7"/></svg></button>
+      <p id="hud-label"></p>
+    </div>
+    <div id="hud-tr" class="fl plate">
+      <span id="hud-count" aria-hidden="true"></span>
+      <button id="btn-settings" class="ui-btn" type="button" title="Réglages (O)" aria-label="Réglages (O)" aria-haspopup="dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/></svg></button>
+    </div>
+    <div id="tools" class="fl plate" role="group" aria-label="Outils">
+      <button id="btn-undo" class="ui-btn" type="button" title="Annuler (Ctrl+Z)" aria-label="Annuler" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 7 4 12l5 5M4 12h10a6 6 0 0 1 0 12" transform="translate(0 -4)"/></svg></button>
+      <button id="btn-redo" class="ui-btn" type="button" title="Refaire (Ctrl+Y)" aria-label="Refaire" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 7 5 5-5 5M20 12H10a6 6 0 0 0 0 12" transform="translate(0 -4)"/></svg></button>
+      <button id="btn-hint" class="ui-btn" type="button" title="Indice (H)" aria-label="Indice"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z"/></svg></button>
+      <button id="btn-sound" class="ui-btn" type="button" title="Couper le son (M)" aria-label="Couper le son (M)" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="waves" d="M16 9a4 4 0 0 1 0 6M18.5 6.5a8 8 0 0 1 0 11"/><path class="slash" d="M17 9l5 6M22 9l-5 6"/></svg></button>
+      <button id="btn-reset" class="ui-btn" type="button" title="Recommencer" aria-label="Recommencer le niveau"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.5-5.8M4 4v5h5"/></svg></button>
+    </div>
+    <p id="caption" class="fl plate"></p>
+    <div id="win" class="fl" hidden>
+      <div class="win-head"><h2 id="win-title">NIVEAU RÉSOLU</h2><span id="win-stars" hidden></span></div>
+      <p id="win-sub"></p>
+      <p id="win-ach" class="ach-line" aria-live="polite"></p>
+      <div class="win-actions">
+        <button id="btn-next" class="btn main" type="button" hidden></button>
+        <button id="btn-again" class="btn" type="button">REJOUER</button>
+        <button id="btn-edit-copy" class="btn quiet" type="button" hidden>ÉDITER UNE COPIE</button>
+        <button id="btn-menu" class="btn quiet" type="button">MENU</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="screen-edit" hidden>
+    <div id="edit-top">
+      <button id="edit-back" class="ui-btn" type="button" title="Retour au menu" aria-label="Retour au menu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 5-7 7 7 7"/></svg></button>
+      <h1 id="edit-title">ÉDITEUR</h1>
+      <input id="edit-name" type="text" maxlength="24" placeholder="nom (facultatif)" aria-label="Nom du niveau (24 signes au plus, minuscules)" autocomplete="off" spellcheck="false">
+      <button id="edit-undo" class="ui-btn" type="button" title="Annuler (Ctrl+Z)" aria-label="Annuler" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 7 4 12l5 5M4 12h10a6 6 0 0 1 0 12" transform="translate(0 -4)"/></svg></button>
+      <button id="edit-redo" class="ui-btn" type="button" title="Refaire (Ctrl+Y)" aria-label="Refaire" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 7 5 5-5 5M20 12H10a6 6 0 0 0 0 12" transform="translate(0 -4)"/></svg></button>
+    </div>
+    <div id="edit-board">
+      <canvas id="edit-canvas" tabindex="0" role="application" aria-roledescription="plateau de l'éditeur" aria-label="Plateau de l'éditeur : flèches pour te déplacer, Entrée pour poser l'outil choisi"></canvas>
+    </div>
+    <div id="edit-side">
+      <div id="edit-tools" role="toolbar" aria-label="Outils (touches 1 à 9, 0 pour effacer, L cadenas)"></div>
+      <p id="edit-tool-name" aria-hidden="true"></p>
+    </div>
+    <div id="edit-panel">
+      <div id="edit-scroll">
+      <div class="edit-row">
+        <div id="edit-sizebar" role="group" aria-label="Taille du plateau">
+          <button id="edit-cols-minus" class="mini" type="button" title="Une colonne de moins" aria-label="Une colonne de moins">↔−</button>
+          <button id="edit-cols-plus" class="mini" type="button" title="Une colonne de plus" aria-label="Une colonne de plus">↔+</button>
+          <span id="edit-size" role="status"></span>
+          <button id="edit-rows-minus" class="mini" type="button" title="Une ligne de moins" aria-label="Une ligne de moins">↕−</button>
+          <button id="edit-rows-plus" class="mini" type="button" title="Une ligne de plus" aria-label="Une ligne de plus">↕+</button>
+        </div>
+        <div id="edit-options" role="group" aria-label="Réglage de l'outil"></div>
+      </div>
+      <div id="edit-info">
+        <div id="edit-status" role="status"></div>
+        <p id="edit-msg" role="status"></p>
+        <p id="edit-prove-out" role="status"></p>
+        <p id="edit-witness"></p>
+      </div>
+      </div>
+      <div id="edit-actions">
+        <button id="edit-test" class="btn main" type="button">TESTER (T)</button>
+        <button id="edit-prove" class="btn" type="button">PROUVER</button>
+        <button id="edit-prove-cancel" class="btn danger" type="button" hidden>ANNULER LA PREUVE</button>
+        <button id="edit-share" class="btn" type="button">PARTAGER</button>
+        <button id="edit-drafts" class="btn quiet" type="button" aria-haspopup="dialog">BROUILLONS · IMPORT</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="daily-wait" hidden role="dialog" aria-modal="true" aria-labelledby="daily-wait-title">
+    <div class="box">
+      <h2 id="daily-wait-title">DÉFI DU JOUR</h2>
+      <p id="daily-wait-text" role="status">Préparation du défi…</p>
+      <div class="bar" aria-hidden="true"><i id="daily-wait-bar"></i></div>
+      <button id="daily-wait-cancel" class="btn" type="button">ANNULER</button>
+    </div>
+  </div>
+</div>
+
+<dialog id="dlg-settings" aria-labelledby="dlg-title">
+  <form method="dialog" class="dlg-body" id="settings-form">
+    <h2 id="dlg-title">RÉGLAGES</h2>
+    <div class="rw seg-row" id="fs-motion" role="radiogroup" aria-labelledby="l-motion"><div class="rw-t"><span id="l-motion">Mouvement réduit</span><small>Coupe la caméra, les secousses et les particules.</small></div>
+      <div class="seg"><label><input type="radio" name="motion" value="auto" aria-label="Automatique, selon l'appareil"><span aria-hidden="true">Auto</span></label><label><input type="radio" name="motion" value="yes" aria-label="Oui : pas d'animation ni de particules"><span aria-hidden="true">Oui</span></label><label><input type="radio" name="motion" value="no" aria-label="Non : toutes les animations"><span aria-hidden="true">Non</span></label></div>
+    </div>
+    <label class="rw"><span class="rw-t">Symboles sur les faisceaux<small>Une forme par couleur : la couleur n'est jamais seule.</small></span><span class="sw"><input type="checkbox" role="switch" name="symbols"><i></i></span></label>
+    <label class="rw"><span class="rw-t">Caméra vivante<small>Sans effet quand le mouvement est réduit.</small></span><span class="sw"><input type="checkbox" role="switch" name="camera"><i></i></span></label>
+    <label class="rw"><span class="rw-t">Effacer l'interface pendant le jeu<small>Elle revient au moindre geste.</small></span><span class="sw"><input type="checkbox" role="switch" name="autohide"><i></i></span></label>
+    <label class="rw"><span class="rw-t">Son activé</span><span class="sw"><input type="checkbox" role="switch" name="sound"><i></i></span></label>
+    <label class="rw"><span class="rw-t">Musique d'ambiance<small>Une nappe très douce sur l'accueil (touche M), jamais pendant un niveau.</small></span><span class="sw"><input type="checkbox" role="switch" name="ambient"><i></i></span></label>
+    <div class="rw seg-row" role="radiogroup" aria-labelledby="l-renderer"><div class="rw-t"><span id="l-renderer">Moteur de rendu</span><small>Canvas 2D : version plate, pour les appareils modestes.</small></div>
+      <div class="seg"><label><input type="radio" name="renderer" value="auto" aria-label="Automatique"><span aria-hidden="true">Auto</span></label><label><input type="radio" name="renderer" value="webgl" aria-label="WebGL2"><span aria-hidden="true">WebGL2</span></label><label><input type="radio" name="renderer" value="canvas" aria-label="Canvas 2D"><span aria-hidden="true">Canvas 2D</span></label></div>
+    </div>
+    <div class="rw seg-row" role="radiogroup" aria-labelledby="l-quality"><div class="rw-t"><span id="l-quality">Qualité des effets</span><small>Halo lumineux et particules.</small></div>
+      <div class="seg"><label><input type="radio" name="quality" value="auto" aria-label="Automatique"><span aria-hidden="true">Auto</span></label><label><input type="radio" name="quality" value="haut" aria-label="Haut"><span aria-hidden="true">Haut</span></label><label><input type="radio" name="quality" value="moyen" aria-label="Moyen"><span aria-hidden="true">Moyen</span></label><label><input type="radio" name="quality" value="bas" aria-label="Bas"><span aria-hidden="true">Bas</span></label></div>
+    </div>
+    <p id="render-line" aria-live="polite"></p>
+    <div id="render-pending" style="visibility: hidden"><p>Le moteur de rendu change au prochain lancement ; la partie en cours repart du début.</p><button type="button" id="btn-render-reload" class="btn">RELANCER</button></div>
+    <fieldset><legend>Progression</legend>
+      <div id="reset-zone"><button type="button" id="btn-reset-progress" class="btn danger">RÉINITIALISER LA PROGRESSION</button></div>
+      <div id="reset-confirm" hidden><p id="reset-q">Effacer toute la progression ? Les réglages sont gardés.</p>
+        <div class="dlg-actions"><button type="button" id="btn-reset-yes" class="btn danger">OUI, EFFACER</button><button type="button" id="btn-reset-no" class="btn">ANNULER</button></div></div>
+    </fieldset>
+    <div class="dlg-actions"><button type="button" id="btn-settings-close" class="btn main">FERMER</button></div>
+  </form>
+</dialog>
+
+<dialog id="dlg-share" class="dlg" aria-labelledby="share-title">
+  <form method="dialog" class="dlg-body" onsubmit="return false">
+    <h2 id="share-title">PARTAGER CE NIVEAU</h2>
+    <p>Le niveau tient dans le lien : colle-le dans un message. Rien n'est envoyé à un serveur.</p>
+    <input id="share-url" type="text" readonly aria-label="Lien du niveau" spellcheck="false">
+    <p id="share-note" class="msg" role="status"></p>
+    <p id="share-ach" class="ach-line" aria-live="polite"></p>
+    <div class="dlg-actions"><button type="button" id="share-copy" class="btn main">COPIER LE LIEN</button><button type="button" id="share-close" class="btn">FERMER</button></div>
+  </form>
+</dialog>
+
+<dialog id="dlg-drafts" class="dlg" aria-labelledby="drafts-title">
+  <form method="dialog" class="dlg-body" onsubmit="return false">
+    <h2 id="drafts-title">BROUILLONS · <span id="drafts-count">0 / 20</span></h2>
+    <ul id="drafts-list" aria-label="Brouillons enregistrés sur cet appareil"></ul>
+    <div class="dlg-actions"><button type="button" id="drafts-save" class="btn main">ENREGISTRER COMME BROUILLON</button></div>
+    <fieldset><legend>Ouvrir un lien ou un brouillon collé</legend>
+      <textarea id="drafts-import-text" aria-label="Lien, code ou brouillon JSON à ouvrir" spellcheck="false" placeholder="Colle un lien Prismaze, un code 1.xxx ou un brouillon JSON"></textarea>
+      <div class="dlg-actions"><button type="button" id="drafts-import" class="btn">OUVRIR</button></div>
+    </fieldset>
+    <div id="drafts-confirm" role="group" aria-labelledby="drafts-confirm-text" hidden>
+      <p id="drafts-confirm-text">Le niveau en cours n'est pas enregistré : l'ouvrir va le remplacer.</p>
+      <div class="dlg-actions"><button type="button" id="drafts-confirm-yes" class="btn danger">REMPLACER</button><button type="button" id="drafts-confirm-no" class="btn main">GARDER MON NIVEAU</button></div>
+    </div>
+    <p id="drafts-msg" class="msg" role="status"></p>
+    <div class="dlg-actions"><button type="button" id="drafts-close" class="btn">FERMER</button></div>
+  </form>
+</dialog>
+
+<div id="intro" hidden aria-hidden="true"><svg id="intro-wm"></svg></div>
+<p id="toast" role="status" aria-live="polite"></p>
+<div id="safe-probe" aria-hidden="true"></div>
+<div id="live" class="sr-only" aria-live="polite" role="status"></div>
+<p id="storage-note" hidden>progression non sauvegardée</p>
+<p id="quality-note" hidden></p>
+<p id="msg" hidden></p>
+<noscript><p style="text-align:center;padding:2em">Prismaze a besoin de JavaScript.</p></noscript>
+<script>
+  /* Ouvert depuis un fichier (file://) : les modules, le chargement des niveaux et le service worker n'y marchent pas. */
+  if (location.protocol === 'file:') {
+    document.addEventListener('DOMContentLoaded', function () {
+      var m = document.getElementById('msg');
+      m.hidden = false;
+      m.textContent = 'Prismaze doit être servi par un petit serveur : dans le dossier du jeu, lance « node tools/serve.mjs » puis ouvre l\'adresse affichée.';
+    });
+  }
+</script>
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>

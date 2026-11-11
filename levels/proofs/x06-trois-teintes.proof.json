@@ -1,0 +1,13 @@
+{
+"format":2,
+"levelId":"x06-trois-teintes",
+"levelHash":"sha256:441c62a5ce4dfa8f4f80f09c2194405214b29bd7939994238c1f088c5c26e68c",
+"rulesVersion":2,
+"solverVersion":2,
+"status":"proved-optimal",
+"minimum":5,
+"solutionsAtMin":8,
+"witness":[{"type":"mirror","at":[1,4],"o":"/"},{"type":"prism","at":[1,2]},{"type":"mirror","at":[2,2],"o":"/"},{"type":"mirror","at":[2,0],"o":"\\"},{"type":"splitter","at":[1,1],"o":"\\"}],
+"parking":[{"type":"filter","at":[0,0],"mask":"GB"}],
+"metrics":{"movable":6,"kinds":["filter","mirror","prism","splitter"],"targets":3,"nodes":101823,"nodesTotal":648934,"leaves":383322,"solutionsRelaxed":8,"falseTrail":1,"pathLength":12,"crossings":1,"specialTypes":2,"D2":38.4}
+}

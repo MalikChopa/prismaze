@@ -1,0 +1,15 @@
+{
+  "format": 2,
+  "id": "m01-tourner",
+  "name": "Tourner",
+  "size": [6,4],
+  "pieces": [
+    {"type":"target","at":[3,0],"need":"RGB"},
+    {"type":"emitter","at":[0,2],"dir":"E","mask":"RGB"},
+    {"type":"mirror","at":[3,2],"o":"-"}
+  ],
+  "par": 1,
+  "solutions": [
+    [{"type":"mirror","at":[3,2],"o":"/"}]
+  ]
+}

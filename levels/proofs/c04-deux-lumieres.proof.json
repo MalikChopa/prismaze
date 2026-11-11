@@ -1,0 +1,13 @@
+{
+"format":2,
+"levelId":"c04-deux-lumieres",
+"levelHash":"sha256:9f7635f92197f49bc25504c2397738d48f2ddec49d6b51a96fa1315524d4802e",
+"rulesVersion":2,
+"solverVersion":2,
+"status":"proved-optimal",
+"minimum":2,
+"solutionsAtMin":1,
+"witness":[{"type":"mirror","at":[1,2],"o":"/"},{"type":"mirror","at":[0,1],"o":"\\"}],
+"parking":[{"type":"mirror","at":[1,0],"o":"|"}],
+"metrics":{"movable":3,"kinds":["mirror"],"targets":2,"nodes":71,"nodesTotal":596,"leaves":359,"solutionsRelaxed":1,"falseTrail":0.997,"pathLength":10,"crossings":1,"specialTypes":0,"D2":15.6}
+}

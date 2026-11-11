@@ -1,0 +1,111 @@
+{
+ "format": 2,
+ "id": "maquette-07",
+ "name": "Deux lumières",
+ "size": [
+  10,
+  6
+ ],
+ "pieces": [
+  {
+   "type": "emitter",
+   "at": [
+    0,
+    3
+   ],
+   "dir": "E",
+   "mask": "RGB"
+  },
+  {
+   "type": "wall",
+   "at": [
+    6,
+    2
+   ]
+  },
+  {
+   "type": "wall",
+   "at": [
+    1,
+    1
+   ]
+  },
+  {
+   "type": "wall",
+   "at": [
+    9,
+    3
+   ]
+  },
+  {
+   "type": "wall",
+   "at": [
+    2,
+    4
+   ]
+  },
+  {
+   "type": "wall",
+   "at": [
+    8,
+    5
+   ]
+  },
+  {
+   "type": "wall",
+   "at": [
+    5,
+    3
+   ]
+  },
+  {
+   "type": "target",
+   "at": [
+    5,
+    1
+   ],
+   "need": "RGB"
+  },
+  {
+   "type": "target",
+   "at": [
+    4,
+    4
+   ],
+   "need": "RGB"
+  },
+  {
+   "type": "mirror",
+   "at": [
+    3,
+    3
+   ],
+   "o": "/"
+  },
+  {
+   "type": "mirror",
+   "at": [
+    3,
+    1
+   ],
+   "o": "/"
+  },
+  {
+   "type": "mirror",
+   "at": [
+    7,
+    1
+   ],
+   "o": "/"
+  },
+  {
+   "type": "mirror",
+   "at": [
+    7,
+    4
+   ],
+   "o": "/",
+   "fixed": true
+  }
+ ]
+}

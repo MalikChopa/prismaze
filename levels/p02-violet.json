@@ -1,0 +1,21 @@
+{
+  "format": 2,
+  "id": "p02-violet",
+  "name": "Violet",
+  "size": [8,6],
+  "pieces": [
+    {"type":"emitter","at":[0,3],"dir":"E","mask":"RGB"},
+    {"type":"prism","at":[2,3],"fixed":true},
+    {"type":"wall","at":[3,3]},
+    {"type":"mirror","at":[2,5],"o":"\\","fixed":true},
+    {"type":"target","at":[4,5],"need":"RB"},
+    {"type":"wall","at":[2,0]},
+    {"type":"mirror","at":[0,1],"o":"/"},
+    {"type":"mirror","at":[0,2],"o":"/"}
+  ],
+  "par": 2,
+  "solutions": [
+    [{"type":"mirror","at":[2,2],"o":"/"},{"type":"mirror","at":[4,2],"o":"\\"}],
+    [{"type":"mirror","at":[2,1],"o":"/"},{"type":"mirror","at":[4,1],"o":"\\"}]
+  ]
+}

@@ -1,0 +1,13 @@
+{
+"format":2,
+"levelId":"c07-bleu-barre",
+"levelHash":"sha256:e6305f6b252200fce1c45609d94397b3742abfadd7de3e2d38aa25a227026a26",
+"rulesVersion":2,
+"solverVersion":2,
+"status":"proved-optimal",
+"minimum":3,
+"solutionsAtMin":1,
+"witness":[{"type":"mirror","at":[5,5],"o":"\\"},{"type":"mirror","at":[5,3],"o":"/"},{"type":"filter","at":[6,5],"mask":"RG"}],
+"parking":[{"type":"mirror","at":[0,0],"o":"-"},{"type":"mirror","at":[1,0],"o":"-"}],
+"metrics":{"movable":5,"kinds":["filter","mirror"],"targets":3,"nodes":3164,"nodesTotal":11106,"leaves":6375,"solutionsRelaxed":1,"falseTrail":1,"pathLength":13,"crossings":2,"specialTypes":1,"D2":28.1}
+}

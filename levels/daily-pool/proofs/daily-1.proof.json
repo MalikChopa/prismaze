@@ -1,0 +1,13 @@
+{
+"format":2,
+"levelId":"daily-1",
+"levelHash":"sha256:4e1af4c6342585f2b3c17ebefe7e1a5bdf95260cdb6534610531a6a00af5676f",
+"rulesVersion":2,
+"solverVersion":2,
+"status":"proved-optimal",
+"minimum":2,
+"solutionsAtMin":1,
+"witness":[{"type":"mirror","at":[6,3],"o":"/"},{"type":"mirror","at":[1,3],"o":"\\"}],
+"parking":[{"type":"mirror","at":[0,0],"o":"-"}],
+"metrics":{"movable":3,"kinds":["mirror"],"targets":1,"nodes":59,"nodesTotal":66,"leaves":27,"solutionsRelaxed":1,"falseTrail":0.963,"pathLength":11,"crossings":0,"specialTypes":0,"D2":13.5}
+}

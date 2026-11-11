@@ -1,0 +1,13 @@
+{
+"format":2,
+"levelId":"x01-cyan-et-bleu",
+"levelHash":"sha256:40fb14d5dc2c0794159e2380a23b14ad05067922f61d9aca3617f1355ba07e5f",
+"rulesVersion":2,
+"solverVersion":2,
+"status":"proved-optimal",
+"minimum":4,
+"solutionsAtMin":2,
+"witness":[{"type":"mirror","at":[2,1],"o":"\\"},{"type":"filter","at":[3,1],"mask":"GB"},{"type":"mirror","at":[5,1],"o":"\\"},{"type":"prism","at":[5,4]}],
+"parking":[{"type":"splitter","at":[0,0],"o":"-"},{"type":"mirror","at":[1,0],"o":"-"}],
+"metrics":{"movable":6,"kinds":["filter","mirror","prism","splitter"],"targets":4,"nodes":28912,"nodesTotal":326238,"leaves":231327,"solutionsRelaxed":2,"falseTrail":1,"pathLength":13,"crossings":0,"specialTypes":2,"D2":32}
+}

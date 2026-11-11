@@ -1,0 +1,19 @@
+{
+  "format": 2,
+  "id": "s02-deux-voies",
+  "name": "Deux voies",
+  "size": [8,6],
+  "pieces": [
+    {"type":"mirror","at":[1,0],"o":"/"},
+    {"type":"mirror","at":[6,0],"o":"\\"},
+    {"type":"target","at":[2,1],"need":"RGB"},
+    {"type":"mirror","at":[5,1],"o":"|"},
+    {"type":"splitter","at":[5,3],"o":"|"},
+    {"type":"target","at":[7,3],"need":"RGB"},
+    {"type":"emitter","at":[4,5],"dir":"N","mask":"RGB"}
+  ],
+  "par": 2,
+  "solutions": [
+    [{"type":"splitter","at":[4,3],"o":"/"},{"type":"mirror","at":[4,1],"o":"\\"}]
+  ]
+}

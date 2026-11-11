@@ -1,0 +1,22 @@
+{
+  "format": 2,
+  "id": "p04-sous-l-emetteur",
+  "name": "Sous l'émetteur",
+  "size": [8,6],
+  "pieces": [
+    {"type":"emitter","at":[5,0],"dir":"S","mask":"RGB"},
+    {"type":"target","at":[1,1],"need":"B"},
+    {"type":"target","at":[6,1],"need":"R"},
+    {"type":"mirror","at":[7,1],"o":"-"},
+    {"type":"mirror","at":[0,3],"o":"|"},
+    {"type":"prism","at":[1,3]},
+    {"type":"target","at":[2,3],"need":"G"},
+    {"type":"mirror","at":[0,5],"o":"|"},
+    {"type":"target","at":[2,5],"need":"G"},
+    {"type":"mirror","at":[7,5],"o":"\\"}
+  ],
+  "par": 3,
+  "solutions": [
+    [{"type":"prism","at":[5,1]},{"type":"mirror","at":[5,2],"o":"/"},{"type":"mirror","at":[2,2],"o":"/"}]
+  ]
+}

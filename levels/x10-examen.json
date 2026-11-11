@@ -1,0 +1,43 @@
+{
+  "format": 2,
+  "id": "x10-examen",
+  "name": "Examen",
+  "size": [10,8],
+  "pieces": [
+    {"type":"wall","at":[0,0]},
+    {"type":"mirror","at":[1,0],"o":"|"},
+    {"type":"mirror","at":[2,0],"o":"-"},
+    {"type":"wall","at":[3,0]},
+    {"type":"emitter","at":[4,0],"dir":"S","mask":"RGB"},
+    {"type":"wall","at":[6,0]},
+    {"type":"wall","at":[7,0]},
+    {"type":"wall","at":[8,0]},
+    {"type":"emitter","at":[9,0],"dir":"S","mask":"RGB"},
+    {"type":"wall","at":[2,1]},
+    {"type":"wall","at":[3,1]},
+    {"type":"gate","at":[4,1],"link":[2,6]},
+    {"type":"wall","at":[7,1]},
+    {"type":"wall","at":[1,3]},
+    {"type":"prism","at":[8,3]},
+    {"type":"filter","at":[4,4],"mask":"RG"},
+    {"type":"wall","at":[8,4]},
+    {"type":"wall","at":[9,4]},
+    {"type":"target","at":[4,5],"need":"RG"},
+    {"type":"mirror","at":[5,5],"o":"|"},
+    {"type":"target","at":[7,5],"need":"GB"},
+    {"type":"wall","at":[8,5]},
+    {"type":"target","at":[2,6],"need":"B"},
+    {"type":"wall","at":[9,6]},
+    {"type":"filter","at":[0,7],"mask":"GB"},
+    {"type":"wall","at":[3,7]},
+    {"type":"target","at":[8,7],"need":"RG"},
+    {"type":"wall","at":[8,2]}
+  ],
+  "par": 6,
+  "solutions": [
+    [{"type":"filter","at":[9,1],"mask":"GB"},{"type":"mirror","at":[9,3],"o":"/"},{"type":"mirror","at":[7,3],"o":"/"},{"type":"prism","at":[7,6]},{"type":"filter","at":[4,2],"mask":"RG"},{"type":"mirror","at":[4,7],"o":"\\"}],
+    [{"type":"filter","at":[9,1],"mask":"GB"},{"type":"mirror","at":[9,3],"o":"/"},{"type":"mirror","at":[7,3],"o":"/"},{"type":"prism","at":[7,6]},{"type":"filter","at":[4,3],"mask":"RG"},{"type":"mirror","at":[4,7],"o":"\\"}],
+    [{"type":"filter","at":[9,1],"mask":"GB"},{"type":"mirror","at":[9,3],"o":"/"},{"type":"mirror","at":[7,3],"o":"/"},{"type":"prism","at":[7,6]},{"type":"filter","at":[4,4],"mask":"RG"},{"type":"mirror","at":[4,7],"o":"\\"}],
+    [{"type":"filter","at":[9,2],"mask":"GB"},{"type":"mirror","at":[9,3],"o":"/"},{"type":"mirror","at":[7,3],"o":"/"},{"type":"prism","at":[7,6]},{"type":"filter","at":[4,2],"mask":"RG"},{"type":"mirror","at":[4,7],"o":"\\"}]
+  ]
+}

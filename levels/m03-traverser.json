@@ -1,0 +1,16 @@
+{
+  "format": 2,
+  "id": "m03-traverser",
+  "name": "Traverser",
+  "size": [6,4],
+  "pieces": [
+    {"type":"emitter","at":[0,1],"dir":"E","mask":"RGB"},
+    {"type":"target","at":[2,1],"need":"RGB"},
+    {"type":"mirror","at":[1,3],"o":"\\"},
+    {"type":"target","at":[4,3],"need":"RGB"}
+  ],
+  "par": 1,
+  "solutions": [
+    [{"type":"mirror","at":[4,1],"o":"\\"}]
+  ]
+}

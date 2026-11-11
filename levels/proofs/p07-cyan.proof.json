@@ -1,0 +1,13 @@
+{
+"format":2,
+"levelId":"p07-cyan",
+"levelHash":"sha256:a82f9bc1cba820c32d215abe18412ed188e03c8504f77e497e4a8c23a2572e9b",
+"rulesVersion":2,
+"solverVersion":2,
+"status":"proved-optimal",
+"minimum":4,
+"solutionsAtMin":2,
+"witness":[{"type":"mirror","at":[4,1],"o":"/"},{"type":"prism","at":[1,1]},{"type":"mirror","at":[0,1],"o":"\\"},{"type":"mirror","at":[0,0],"o":"/"}],
+"parking":[{"type":"filter","at":[2,0],"mask":"GB"}],
+"metrics":{"movable":5,"kinds":["filter","mirror","prism"],"targets":2,"nodes":12536,"nodesTotal":136461,"leaves":83796,"solutionsRelaxed":2,"falseTrail":1,"pathLength":15,"crossings":1,"specialTypes":1,"D2":31.3}
+}

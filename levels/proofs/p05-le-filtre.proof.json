@@ -1,0 +1,13 @@
+{
+"format":2,
+"levelId":"p05-le-filtre",
+"levelHash":"sha256:44c33328bd77a018c394b7614c39b75af13b619466dbdd709002748749d36ca4",
+"rulesVersion":2,
+"solverVersion":2,
+"status":"proved-optimal",
+"minimum":3,
+"solutionsAtMin":1,
+"witness":[{"type":"mirror","at":[1,5],"o":"/"},{"type":"filter","at":[1,4],"mask":"RB"},{"type":"prism","at":[1,1]}],
+"parking":[{"type":"mirror","at":[0,0],"o":"-"}],
+"metrics":{"movable":4,"kinds":["filter","mirror","prism"],"targets":2,"nodes":728,"nodesTotal":7713,"leaves":4525,"solutionsRelaxed":1,"falseTrail":1,"pathLength":12,"crossings":0,"specialTypes":2,"D2":24}
+}

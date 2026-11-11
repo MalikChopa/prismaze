@@ -1,0 +1,13 @@
+{
+"format":2,
+"levelId":"c10-trois-sources",
+"levelHash":"sha256:43e133fdae67f3e14f8b4bb69fe60b3fc7c4b6614aa87d2fd7bb91a5fea092e0",
+"rulesVersion":2,
+"solverVersion":2,
+"status":"proved-optimal",
+"minimum":4,
+"solutionsAtMin":2,
+"witness":[{"type":"mirror","at":[2,6],"o":"/"},{"type":"mirror","at":[2,3],"o":"/"},{"type":"mirror","at":[3,3],"o":"/"},{"type":"filter","at":[3,2],"mask":"RG"}],
+"parking":[{"type":"mirror","at":[0,0],"o":"-"},{"type":"mirror","at":[2,0],"o":"-"}],
+"metrics":{"movable":6,"kinds":["filter","mirror"],"targets":4,"nodes":45747,"nodesTotal":241238,"leaves":133400,"solutionsRelaxed":2,"falseTrail":1,"pathLength":23,"crossings":3,"specialTypes":1,"D2":38.6}
+}

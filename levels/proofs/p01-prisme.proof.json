@@ -1,0 +1,13 @@
+{
+"format":2,
+"levelId":"p01-prisme",
+"levelHash":"sha256:7cee5acd61a21e135aa2e15bf7d3c69bc098c16fa621b5da8af5f901cc67971a",
+"rulesVersion":2,
+"solverVersion":2,
+"status":"proved-optimal",
+"minimum":1,
+"solutionsAtMin":1,
+"witness":[{"type":"mirror","at":[5,2],"o":"\\"}],
+"parking":[],
+"metrics":{"movable":1,"kinds":["mirror"],"targets":3,"nodes":21,"nodesTotal":38,"leaves":27,"solutionsRelaxed":1,"falseTrail":0.963,"pathLength":19,"crossings":0,"specialTypes":0,"D2":10.8}
+}

@@ -1,0 +1,21 @@
+{
+  "format": 2,
+  "id": "m05-fixe-et-leurre",
+  "name": "Fixe et leurre",
+  "size": [7,5],
+  "pieces": [
+    {"type":"wall","at":[4,1]},
+    {"type":"target","at":[5,1],"need":"RGB"},
+    {"type":"mirror","at":[6,2],"o":"-"},
+    {"type":"mirror","at":[1,3],"o":"/"},
+    {"type":"emitter","at":[0,4],"dir":"E","mask":"RGB"},
+    {"type":"mirror","at":[3,4],"o":"/","fixed":true},
+    {"type":"mirror","at":[5,4],"o":"\\"}
+  ],
+  "par": 2,
+  "solutions": [
+    [{"type":"mirror","at":[3,3],"o":"/"},{"type":"mirror","at":[5,3],"o":"/"}],
+    [{"type":"mirror","at":[3,2],"o":"/"},{"type":"mirror","at":[5,2],"o":"/"}],
+    [{"type":"mirror","at":[3,0],"o":"/"},{"type":"mirror","at":[5,0],"o":"\\"}]
+  ]
+}

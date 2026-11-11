@@ -1,0 +1,21 @@
+{
+  "format": 2,
+  "id": "p07-cyan",
+  "name": "Cyan",
+  "size": [9,7],
+  "pieces": [
+    {"type":"target","at":[1,0],"need":"GB"},
+    {"type":"mirror","at":[2,0],"o":"-"},
+    {"type":"emitter","at":[4,0],"dir":"S","mask":"RGB"},
+    {"type":"prism","at":[5,0]},
+    {"type":"mirror","at":[0,1],"o":"\\"},
+    {"type":"target","at":[2,1],"need":"RGB"},
+    {"type":"filter","at":[0,2],"mask":"GB"},
+    {"type":"mirror","at":[5,3],"o":"\\"}
+  ],
+  "par": 4,
+  "solutions": [
+    [{"type":"mirror","at":[4,1],"o":"/"},{"type":"prism","at":[1,1]},{"type":"mirror","at":[0,1],"o":"\\"},{"type":"mirror","at":[0,0],"o":"/"}],
+    [{"type":"mirror","at":[4,1],"o":"/"},{"type":"filter","at":[1,1],"mask":"GB"},{"type":"mirror","at":[0,1],"o":"\\"},{"type":"mirror","at":[0,0],"o":"/"}]
+  ]
+}
