@@ -5,7 +5,7 @@
 // Ce worker ne lit que des fichiers de la même origine (le jeu lui-même) ; il n'envoie rien nulle part.
 
 // <gen-sw>
-const VERSION = 'e23363602ffd';
+const VERSION = 'd391314c3cf5';
 const PRECACHE = [
   './',
   './index.html',

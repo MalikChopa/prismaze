@@ -87,3 +87,7 @@ Dit franchement, parce que personne n'a pu le vérifier ici :
 ## Licence
 
 [GPL-3.0](LICENSE). Toutes les images et tous les sons sont générés par le code du jeu.
+
+---
+
+Créé par **Malik Moussaoui** (Chopa), développeur à Toulouse · [tous mes projets](https://malikchopa.github.io/) · [GitHub](https://github.com/MalikChopa)
